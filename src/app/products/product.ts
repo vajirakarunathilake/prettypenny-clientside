@@ -1,4 +1,3 @@
-import { User } from './user';
 export class Product {
   id: number;
   productName: string;
@@ -7,5 +6,4 @@ export class Product {
   onSale: number;
   dateListed: Date;
   status: string;
-  seller: User;
 }
