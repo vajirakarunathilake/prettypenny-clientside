@@ -9,4 +9,5 @@ export class Product {
   status: string;
   user: User;
   interestThreshold: number;
+  imageUrl: string;
 }
