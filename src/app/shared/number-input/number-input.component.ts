@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-number-input',
@@ -6,10 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./number-input.component.scss']
 })
 export class NumberInputComponent implements OnInit {
+  @Input() val: number;
+  @Input() minDisabled: boolean;
+  @Output() valAdd = new EventEmitter<void>();
+  @Output() valSub = new EventEmitter<void>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onValAdd() {
+    this.valAdd.emit();
+  }
+  onValSub() {
+    this.valSub.emit();
   }
 
 }
