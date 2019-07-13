@@ -1,11 +1,11 @@
 import { User } from '../user';
 export class Product {
   id: number;
-  productName: string;
+  name: string;
   price: number;
   salePrice: number;
   onSale: number;
   dateListed: Date;
   status: string;
-  seller: User;
+  user: User;
 }

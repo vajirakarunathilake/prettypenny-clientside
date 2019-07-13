@@ -1,11 +1,11 @@
 export class User {
     id: number;
-    firstName: String;
-    lastName: String;
-    email: String;
-    password: String;
-    role: String;
-    address: String;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    role: string;
+    address: string;
     creditCardNumber: number;
     cvv: number;
 }
