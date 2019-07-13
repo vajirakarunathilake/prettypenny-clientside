@@ -1,7 +1,7 @@
 import { Product } from './product';
 
 export class Taxonomy {
-    id: number;
+    taxonomyId: number;
     name: string;
     type: string;
     subType: string;

@@ -11,42 +11,42 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   findAll(): Observable<Product[]> {
-    return this.http.get('http://localhost:8080/project2/products')
+    return this.http.get('http://localhost:8080/project2/api/products')
       .pipe( map( (p) => p as Product[]));
   }
 
   findAllStandard(): Observable<Product[]> {
-    return this.http.get('http://localhost:8080/project2/products/standard')
+    return this.http.get('http://localhost:8080/project2/api/products/standard')
       .pipe( map( (p) => p as Product[]));
   }
 
   findAllSale(): Observable<Product[]> {
-    return this.http.get('http://localhost:8080/project2/products/on_sale')
+    return this.http.get('http://localhost:8080/project2/api/products/on_sale')
       .pipe( map( (p) => p as Product[]));
   }
 
   findAllInterest(): Observable<Product[]> {
-    return this.http.get('http://localhost:8080/project2/product/interests')
+    return this.http.get('http://localhost:8080/project2/api/product/interests')
       .pipe( map( (p) => p as Product[]));
   }
 
   findById(productId: number): Observable<Product> {
-    return this.http.get(`http://localhost:8080/project2/product?product_id=${productId}`)
+    return this.http.get(`http://localhost:8080/project2/api/product?productId=${productId}`)
       .pipe( map( (p) => p as Product));
   }
 
-  insert(productName: string, productPrice: number, id: number): Observable<Product> {
-    return this.http.post('http://localhost:8080/project2/product', {},{params: {name: productName, price: productPrice, seller_id: id}})
+  insert(productName: string, productPrice: number, id: number, interestThreshold: number): Observable<Product> {
+    return this.http.post('http://localhost:8080/project2/api/product', {"name": productName, "price": productPrice, "userId": id, "interestThreshold": interestThreshold})
       .pipe( map( (p) => p as Product));
   }
 
-  update(productName: string, productPrice: number, salePrice: number, prodStatus: string, id: number): Observable<Product> {
-    return this.http.put('http://localhost:8080/project2/product', {},{params: {name: productName, price: productPrice, sale_price: salePrice, status: prodStatus, product_id: id}})
+  update(productName: string, productPrice: number, salePrice: number, prodStatus: string, id: number, interestThreshold: number): Observable<Product> {
+    return this.http.put('http://localhost:8080/project2/api/product', {"name": productName, "price": productPrice, "salePrice": salePrice, "status": prodStatus, "productId": id,"interestThreshold": interestThreshold})
       .pipe( map( (p) => p as Product));
   }
 
   delete(productId: number){
-    return this.http.delete(`http://localhost:8080/project2/product?product_id=${productId}`);
+    return this.http.delete(`http://localhost:8080/project2/api/product?productId=${productId}`);
   }
 
 

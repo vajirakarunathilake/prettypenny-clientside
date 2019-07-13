@@ -11,32 +11,32 @@ export class FavoriteService {
   constructor(private http: HttpClient) { }
 
   findAll(): Observable<Favorite[]> {
-    return this.http.get('http://localhost:8080/project2/favorites')
+    return this.http.get('http://localhost:8080/project2/api/favorites')
       .pipe( map( (f) => f as Favorite[]));
   }
 
   findByUser(userId: number): Observable<Favorite[]> {
-    return this.http.get(`http://localhost:8080/project2/favorites/by_user?customer_id=${userId}`)
+    return this.http.get(`http://localhost:8080/project2/favorites/api/by_user?userId=${userId}`)
       .pipe( map( (f) => f as Favorite[]));
   }
 
   findById(favoriteId: number): Observable<Favorite> {
-    return this.http.get(`http://localhost:8080/project2/favorite?id=${favoriteId}`)
+    return this.http.get(`http://localhost:8080/project2/api/favorite?favoriteId=${favoriteId}`)
       .pipe( map( (f) => f as Favorite));
   }
 
   insert(custId: number, prodId: number): Observable<Favorite> {
-    return this.http.post(`http://localhost:8080/project2/favorite`,{},{params: {customer_id: custId, product_id: prodId}})
+    return this.http.post(`http://localhost:8080/project2/api/favorite`,{"userId": custId, "productId": prodId})
       .pipe( map( (f) => f as Favorite));
   }
 
   update(favoriteId: number, custId: number, prodId: number): Observable<Favorite> {
-    return this.http.put(`http://localhost:8080/project2/favorite`,{},{params: {favorite_id: favoriteId, customer_id: custId, product_id: prodId}})
+    return this.http.put(`http://localhost:8080/project2/api/favorite`,{"favoriteId": favoriteId, "userId": custId, "productId": prodId})
       .pipe( map( (f) => f as Favorite));
   }
 
   delete(favoriteId: number){
-    return this.http.delete(`http://localhost:8080/project2/favorite?favorite_id=${favoriteId}`);
+    return this.http.delete(`http://localhost:8080/project2/api/favorite?favoriteId=${favoriteId}`);
   }
 //backup
 //,{},{params: {favorite_id: favoriteId, customer_id: custId, product_id: prodId}}

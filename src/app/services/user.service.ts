@@ -11,32 +11,32 @@ export class UserService {
   constructor(private http: HttpClient) { }
   id: number;
   login(email: string, password: string): Observable<User> {
-    return this.http.get('http://localhost:8080/project2/user/login' + email + password)
+    return this.http.get('http://localhost:8080/project2/user/api/login' + email + password)
       .pipe( map( (u) => u as User));
   }
 
   getLoggedInUser(): Observable<User> {
-    return this.http.get('http://localhost:8080/project2/user/getLoggedInUser')
+    return this.http.get('http://localhost:8080/project2/user/api/getLoggedInUser')
       .pipe( map( (u) => u as User));
   }
 
   logout(): Observable<User> {
-    return this.http.get('http://localhost:8080/project2/user/logout')
+    return this.http.get('http://localhost:8080/project2/user/api/logout')
       .pipe( map( (u) => u as User));
   }
 
   insert(user: User): Observable<User> {
-    return this.http.post('http://localhost:8080/project2/user/insert', JSON.stringify(user))
+    return this.http.post('http://localhost:8080/project2/user/api/insert', JSON.stringify(user))
       .pipe( map( (u) => u as User));
   }
 
   update(user: User): Observable<User> {
-    return this.http.put('http://localhost:8080/project2/user/update', JSON.stringify(user))
+    return this.http.put('http://localhost:8080/project2/user/api/update', JSON.stringify(user))
       .pipe( map( (u) => u as User));
   }
 
   delete(user: User){
-    return this.http.delete('http://localhost:8080/project2/user?id=${user.id}');
+    return this.http.delete('http://localhost:8080/project2/api/user?userId=${user.id}');
   }
 
 

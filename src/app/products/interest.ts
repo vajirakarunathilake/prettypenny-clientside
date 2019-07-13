@@ -6,5 +6,4 @@ export class Interest {
     user: User;
     product: Product;
     quantity: number;
-    status: number;
 }

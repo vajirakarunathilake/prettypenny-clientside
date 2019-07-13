@@ -11,27 +11,27 @@ export class TaxonomyService {
   constructor(private http: HttpClient) { }
 
   findAll(): Observable<Taxonomy[]> {
-    return this.http.get('http://localhost:8080/project2/taxonomies')
+    return this.http.get('http://localhost:8080/project2/api/taxonomies')
       .pipe( map( (t) => t as Taxonomy[]));
   }
 
 
   findById(taxonomyId: number): Observable<Taxonomy> {
-    return this.http.get(`http://localhost:8080/project2/taxonomy?taxonomy_id=${taxonomyId}`)
+    return this.http.get(`http://localhost:8080/project2/api/taxonomy?taxonomyId=${taxonomyId}`)
       .pipe( map( (t) => t as Taxonomy));
   }
 
   insert(taxonomyName: string, taxType: string, subType: string, productId: number): Observable<Taxonomy> {
-    return this.http.post('http://localhost:8080/project2/taxonomy', {},{params: {name: taxonomyName, type: taxType, sub_type: subType,product_id: productId}})
+    return this.http.post('http://localhost:8080/project2/api/taxonomy', {"name": taxonomyName, "type": taxType, "subType": subType,"productId": productId})
       .pipe( map( (t) => t as Taxonomy));
   }
 
   update(taxonomyName: string, taxType: string, subType: string, productId: number, id: number): Observable<Taxonomy> {
-    return this.http.put('http://localhost:8080/project2/taxonomy', {},{params: {name: taxonomyName, type: taxType, sub_type: subType,product_id: productId, taxonomy_id: id}})
+    return this.http.put('http://localhost:8080/project2/api/taxonomy', {"name": taxonomyName, "type": taxType, "subType": subType,"productId": productId, "taxonomyId": id})
       .pipe( map( (t) => t as Taxonomy));
   }
 
   delete(taxonomyId: number){
-    return this.http.delete(`http://localhost:8080/project2/taxonomy?taxonomy_id=${taxonomyId}`);
+    return this.http.delete(`http://localhost:8080/project2/api/taxonomy?taxonomyId=${taxonomyId}`);
   }
 }
