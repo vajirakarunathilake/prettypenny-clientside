@@ -14,13 +14,15 @@ import { PurchaseService } from './services/purchase.service';
 import { TaxonomyService } from './services/taxonomy.service';
 import { InterestService } from './services/interest.service';
 import { FavoriteService } from './services/favorite.service';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
     ProductComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
