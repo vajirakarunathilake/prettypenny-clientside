@@ -21,17 +21,18 @@ export class InterestService {
       .pipe( map( (t) => t as Interest));
   }
 
-  insert(userId: number, productId: number, interestQuantity: number): Observable<Interest> {
-    return this.http.post('http://localhost:8080/project2/api/interest', {"userId": userId, "productId": productId, "quantity": interestQuantity})
-      .pipe( map( (t) => t as Interest));
+  insert(uId: number, prodId: number, interestQuantity: number): any {
+    return this.http.post('http://localhost:8080/project2/api/interest', {userId: uId, productId: prodId, quantity: interestQuantity})
+    .pipe( map( (response: any) => response.json()));
   }
 
-  update(userId: number, productId: number, interestQuantity: number, id: number): Observable<Interest> {
-    return this.http.put('http://localhost:8080/project2/api/interest', {"userId": userId, "productId": productId, "quantity": interestQuantity, "interestId": id})
-      .pipe( map( (t) => t as Interest));
+  update(uId: number, prodId: number, interestQuantity: number, id: number): any {
+    return this.http.put('http://localhost:8080/project2/api/interest', {userId: uId, productId: prodId, quantity: interestQuantity, interestId: id})
+    .pipe( map( (response: any) => response.json()));
   }
 
-  delete(interestId: number){
-    return this.http.delete(`http://localhost:8080/project2/api/interest?interestId=${interestId}`);
+  delete(interestId: number): any {
+    return this.http.delete(`http://localhost:8080/project2/api/interest?interestId=${interestId}`)
+    .pipe( map( (response: any) => response.json()));
   }
 }

@@ -35,18 +35,21 @@ export class ProductService {
       .pipe( map( (p) => p as Product));
   }
 
-  insert(productName: string, productPrice: number, id: number, interestThreshold: number, image: string): Observable<Product> {
-    return this.http.post('http://localhost:8080/project2/api/product', {"name": productName, "price": productPrice, "userId": id, "interestThreshold": interestThreshold, "imageUrl": image})
-      .pipe( map( (p) => p as Product));
+  insert(productName: string, productPrice: number, id: number, interestThreshold: number, image: string): any {
+    return this.http.post('http://localhost:8080/project2/api/product',
+     {name: productName, price: productPrice, userId: id, interestThreshold: interestThreshold, imageUrl: image})
+    .pipe( map( (response: any) => response.json()));
   }
 
-  update(productName: string, productPrice: number, salePrice: number, prodStatus: string, id: number, interestThreshold: number,image: string): Observable<Product> {
-    return this.http.put('http://localhost:8080/project2/api/product', {"name": productName, "price": productPrice, "salePrice": salePrice, "status": prodStatus, "productId": id,"interestThreshold": interestThreshold, "imageUrl": image})
-      .pipe( map( (p) => p as Product));
+  update(productName: string, productPrice: number, salePrice: number, prodStatus: string, id: number, interestThreshold: number,image: string): any {
+    return this.http.put('http://localhost:8080/project2/api/product',
+     {name: productName, price: productPrice, salePrice: salePrice, status: prodStatus, productId: id, interestThreshold: interestThreshold, imageUrl: image})
+    .pipe( map( (response: any) => response.json()));
   }
 
-  delete(productId: number){
-    return this.http.delete(`http://localhost:8080/project2/api/product?productId=${productId}`);
+  delete(productId: number): any {
+    return this.http.delete(`http://localhost:8080/project2/api/product?productId=${productId}`)
+    .pipe( map( (response: any) => response.json()));
   }
 
 

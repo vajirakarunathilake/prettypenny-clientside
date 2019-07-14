@@ -38,13 +38,7 @@ export class LoginComponent implements OnInit {
           this.userService.login(newUser.email, newUser.password).subscribe(
             (u) => {
               this.user = u;
-              localStorage.setItem('email', this.user.email);
-              localStorage.setItem('firstname', this.user.firstName);
-              localStorage.setItem('lastname', this.user.lastName);
-              localStorage.setItem('address', this.user.address);
-              localStorage.setItem('creditCardNumber', this.user.creditCardNumber);
-              localStorage.setItem('cvv', this.user.cvv);
-              localStorage.setItem('role', this.user.role);
+              localStorage.setItem('user', this.user);
               console.log('User is logged in');
               this.router.navigate(['/products']);
             }

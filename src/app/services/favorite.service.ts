@@ -25,18 +25,21 @@ export class FavoriteService {
       .pipe( map( (f) => f as Favorite));
   }
 
-  insert(custId: number, prodId: number): Observable<Favorite> {
-    return this.http.post(`http://localhost:8080/project2/api/favorite`,{"userId": custId, "productId": prodId})
-      .pipe( map( (f) => f as Favorite));
+  insert(custId: number, prodId: number): any {
+    return this.http.post(`http://localhost:8080/project2/api/favorite`,
+    {userId: custId, productId: prodId})
+    .pipe( map( (response: any) => response.json()));
   }
 
-  update(favoriteId: number, custId: number, prodId: number): Observable<Favorite> {
-    return this.http.put(`http://localhost:8080/project2/api/favorite`,{"favoriteId": favoriteId, "userId": custId, "productId": prodId})
-      .pipe( map( (f) => f as Favorite));
+  update(favoriteId: number, custId: number, prodId: number): any {
+    return this.http.put(`http://localhost:8080/project2/api/favorite`,
+    {favoriteId: favoriteId, userId: custId, productId: prodId})
+    .pipe( map( (response: any) => response.json()));
   }
 
-  delete(favoriteId: number){
-    return this.http.delete(`http://localhost:8080/project2/api/favorite?favoriteId=${favoriteId}`);
+  delete(favoriteId: number): any {
+    return this.http.delete(`http://localhost:8080/project2/api/favorite?favoriteId=${favoriteId}`)
+    .pipe( map( (response: any) => response.json()));
   }
 //backup
 //,{},{params: {favorite_id: favoriteId, customer_id: custId, product_id: prodId}}

@@ -21,17 +21,20 @@ export class PurchaseService {
       .pipe( map( (p) => p as Purchase));
   }
 
-  insert(purchaseDate: Date, userId: number, productId: number): Observable<Purchase> {
-    return this.http.post('http://localhost:8080/project2/api/purchase', {"datePurchased": purchaseDate, "userId": userId, "productId": productId})
-      .pipe( map( (p) => p as Purchase));
+  insert(purchaseDate: Date, userId: number, productId: number): any {
+    return this.http.post('http://localhost:8080/project2/api/purchase',
+     {"datePurchased": purchaseDate, "userId": userId, "productId": productId})
+     .pipe( map( (response: any) => response.json()));
   }
 
-  update(purchaseDate: Date, userId: number, productId: number, purchaseId: number): Observable<Purchase> {
-    return this.http.put('http://localhost:8080/project2/api/purchase', {"datePurchased": purchaseDate, "userId": userId, "productId": productId, "purchaseId": purchaseId})
-      .pipe( map( (p) => p as Purchase));
+  update(purchaseDate: Date, uId: number, prodId: number, purchId: number): any {
+    return this.http.put('http://localhost:8080/project2/api/purchase',
+     {datePurchased: purchaseDate, userId: uId, productId: prodId, purchaseId: purchId})
+     .pipe( map( (response: any) => response.json()));
   }
 
-  delete(purchaseId: number){
-    return this.http.delete(`http://localhost:8080/project2/api/purchase?purchaseId=${purchaseId}`);
+  delete(purchaseId: number): any {
+    return this.http.delete(`http://localhost:8080/project2/api/purchase?purchaseId=${purchaseId}`)
+    .pipe( map( (response: any) => response.json()));
   }
 }

@@ -20,9 +20,10 @@ export class UserService {
       .pipe( map( (u) => u as User));
   }
 
-  logout(): Observable<User> {
+  logout(): any {
+    localStorage.removeItem("user");
     return this.http.get('http://localhost:8080/project2/api/user/logout')
-      .pipe( map( (u) => u as User));
+    .pipe( map( (response: any) => response.json()));
   }
 
   insert(user: User): any {
@@ -30,13 +31,14 @@ export class UserService {
     .pipe( map( (response: any) => response.json()));
   }
 
-  update(user: User): Observable<User> {
+  update(user: User): any {
     return this.http.put('http://localhost:8080/project2/api/user/update', JSON.stringify(user))
-      .pipe( map( (u) => u as User));
+    .pipe( map( (response: any) => response.json()));
   }
 
-  delete(user: User){
-    return this.http.delete('http://localhost:8080/project2/api/user?userId=${user.id}');
+  delete(user: User): any {
+    return this.http.delete(`http://localhost:8080/project2/api/user?userId=${user.userId}`)
+    .pipe( map( (response: any) => response.json()));
   }
 
 
