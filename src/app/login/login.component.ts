@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { User } from '../user';
 
@@ -9,8 +10,9 @@ import { User } from '../user';
 })
 export class LoginComponent implements OnInit {
   @Input() user: User;
+  resp: string;
   @Output() submitted = new EventEmitter<boolean>();
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
     let submitBtn = document.getElementById('submit');
     submitBtn.addEventListener('click', (e: Event) => this.submitRegistration());
   }
@@ -26,8 +28,28 @@ export class LoginComponent implements OnInit {
     newUser.cvv = document.getElementById('ccv').value;
     newUser.role = 'USER';
     this.userService.insert(newUser).subscribe(
-      (user) => {
-        this.user = user;
+      (response) => {
+        this.resp = response;
+        if (this.resp !== 'User Inserted'){
+          this.alertMessage(this.resp);
+        }
+        else{
+          this.alertMessage(this.resp);
+          this.userService.login(newUser.email, newUser.password).subscribe(
+            (u) => {
+              this.user = u;
+              localStorage.setItem('email', this.user.email);
+              localStorage.setItem('firstname', this.user.firstName);
+              localStorage.setItem('lastname', this.user.lastName);
+              localStorage.setItem('address', this.user.address);
+              localStorage.setItem('creditCardNumber', this.user.creditCardNumber);
+              localStorage.setItem('cvv', this.user.cvv);
+              localStorage.setItem('role', this.user.role);
+              console.log('User is logged in');
+              this.router.navigate(['/products']);
+            }
+          );
+        }
       }
     );
 
@@ -38,9 +60,21 @@ export class LoginComponent implements OnInit {
     let emailL = document.getElementById('emailL').value;
     let passwordL = document.getElementById('passwordL').value;
     this.userService.login(emailL, passwordL).subscribe(
-      (user) => {
-
-        this.submitted.emit(true);
+      (u) => {
+        if (u === null){
+          this.alertMessage('Invalid Credentials');
+        }
+        else{
+        localStorage.setItem('email', this.user.email);
+        localStorage.setItem('firstname', this.user.firstName);
+        localStorage.setItem('lastname', this.user.lastName);
+        localStorage.setItem('address', this.user.address);
+        localStorage.setItem('creditCardNumber', this.user.creditCardNumber);
+        localStorage.setItem('cvv', this.user.cvv);
+        localStorage.setItem('role', this.user.role);
+        console.log('User is logged in');
+        this.router.navigate(['/products']);
+        }
       }
     );
   }

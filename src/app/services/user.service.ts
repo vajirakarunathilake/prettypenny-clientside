@@ -11,7 +11,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
   id: number;
   login(email: string, password: string): Observable<User> {
-    return this.http.post('http://localhost:8080/project2/api/user/login',{email, password})
+    return this.http.post('http://localhost:8080/project2/api/user/login', {email, password})
       .pipe( map( (u) => u as User));
   }
 
@@ -25,9 +25,9 @@ export class UserService {
       .pipe( map( (u) => u as User));
   }
 
-  insert(user: User): Observable<User> {
+  insert(user: User): any {
     return this.http.post('http://localhost:8080/project2/api/user/insert', JSON.stringify(user))
-      .pipe( map( (u) => u as User));
+    .pipe( map( (response: any) => response.json()));
   }
 
   update(user: User): Observable<User> {
