@@ -17,9 +17,27 @@ export class LoginComponent implements OnInit {
 
   submitRegistration(){
     let newUser = new User();
-    newUser.email = document.getElementById('emailR').nodeValue;
-    newUser.password = document.getElementById('passwordR').nodeValue;
+    newUser.email = document.getElementById('emailR').value;
+    newUser.password = document.getElementById('passwordR').value;
+    newUser.firstName = document.getElementById('firstname').value;
+    newUser.lastName = document.getElementById('lastname').value;
+    newUser.address = document.getElementById('address').value;
+    newUser.creditCardNumber = document.getElementById('creditcardnumber').value;
+    newUser.cvv = document.getElementById('ccv').value;
+    newUser.role = 'USER';
     this.userService.insert(newUser).subscribe(
+      (user) => {
+        this.user = user;
+      }
+    );
+
+
+  }
+
+  loginUser(){
+    let emailL = document.getElementById('emailL').value;
+    let passwordL = document.getElementById('passwordL').value;
+    this.userService.login(emailL, passwordL).subscribe(
       (user) => {
 
         this.submitted.emit(true);
@@ -27,15 +45,8 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  submitRegistration(){
-    let emailL = document.getElementById('emailL').nodeValue;
-    let passwordL = document.getElementById('passwordL').nodeValue;
-    this.userService.login(emailL, passwordL).subscribe(
-      (user) => {
-
-        this.submitted.emit(true);
-      }
-    );
+  alertMessage(response: string){
+    alert(response);
   }
 
   ngOnInit() {
