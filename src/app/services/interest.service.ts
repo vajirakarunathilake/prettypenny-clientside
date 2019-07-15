@@ -21,18 +21,18 @@ export class InterestService {
       .pipe( map( (t) => t as Interest));
   }
 
-  insert(uId: number, prodId: number, interestQuantity: number): any {
+  insert(uId: number, prodId: number, interestQuantity: number): Observable<any> {
     return this.http.post('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/interest', {userId: uId, productId: prodId, quantity: interestQuantity})
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 
-  update(uId: number, prodId: number, interestQuantity: number, id: number): any {
+  update(uId: number, prodId: number, interestQuantity: number, id: number): Observable<any> {
     return this.http.put('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/interest', {userId: uId, productId: prodId, quantity: interestQuantity, interestId: id})
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 
-  delete(interestId: number): any {
+  delete(interestId: number): Observable<any> {
     return this.http.delete(`http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/interest?interestId=${interestId}`)
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 }

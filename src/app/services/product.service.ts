@@ -35,21 +35,21 @@ export class ProductService {
       .pipe( map( (p) => p as Product));
   }
 
-  insert(productName: string, productPrice: number, id: number, interestThreshold: number, image: string): any {
+  insert(productName: string, productPrice: number, id: number, interestThreshold: number, image: string): Observable<any> {
     return this.http.post('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/product',
      {name: productName, price: productPrice, userId: id, interestThreshold: interestThreshold, imageUrl: image})
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 
-  update(productName: string, productPrice: number, salePrice: number, prodStatus: string, id: number, interestThreshold: number,image: string): any {
+  update(productName: string, productPrice: number, salePrice: number, prodStatus: string, id: number, interestThreshold: number,image: string): Observable<any> {
     return this.http.put('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/product',
      {name: productName, price: productPrice, salePrice: salePrice, status: prodStatus, productId: id, interestThreshold: interestThreshold, imageUrl: image})
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 
-  delete(productId: number): any {
+  delete(productId: number): Observable<any> {
     return this.http.delete(`http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/product?productId=${productId}`)
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 
 

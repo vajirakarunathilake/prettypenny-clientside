@@ -21,20 +21,20 @@ export class PurchaseService {
       .pipe( map( (p) => p as Purchase));
   }
 
-  insert(purchaseDate: Date, userId: number, productId: number): any {
+  insert(purchaseDate: Date, userId: number, productId: number): Observable<any> {
     return this.http.post('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/purchase',
      {"datePurchased": purchaseDate, "userId": userId, "productId": productId})
-     .pipe( map( (response: any) => response.json()));
+     .pipe( map( (response: any) => response));
   }
 
-  update(purchaseDate: Date, uId: number, prodId: number, purchId: number): any {
+  update(purchaseDate: Date, uId: number, prodId: number, purchId: number): Observable<any> {
     return this.http.put('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/purchase',
      {datePurchased: purchaseDate, userId: uId, productId: prodId, purchaseId: purchId})
-     .pipe( map( (response: any) => response.json()));
+     .pipe( map( (response: any) => response));
   }
 
-  delete(purchaseId: number): any {
+  delete(purchaseId: number): Observable<any> {
     return this.http.delete(`http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/purchase?purchaseId=${purchaseId}`)
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 }
