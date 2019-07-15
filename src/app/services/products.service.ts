@@ -36,7 +36,7 @@ export class ProductsService {
   ) {}
 
   fetchProductsFromDB(): Observable<any> {
-    return this.httpClient.get(`${environment.apiBase}/products.json`)
+    return this.httpClient.get(`${environment.mockApiBase}/products.json`)
       .map(productSingle => {
         const adjustedFetchedProducts: any[] = [];
         for (const key in productSingle) {
@@ -52,7 +52,7 @@ export class ProductsService {
 
 
   fetchSingleProductFromDB(indexID: string): Observable<any> {
-    return this.httpClient.get(`${environment.apiBase}/products/${indexID}.json`)
+    return this.httpClient.get(`${environment.mockApiBase}/products/${indexID}.json`)
       .map(singleProduct => {
         if (singleProduct === null) {
           this.router.navigate(['/products']);
