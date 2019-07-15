@@ -11,33 +11,33 @@ export class UserService {
   constructor(private http: HttpClient) { }
   id: number;
   login(email: string, password: string): Observable<User> {
-    return this.http.post('http://localhost:8080/project2/api/user/login', {email, password})
+    return this.http.post('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/user/login', {email, password})
       .pipe( map( (u) => u as User));
   }
 
   getLoggedInUser(): Observable<User> {
-    return this.http.get('http://localhost:8080/project2/api/user/getLoggedInUser')
+    return this.http.get('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/user/getLoggedInUser')
       .pipe( map( (u) => u as User));
   }
 
   logout(): any {
     localStorage.removeItem("user");
-    return this.http.get('http://localhost:8080/project2/api/user/logout')
+    return this.http.get('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/user/logout')
     .pipe( map( (response: any) => response.json()));
   }
 
   insert(user: User): any {
-    return this.http.post('http://localhost:8080/project2/api/user/insert', JSON.stringify(user))
+    return this.http.post('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/user/insert', JSON.stringify(user))
     .pipe( map( (response: any) => response.json()));
   }
 
   update(user: User): any {
-    return this.http.put('http://localhost:8080/project2/api/user/update', JSON.stringify(user))
+    return this.http.put('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/user/update', JSON.stringify(user))
     .pipe( map( (response: any) => response.json()));
   }
 
   delete(user: User): any {
-    return this.http.delete(`http://localhost:8080/project2/api/user?userId=${user.userId}`)
+    return this.http.delete(`http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/user?userId=${user.userId}`)
     .pipe( map( (response: any) => response.json()));
   }
 
