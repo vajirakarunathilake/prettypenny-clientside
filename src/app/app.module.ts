@@ -18,7 +18,6 @@ import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
 import { ProductComponent } from './products/product/product.component';
-import { FavoriteComponent } from './products/favorite/favorite.component';
 import { UserService } from './services/user.service';
 import { PurchaseService } from './services/purchase.service';
 import { TaxonomyService } from './services/taxonomy.service';
@@ -55,7 +54,7 @@ const appRoutes: Routes = [
     ProductsComponent,
     ProductCardComponent,
     ProductComponent,
-    FavoriteComponent,
+    //FavoriteComponent,
     LoginComponent,
     FiltersComponent,
     ProductListItemComponent,
