@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { User } from '../user';
-import { NgbdAlertCloseable } from '../alert-closeable';
 
 @Component({
   selector: 'app-login',
@@ -24,11 +23,11 @@ export class LoginComponent implements OnInit {
   goodInf: boolean = null;
   resp: string;
   @Output() submitted = new EventEmitter<boolean>();
-  
+
   constructor(private userService: UserService, private router: Router) {
   }
 
-  submitRegistration(){
+  submitRegistration() {
     let newUser = new User();
     newUser.email = this.emailR;
     newUser.password = this.passwordR;
@@ -41,10 +40,10 @@ export class LoginComponent implements OnInit {
     this.userService.insert(newUser).subscribe(
       (response) => {
         this.resp = response;
-        if (this.resp !== 'User Inserted'){
+        if (this.resp !== 'User Inserted') {
           this.goodInf = false;
         }
-        else{
+        else {
           this.goodInf = null;
           this.userService.login(newUser.email, newUser.password).subscribe(
             (u) => {
@@ -67,14 +66,14 @@ export class LoginComponent implements OnInit {
 
   }
 
-  loginUser(){
+  loginUser() {
     console.log(this.emailL);
     this.userService.login(this.emailL, this.passwordL).subscribe(
       (u) => {
-        if (u === null){
+        if (u === null) {
           this.goodCred = false;
         }
-        else{
+        else {
           this.goodCred = null;
           localStorage.setItem('email', this.user.email);
           localStorage.setItem('firstname', this.user.firstName);
@@ -90,7 +89,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  alertMessage(response: string){
+  alertMessage(response: string) {
     alert(response);
   }
 
