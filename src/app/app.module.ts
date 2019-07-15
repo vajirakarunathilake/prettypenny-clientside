@@ -18,6 +18,12 @@ import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
 import { ProductComponent } from './products/product/product.component';
+import { UserService } from './services/user.service';
+import { PurchaseService } from './services/purchase.service';
+import { TaxonomyService } from './services/taxonomy.service';
+import { InterestService } from './services/interest.service';
+import { FavoriteService } from './services/favorite.service';
+import { LoginComponent } from './login/login.component';
 import { FiltersComponent } from './products/filters/filters.component';
 import { ProductListItemComponent } from './products/product-list-item/product-list-item.component';
 import { ToastyNotificationsService } from './services/toasty-notifications.service';
@@ -48,6 +54,8 @@ const appRoutes: Routes = [
     ProductsComponent,
     ProductCardComponent,
     ProductComponent,
+    //FavoriteComponent,
+    LoginComponent,
     FiltersComponent,
     ProductListItemComponent,
     TruncatePipe,
@@ -65,7 +73,12 @@ const appRoutes: Routes = [
     HttpClientModule
   ],
   providers: [
+    UserService,
     ProductsService,
+    PurchaseService,
+    TaxonomyService,
+    InterestService,
+    FavoriteService,
     ToastyNotificationsService
   ],
   bootstrap: [AppComponent]

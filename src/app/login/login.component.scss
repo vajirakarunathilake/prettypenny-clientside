@@ -1,0 +1,15 @@
+#header {
+  text-align: center;
+}
+
+.column {
+  text-align: center;
+  float: left;
+  width: 50%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
