@@ -21,7 +21,13 @@ export class UserService {
   }
 
   logout(): any {
-    localStorage.removeItem("user");
+    localStorage.remove('email');
+    localStorage.remove('firstname');
+    localStorage.remove('lastname');
+    localStorage.remove('address');
+    localStorage.remove('creditCardNumber');
+    localStorage.remove('cvv');
+    localStorage.remove('role');
     return this.http.get('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/user/logout')
     .pipe( map( (response: any) => response.json()));
   }

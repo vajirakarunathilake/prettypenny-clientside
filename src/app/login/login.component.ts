@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { User } from '../user';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,24 +11,30 @@ import { User } from '../user';
 })
 export class LoginComponent implements OnInit {
   @Input() user: User;
+  ccv: string;
+  creditcardnumber: string;
+  address: string;
+  passwordR: string;
+  emailR: string;
+  firstname: string;
+  lastname: string;
+  passwordL: string;
+  emailL: string;
+
   resp: string;
   @Output() submitted = new EventEmitter<boolean>();
   constructor(private userService: UserService, private router: Router) {
-    let submitBtn = angular.element('#submit');
-    submitBtn.addEventListener('click', (e: Event) => this.submitRegistration());
-    let loginBtn = angular.element('#login');
-    loginBtn.addEventListener('click', (e: Event) => this.loginUser());
   }
 
   submitRegistration(){
     let newUser = new User();
-    newUser.email = angular.element('#emailR').val();
-    newUser.password = angular.element('#passwordR').val();
-    newUser.firstName = angular.element('#firstname').val();
-    newUser.lastName = angular.element('#lastname').val();
-    newUser.address = angular.element('#address').val();
-    newUser.creditCardNumber = angular.element('#creditcardnumber').val();
-    newUser.cvv = angular.element('#ccv').val();
+    newUser.email = this.emailR;
+    newUser.password = this.passwordR;
+    newUser.firstName = this.firstname;
+    newUser.lastName = this.lastname;
+    newUser.address = this.address;
+    newUser.creditCardNumber = this.creditcardnumber;
+    newUser.cvv = this.ccv;
     newUser.role = 'USER';
     this.userService.insert(newUser).subscribe(
       (response) => {
@@ -40,7 +47,13 @@ export class LoginComponent implements OnInit {
           this.userService.login(newUser.email, newUser.password).subscribe(
             (u) => {
               this.user = u;
-              localStorage.setItem('user', this.user);
+              localStorage.setItem('email', this.user.email);
+              localStorage.setItem('firstname', this.user.firstName);
+              localStorage.setItem('lastname', this.user.lastName);
+              localStorage.setItem('address', this.user.address);
+              localStorage.setItem('creditCardNumber', this.user.creditCardNumber);
+              localStorage.setItem('cvv', this.user.cvv);
+              localStorage.setItem('role', this.user.role);
               console.log('User is logged in');
               this.router.navigate(['/products']);
             }
@@ -53,9 +66,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(){
-    let emailL = angular.element('#emailL').val();
-    let passwordL = angular.element('#passwordL').val();
-    this.userService.login(emailL, passwordL).subscribe(
+    this.userService.login(this.emailL, this.passwordL).subscribe(
       (u) => {
         if (u === null){
           this.alertMessage('Invalid Credentials');

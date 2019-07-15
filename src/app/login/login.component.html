@@ -6,53 +6,58 @@
   <div class="row">
     <div class="column">
       <h2>Register</h2>
-      <form>
+      <form #registers='ngForm'>
         <div class="form-group">
           <label for="emailR">Email address</label>
-          <input type="Email" class="form-control" ng-model="emailR" aria-describedby="emailHelp" placeholder="Enter email">
-          <small ng-model="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          <input type="Email" class="form-control" [(ngModel)]="emailR" aria-describedby="emailHelp" placeholder="Enter email">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
           <label for="passwordR">Password</label>
-          <input type="Password" class="form-control" ng-model="passwordR" placeholder="Password">
+          <input type="Password" class="form-control" [(ngModel)]="passwordR" placeholder="Password">
         </div>
         <div class="form-group">
           <label for="firstname">First Name</label>
-          <input type="Text" class="form-control" ng-model="firstname" placeholder="First Name">
+          <input type="Text" class="form-control" [(ngModel)]="firstname" placeholder="First Name">
         </div>
         <div class="form-group">
           <label for="lastname">Last Name</label>
-          <input type="Text" class="form-control" ng-model="lastname" placeholder="Last Name">
+          <input type="Text" class="form-control" [(ngModel)]="lastname" placeholder="Last Name">
         </div>
         <div class="form-group">
           <label for="address">Address</label>
-          <input type="Text" class="form-control" ng-model="address" placeholder="Address">
+          <input type="Text" class="form-control" [(ngModel)]="address" placeholder="Address">
         </div>
         <div class="form-group">
           <label for="creditcardnumber">Credit Card Number</label>
-          <input type="Number" class="form-control" ng-model="creditcardnumber" placeholder=0000000000000000>
+          <input type="Number" class="form-control" [(ngModel)]="creditcardnumber" placeholder=0000000000000000>
         </div>
         <div class="form-group">
           <label for="ccv">CVV</label>
-          <input type="Number" class="form-control" ng-model="ccv" placeholder=000>
+          <input type="Number" class="form-control" [(ngModel)]="ccv" placeholder=000>
         </div>
-        <button type="button" ng-model="submit" class="btn btn-success">Submit</button>
+        <button type="button" (click)="submitRegistration()" class="btn btn-success">Submit</button>
       </form>
     </div>
     <div class="column">
         <h2>Login</h2>
-        <form>
+        <form #logins='ngForm'>
           <div class="form-group">
             <label for="emailL">Email address</label>
-            <input type="email" class="form-control" ng-model="emailL" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="email" class="form-control" [(ngModel)]="emailL" aria-describedby="emailHelp" placeholder="Enter email">
             <small ng-model="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <div class="form-group">
             <label for="passwordL">Password</label>
-            <input type="password" class="form-control" ng-model="passwordL" placeholder="Password">
+            <input type="password" class="form-control" [(ngModel)]="passwordL" placeholder="Password">
           </div>
-          <button type="button" ng-model="login" class="btn btn-success">Login</button>
+          <button type="button" (click)="login()" class="btn btn-success">Login</button>
         </form>
+        <p ngif="goodCred">
+          <ngb-alert [dismissible]=”false”>
+            <strong>Warning!</strong> Better check yourself, you’re not looking too good.
+          </ngb-alert>
+        </p>
   </div>
 
 
