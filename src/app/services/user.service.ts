@@ -17,6 +17,12 @@ export class UserService {
       .pipe( map( (u) => u as User));
   }
 
+  insert(user: User): Observable<any> {
+    console.log(user.email);
+    return this.http.post('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/user/insert', user)
+    .pipe( map( (response: any) => response));
+  }
+
   getLoggedInUser(): Observable<User> {
     return this.http.get(`${environment.apiBase}/user/getLoggedInUser`)
       .pipe( map( (u) => u as User));
@@ -31,11 +37,6 @@ export class UserService {
     localStorage.remove('cvv');
     localStorage.remove('role');
     return this.http.get(`${environment.apiBase}/user/logout`)
-    .pipe( map( (response: any) => response));
-  }
-
-  insert(user: User): Observable<any> {
-    return this.http.post(`${environment.apiBase}/user/insert`, JSON.stringify(user))
     .pipe( map( (response: any) => response));
   }
 

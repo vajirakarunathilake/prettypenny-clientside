@@ -27,19 +27,19 @@ export class FavoriteService {
       .pipe( map( (f) => f as Favorite));
   }
 
-  insert(custId: number, prodId: number): any {
+  insert(custId: number, prodId: number): Observable<any> {
     return this.http.post(`${environment.apiBase}/favorite`,
     {userId: custId, productId: prodId})
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 
-  update(favoriteId: number, custId: number, prodId: number): any {
+  update(favoriteId: number, custId: number, prodId: number): Observable<any> {
     return this.http.put(`${environment.apiBase}/favorite`,
     {favoriteId: favoriteId, userId: custId, productId: prodId})
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 
-  delete(favoriteId: number): any {
+  delete(favoriteId: number): Observable<any> {
     return this.http.delete(`${environment.apiBase}/favorite?favoriteId=${favoriteId}`)
     .pipe( map( (response: any) => response.json()));
   }
