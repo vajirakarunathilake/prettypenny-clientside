@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Purchase } from '../products/purchase';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,30 +13,30 @@ export class PurchaseService {
   constructor(private http: HttpClient) { }
 
   findAll(): Observable<Purchase[]> {
-    return this.http.get('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/purchases')
+    return this.http.get(`${environment.apiBase}/purchases`)
       .pipe( map( (p) => p as Purchase[]));
   }
 
 
   findById(purchaseId: number): Observable<Purchase> {
-    return this.http.get(`http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/purchase?purchaseId=${purchaseId}`)
+    return this.http.get(`${environment.apiBase}/purchase?purchaseId=${purchaseId}`)
       .pipe( map( (p) => p as Purchase));
   }
 
   insert(purchaseDate: Date, userId: number, productId: number): Observable<any> {
-    return this.http.post('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/purchase',
-     {"datePurchased": purchaseDate, "userId": userId, "productId": productId})
+    return this.http.post(`${environment.apiBase}/purchase`,
+     {'datePurchased': purchaseDate, 'userId': userId, 'productId': productId})
      .pipe( map( (response: any) => response));
   }
 
   update(purchaseDate: Date, uId: number, prodId: number, purchId: number): Observable<any> {
-    return this.http.put('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/purchase',
+    return this.http.put(`${environment.apiBase}/purchase`,
      {datePurchased: purchaseDate, userId: uId, productId: prodId, purchaseId: purchId})
      .pipe( map( (response: any) => response));
   }
 
   delete(purchaseId: number): Observable<any> {
-    return this.http.delete(`http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/purchase?purchaseId=${purchaseId}`)
+    return this.http.delete(`${environment.apiBase}/purchase?purchaseId=${purchaseId}`)
     .pipe( map( (response: any) => response));
   }
 }
