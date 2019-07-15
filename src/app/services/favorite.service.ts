@@ -25,21 +25,21 @@ export class FavoriteService {
       .pipe( map( (f) => f as Favorite));
   }
 
-  insert(custId: number, prodId: number): any {
+  insert(custId: number, prodId: number): Observable<any> {
     return this.http.post(`http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/favorite`,
     {userId: custId, productId: prodId})
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 
-  update(favoriteId: number, custId: number, prodId: number): any {
+  update(favoriteId: number, custId: number, prodId: number): Observable<any> {
     return this.http.put(`http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/favorite`,
     {favoriteId: favoriteId, userId: custId, productId: prodId})
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 
-  delete(favoriteId: number): any {
+  delete(favoriteId: number): Observable<any> {
     return this.http.delete(`http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/favorite?favoriteId=${favoriteId}`)
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 //backup
 //,{},{params: {favorite_id: favoriteId, customer_id: custId, product_id: prodId}}

@@ -36,6 +36,9 @@
         </div>
         <button type="button" (click)="submitRegistration()" class="btn btn-success">Submit</button>
       </form>
+      <p *ngIf="this.goodInf == false">
+            Invalid Entry/Email Taken
+        </p>
     </div>
     <div class="column">
         <h2>Login</h2>
@@ -52,9 +55,7 @@
           <button type="button" (click)="loginUser()" class="btn btn-success">Login</button>
         </form>
         <p *ngIf="this.goodCred == false">
-
-            <ngb-alert [type]="alert.success" (close)="close(alert)">{{ alert.message }}</ngb-alert>
-
+            Invalid Credentials
         </p>
   </div>
 
