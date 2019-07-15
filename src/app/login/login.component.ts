@@ -13,19 +13,21 @@ export class LoginComponent implements OnInit {
   resp: string;
   @Output() submitted = new EventEmitter<boolean>();
   constructor(private userService: UserService, private router: Router) {
-    let submitBtn = document.getElementById('submit');
+    let submitBtn = angular.element('#submit');
     submitBtn.addEventListener('click', (e: Event) => this.submitRegistration());
+    let loginBtn = angular.element('#login');
+    loginBtn.addEventListener('click', (e: Event) => this.loginUser());
   }
 
   submitRegistration(){
     let newUser = new User();
-    newUser.email = document.getElementById('emailR').value;
-    newUser.password = document.getElementById('passwordR').value;
-    newUser.firstName = document.getElementById('firstname').value;
-    newUser.lastName = document.getElementById('lastname').value;
-    newUser.address = document.getElementById('address').value;
-    newUser.creditCardNumber = document.getElementById('creditcardnumber').value;
-    newUser.cvv = document.getElementById('ccv').value;
+    newUser.email = angular.element('#emailR').val();
+    newUser.password = angular.element('#passwordR').val();
+    newUser.firstName = angular.element('#firstname').val();
+    newUser.lastName = angular.element('#lastname').val();
+    newUser.address = angular.element('#address').val();
+    newUser.creditCardNumber = angular.element('#creditcardnumber').val();
+    newUser.cvv = angular.element('#ccv').val();
     newUser.role = 'USER';
     this.userService.insert(newUser).subscribe(
       (response) => {
@@ -51,8 +53,8 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(){
-    let emailL = document.getElementById('emailL').value;
-    let passwordL = document.getElementById('passwordL').value;
+    let emailL = angular.element('#emailL').val();
+    let passwordL = angular.element('#passwordL').val();
     this.userService.login(emailL, passwordL).subscribe(
       (u) => {
         if (u === null){
