@@ -29,22 +29,22 @@ export class UserService {
     localStorage.remove('cvv');
     localStorage.remove('role');
     return this.http.get('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/user/logout')
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 
-  insert(user: User): any {
+  insert(user: User): Observable<any> {
     return this.http.post('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/user/insert', JSON.stringify(user))
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 
-  update(user: User): any {
+  update(user: User): Observable<any> {
     return this.http.put('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/user/update', JSON.stringify(user))
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 
-  delete(user: User): any {
+  delete(user: User): Observable<any> {
     return this.http.delete(`http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/user?userId=${user.userId}`)
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 
 

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { User } from '../user';
-
+import { NgbdAlertCloseable } from '../alert-closeable';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   goodCred: boolean = null;
   resp: string;
   @Output() submitted = new EventEmitter<boolean>();
+  
   constructor(private userService: UserService, private router: Router) {
   }
 
