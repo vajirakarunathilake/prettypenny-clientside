@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   lastname: string;
   passwordL: string;
   emailL: string;
-
+  goodCred: boolean = null;
   resp: string;
   @Output() submitted = new EventEmitter<boolean>();
   constructor(private userService: UserService, private router: Router) {
@@ -40,10 +40,9 @@ export class LoginComponent implements OnInit {
       (response) => {
         this.resp = response;
         if (this.resp !== 'User Inserted'){
-          this.alertMessage(this.resp);
+          this.goodCred = false;
         }
         else{
-          this.alertMessage(this.resp);
           this.userService.login(newUser.email, newUser.password).subscribe(
             (u) => {
               this.user = u;
@@ -69,7 +68,7 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.emailL, this.passwordL).subscribe(
       (u) => {
         if (u === null){
-          this.alertMessage('Invalid Credentials');
+          this.goodCred = false;
         }
         else{
         localStorage.setItem('email', this.user.email);
