@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -39,7 +39,7 @@ const appRoutes: Routes = [
   { path: 'products/:id', component: ProductComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent }
 ];
 
 

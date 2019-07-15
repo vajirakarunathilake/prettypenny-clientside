@@ -19,7 +19,7 @@ export class UserService {
 
   insert(user: User): Observable<any> {
     console.log(user.email);
-    return this.http.post('http://ec2-18-224-165-117.us-east-2.compute.amazonaws.com:8080/project2-backend/api/user/insert', user)
+    return this.http.post(`${environment.apiBase}/user`, user)
     .pipe( map( (response: any) => response));
   }
 
@@ -41,7 +41,7 @@ export class UserService {
   }
 
   update(user: User): Observable<any> {
-    return this.http.put(`${environment.apiBase}/user/update`, JSON.stringify(user))
+    return this.http.put(`${environment.apiBase}/user`, JSON.stringify(user))
     .pipe( map( (response: any) => response));
   }
 
