@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   passwordL: string;
   emailL: string;
   goodCred: boolean = null;
+  goodInf: boolean = null;
   resp: string;
   @Output() submitted = new EventEmitter<boolean>();
   
@@ -41,9 +42,10 @@ export class LoginComponent implements OnInit {
       (response) => {
         this.resp = response;
         if (this.resp !== 'User Inserted'){
-          this.goodCred = false;
+          this.goodInf = false;
         }
         else{
+          this.goodInf = null;
           this.userService.login(newUser.email, newUser.password).subscribe(
             (u) => {
               this.user = u;
@@ -72,15 +74,16 @@ export class LoginComponent implements OnInit {
           this.goodCred = false;
         }
         else{
-        localStorage.setItem('email', this.user.email);
-        localStorage.setItem('firstname', this.user.firstName);
-        localStorage.setItem('lastname', this.user.lastName);
-        localStorage.setItem('address', this.user.address);
-        localStorage.setItem('creditCardNumber', this.user.creditCardNumber);
-        localStorage.setItem('cvv', this.user.cvv);
-        localStorage.setItem('role', this.user.role);
-        console.log('User is logged in');
-        this.router.navigate(['/products']);
+          this.goodCred = null;
+          localStorage.setItem('email', this.user.email);
+          localStorage.setItem('firstname', this.user.firstName);
+          localStorage.setItem('lastname', this.user.lastName);
+          localStorage.setItem('address', this.user.address);
+          localStorage.setItem('creditCardNumber', this.user.creditCardNumber);
+          localStorage.setItem('cvv', this.user.cvv);
+          localStorage.setItem('role', this.user.role);
+          console.log('User is logged in');
+          this.router.navigate(['/products']);
         }
       }
     );
