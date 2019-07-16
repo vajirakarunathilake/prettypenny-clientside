@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ToastyModule } from 'ng2-toasty';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -46,6 +45,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+
     HeaderComponent,
     CartComponent,
     ContactComponent,

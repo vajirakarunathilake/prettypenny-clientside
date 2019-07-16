@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { User } from '../user';
-
+import { Helpers } from '../helpers';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   resp: string;
   @Output() submitted = new EventEmitter<boolean>();
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private router: Router, public helper: Helpers) {
   }
 
   submitRegistration() {
@@ -48,13 +48,13 @@ export class LoginComponent implements OnInit {
           this.userService.login(newUser.email, newUser.password).subscribe(
             (u) => {
               this.user = u;
-              localStorage.setItem('email', this.user.email);
-              localStorage.setItem('firstname', this.user.firstName);
-              localStorage.setItem('lastname', this.user.lastName);
-              localStorage.setItem('address', this.user.address);
-              localStorage.setItem('creditCardNumber', this.user.creditCardNumber);
-              localStorage.setItem('cvv', this.user.cvv);
-              localStorage.setItem('role', this.user.role);
+              this.helper.localStorageSet('email', this.user.email);
+              this.helper.localStorageSet('firstname', this.user.firstName);
+              this.helper.localStorageSet('lastname', this.user.lastName);
+              this.helper.localStorageSet('address', this.user.address);
+              this.helper.localStorageSet('creditCardNumber', this.user.creditCardNumber);
+              this.helper.localStorageSet('cvv', this.user.cvv);
+              this.helper.localStorageSet('role', this.user.role);
               console.log('User is logged in');
               this.router.navigate(['/products']);
             }
@@ -75,13 +75,13 @@ export class LoginComponent implements OnInit {
         }
         else {
           this.goodCred = null;
-          localStorage.setItem('email', this.user.email);
-          localStorage.setItem('firstname', this.user.firstName);
-          localStorage.setItem('lastname', this.user.lastName);
-          localStorage.setItem('address', this.user.address);
-          localStorage.setItem('creditCardNumber', this.user.creditCardNumber);
-          localStorage.setItem('cvv', this.user.cvv);
-          localStorage.setItem('role', this.user.role);
+          this.helper.localStorageSet('email', this.user.email);
+          this.helper.localStorageSet('firstname', this.user.firstName);
+          this.helper.localStorageSet('lastname', this.user.lastName);
+          this.helper.localStorageSet('address', this.user.address);
+          this.helper.localStorageSet('creditCardNumber', this.user.creditCardNumber);
+          this.helper.localStorageSet('cvv', this.user.cvv);
+          this.helper.localStorageSet('role', this.user.role);
           console.log('User is logged in');
           this.router.navigate(['/products']);
         }
