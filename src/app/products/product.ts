@@ -10,4 +10,6 @@ export class Product {
   user: User;
   interestThreshold: number;
   imageUrl: string;
+  description: string;
+  taxonomy: number;
 }
