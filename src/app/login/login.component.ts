@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit {
   }
 
   submitRegistration() {
+    console.log(this.firstname);
+    
     let newUser = new User();
     newUser.email = this.emailR;
     newUser.password = this.passwordR;
