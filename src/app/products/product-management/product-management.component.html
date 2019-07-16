@@ -1,82 +1,79 @@
-<div class="row padding-lg">
-  
-    <div class="col-sm-12">
-        <div class="form-outer">
+<form>
 
-                <div class="row">
-                        <div class="col-sm-12">
-                                <label>Product Name</label>
-                                <input name="productname" id="productname" type="text" placeholder="Iphone x brand new" required>
-                        </div>
-                        
-                    </div>
-           
-            
-            <div class="row">
-                <div class="col-sm-4">
-                    <label>Brand</label>
-                    <select name="reimbursementType" id="reimbursementType" class="custom_select" required>
-                        <option value="">Select Brand Name </option>
-                        <option value="7">University Courses</option>
-                        <option value="8">Seminar</option>
-                        <option value="9">Certification Preparation</option>
-                        <option value="10">Certification</option>
-                        <option value="11">Technical Training</option>
-                        <option value="12">Other</option>
-                    </select>
-                </div>
-                <div class="col-sm-4">
-                    <label>Category</label>
-                    <select name="category" id="category" class="custom_select" required>
-                        <option value="">Select Categoty</option>
-                        <option value="Electronics, Computers & Office">Electronics, Computers & Office</option>
-                        <option value="Clothing, Shoes, Jewelry  & Watches">Clothing, Shoes, Jewelry  & Watches</option>
-                        <option value="Sports & Outdoor">Sports & Outdoor</option>
-                    </select>
-                </div>
-                <div class="col-sm-4">
-                    <label>Sub Category</label>
-                    <select name="subcategory" id="subcategory" class="custom_select" required>
-                        <option value="">Tv</option>
-                        <option value="7">Phone</option>
-                    </select>
-                </div>
-                
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                        <label>Price ($)</label>
-                        <input name="cost" id="cost" type="text" placeholder="Ex: 199.99" required>
-                </div>
-                <div class="col-sm-6">
-                    <label>Sale Price ($) </label>
-                    <input name="location" id="location" type="text" placeholder="ex : 99.99" required>
-                </div>
-            </div>
-          
-            <div class="row">
-                <div class="col-sm-12">
-                        <label>Description</label>
-                        <textarea name="description" id="description" class="form-control" rows="6"></textarea>
-                </div>
-            </div>
+  <div class="form-group">
+    <label for="inputAddress">Product Name</label>
+    <input type="text" class="form-control" id="name" placeholder="Apple iphone x">
+  </div>
 
-        <br>
-
-        <div class="row">
-                <div class="col-sm-6">
-                        <label>Listing Type</label>
-                        <select name="gradingformat" id="gradingformat" class="custom_select" required>
-                                <option value="">Select Listing type </option>
-                                <option value="Passing Grade">Pretty</option>
-                                <option value="Presentation">Penny</option>
-                        </select>
-                </div>
-            </div>
-            <br>
-            <div class="button-outer">
-                <button class="btn" onclick="requestrem()" >List Now <span class="icon-more-icon"></span></button>
-            </div>
-        </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="inputState">Brand Name</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
     </div>
-</div>
+    <div class="form-group col-md-4">
+      <label for="inputState">Category</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">Sub Category</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputAddress">Product Description</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+  </div>
+
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputState">Listing Type</label>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+        <label class="custom-control-label" for="customRadio1">Pretty ( Just Listing for Sale )</label>
+      </div>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+        <label class="custom-control-label" for="customRadio2">Penny ( Wholesale Retail with minimum quantity )</label>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Minimum Threshold Value</label>
+      <input type="password" class="form-control" id="inputPassword4" placeholder="Minimum Threshold Value">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">MSRP (Manufacturer's Suggested Retail Price)</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="validationTooltipUsernamePrepend">$</span>
+        </div>
+        <input type="text" class="form-control" id="inputZip">
+      </div>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="inputZip">Sale Price</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="validationTooltipUsernamePrepend">$</span>
+        </div>
+        <input type="text" class="form-control" id="inputZip">
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">List Product</button>
+</form>
