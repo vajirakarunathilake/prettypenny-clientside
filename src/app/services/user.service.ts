@@ -4,13 +4,13 @@ import { User } from '../user';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-
+import { Helpers } from '../helpers';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public helper: Helpers) { }
   id: number;
   login(email: string, password: string): Observable<User> {
     return this.http.post(`${environment.apiBase}/user/login`, {email, password})
@@ -29,13 +29,13 @@ export class UserService {
   }
 
   logout(): any {
-    localStorage.remove('email');
-    localStorage.remove('firstname');
-    localStorage.remove('lastname');
-    localStorage.remove('address');
-    localStorage.remove('creditCardNumber');
-    localStorage.remove('cvv');
-    localStorage.remove('role');
+    this.helper.removeStorageItem('email');
+    this.helper.removeStorageItem('firstname');
+    this.helper.removeStorageItem('lastname');
+    this.helper.removeStorageItem('address');
+    this.helper.removeStorageItem('creditCardNumber');
+    this.helper.removeStorageItem('cvv');
+    this.helper.removeStorageItem('role');
     return this.http.get(`${environment.apiBase}/user/logout`)
     .pipe( map( (response: any) => response));
   }
