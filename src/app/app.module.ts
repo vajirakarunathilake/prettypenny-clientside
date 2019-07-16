@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -31,6 +32,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { SearchPipe } from './pipes/search.pipe';
+import { ProductAddComponent } from './products/productManagement/product-add/product-add.component';
+
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -38,9 +41,10 @@ const appRoutes: Routes = [
   { path: 'products/:id', component: ProductComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'login', component: LoginComponent }
-];
+  { path: 'login', component: LoginComponent },
+  { path: 'productmanagement', component: ProductAddComponent }
 
+];
 
 @NgModule({
   declarations: [
@@ -61,7 +65,8 @@ const appRoutes: Routes = [
     ProductListItemComponent,
     TruncatePipe,
     FilterPipe,
-    SearchPipe
+    SearchPipe,
+    ProductAddComponent
   ],
   imports: [
     BrowserModule,

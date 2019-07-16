@@ -1,15 +1,16 @@
 <nav class="navbar is-fixed-top">
   <div class="container">
-      <div class="navbar-brand">
-        <a class="navbar-item logo" routerLink="/">
-          Pretty<b>Penny</b>
-        </a>
-        <div class="navbar-burger burger" [ngClass]="{'is-active': menuToggle}" data-target="navbarExampleTransparentExample" (click)="menuToggle = !menuToggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+    <div class="navbar-brand">
+      <a class="navbar-item logo" routerLink="/">
+        Pretty<b>Penny</b>
+      </a>
+      <div class="navbar-burger burger" [ngClass]="{'is-active': menuToggle}"
+        data-target="navbarExampleTransparentExample" (click)="menuToggle = !menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
+    </div>
 
       <div id="navbarExampleTransparentExample" class="navbar-menu" [ngClass]="{'is-active': menuToggle}">
         <div class="navbar-start">
@@ -20,7 +21,7 @@
             [routerLinkActiveOptions]="{exact: true}">
             <span class="icon">
               <i class="fas fa-home"></i>
-            </span>
+            </span><span></span>
             Home
           </a>
           <a class="navbar-item" routerLink="/products" routerLinkActive="is-active">
@@ -32,19 +33,25 @@
           <a class="navbar-item" routerLink="/contact" routerLinkActive="is-active">
             <span class="icon">
               <i class="fas fa-envelope-open"></i>
-            </span>
+            </span><span></span>
             Contact
           </a>
+           <a class="navbar-item" routerLink="/productmanagement" routerLinkActive="is-active">
+          <span class="icon">
+            <i class="fas fa-key"></i>
+          </span><span></span>
+          Product Management
+        </a>
           <ng-container *ngIf="this.helper.localStorageItem('email') == null; else nobody">
             <a class="navbar-item" routerLink="/login" routerLinkActive="is-active">
               <span class="icon">
                 <i class="fas fa-user"></i>
-              </span>
+              </span><span></span>
               Login
             </a>
             </ng-container>
           <ng-template #nobody>
-              <a class="navbar-item" ng-click="userService.logout()">Logout</a>
+              <a class="navbar-item" ng-click="userService.logout()"> <span></span> Logout</a>
               <span class="icon">
                   <i class="fas fa-user"></i>
                 </span>
@@ -52,8 +59,7 @@
 
         </div>
 
-        <app-cartmini class="navbar-end mini-cart-wrap"></app-cartmini>
-      </div>
+      <app-cartmini class="navbar-end mini-cart-wrap"></app-cartmini>
+    </div>
   </div>
 </nav>
-
