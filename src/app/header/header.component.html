@@ -35,12 +35,21 @@
             </span>
             Contact
           </a>
-          <a class="navbar-item" routerLink="/login" routerLinkActive="is-active">
-            <span class="icon">
-              <i class="fas fa-user"></i>
-            </span>
-            Login
-          </a>
+          <ng-container *ngIf=" localStorage == undefined; else nobody">
+            <a class="navbar-item" routerLink="/login" routerLinkActive="is-active">
+              <span class="icon">
+                <i class="fas fa-user"></i>
+              </span>
+              Login
+            </a>
+            </ng-container>
+          <ng-template #nobody>
+              <a class="navbar-item" ng-click="userService.logout()">Logout</a>
+              <span class="icon">
+                  <i class="fas fa-user"></i>
+                </span>
+          </ng-template>
+
         </div>
 
         <app-cartmini class="navbar-end mini-cart-wrap"></app-cartmini>
