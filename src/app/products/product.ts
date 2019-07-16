@@ -1,7 +1,7 @@
 import { User } from '../user';
 export class Product {
   productId: number;
-  ProductName: string;
+  productName: string;
   price: number;
   salePrice: number;
   onSale: number;
