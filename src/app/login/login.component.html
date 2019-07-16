@@ -34,7 +34,7 @@
           <label for="ccv">CVV</label>
           <input type="Number" class="form-control" [(ngModel)]="ccv" name="ccv" placeholder=000>
         </div>
-        <button type="button" (click)="submitRegistration()" class="btn btn-success">Submit</button>
+        <button type="button" (click)="submitRegistration()" class="btn btn-success" id="sbmtBtn">Submit</button>
       </form>
       <p *ngIf="this.goodInf == false">
             Invalid Entry/Email Taken
@@ -52,7 +52,7 @@
             <label for="passwordL">Password</label>
             <input type="password" class="form-control" [(ngModel)]="passwordL" name="passwordL" placeholder="Password">
           </div>
-          <button type="button" (click)="loginUser()" class="btn btn-success">Login</button>
+          <button type="button" (click)="loginUser()" class="btn btn-success" id="logBtn">Login</button>
         </form>
         <p *ngIf="this.goodCred == false">
             Invalid Credentials

@@ -30,12 +30,13 @@ export class UserService {
 
   logout(): any {
     this.helper.removeStorageItem('email');
-    this.helper.removeStorageItem('firstname');
-    this.helper.removeStorageItem('lastname');
+    this.helper.removeStorageItem('firstName');
+    this.helper.removeStorageItem('lastName');
     this.helper.removeStorageItem('address');
     this.helper.removeStorageItem('creditCardNumber');
     this.helper.removeStorageItem('cvv');
     this.helper.removeStorageItem('role');
+    this.helper.removeStorageItem('userId');
     return this.http.get(`${environment.apiBase}/user/logout`)
     .pipe( map( (response: any) => response));
   }

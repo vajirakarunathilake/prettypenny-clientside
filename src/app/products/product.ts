@@ -7,9 +7,9 @@ export class Product {
   onSale: number;
   dateListed: Date;
   status: string;
-  user: User;
+  userId: number;
   interestThreshold: number;
   imageUrl: string;
   description: string;
-  taxonomy: number;
+  taxonomy: number
 }

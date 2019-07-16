@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
               this.helper.localStorageSet('creditCardNumber', this.user.creditCardNumber);
               this.helper.localStorageSet('cvv', this.user.cvv);
               this.helper.localStorageSet('role', this.user.role);
+              this.helper.localStorageSet('userId', (this.user.userId + ""));
               console.log('User is logged in');
               this.router.navigate(['/products']);
             }
@@ -76,14 +77,16 @@ export class LoginComponent implements OnInit {
           this.goodCred = false;
         }
         else {
+          this.user = u;
           this.goodCred = null;
           this.helper.localStorageSet('email', this.user.email);
-          this.helper.localStorageSet('firstname', this.user.firstName);
-          this.helper.localStorageSet('lastname', this.user.lastName);
+          this.helper.localStorageSet('firstName', this.user.firstName);
+          this.helper.localStorageSet('lastName', this.user.lastName);
           this.helper.localStorageSet('address', this.user.address);
           this.helper.localStorageSet('creditCardNumber', this.user.creditCardNumber);
           this.helper.localStorageSet('cvv', this.user.cvv);
           this.helper.localStorageSet('role', this.user.role);
+          this.helper.localStorageSet('userId', (this.user.userId + ""));
           console.log('User is logged in');
           this.router.navigate(['/products']);
         }
