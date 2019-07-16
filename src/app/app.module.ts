@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -26,13 +27,13 @@ import { FavoriteService } from './services/favorite.service';
 import { LoginComponent } from './login/login.component';
 import { FiltersComponent } from './products/filters/filters.component';
 import { ProductListItemComponent } from './products/product-list-item/product-list-item.component';
-import { ProductManagementComponent } from './products/product-management/product-management.component';
 import { ToastyNotificationsService } from './services/toasty-notifications.service';
 import { ProductsService } from './services/products.service';
 import { Routes, RouterModule } from '@angular/router';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { SearchPipe } from './pipes/search.pipe';
+import { ProductAddComponent } from './products/productManagement/product-add/product-add.component';
 
 
 const appRoutes: Routes = [
@@ -42,7 +43,7 @@ const appRoutes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'cart', component: CartComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'productmanagement', component: ProductManagementComponent }
+  { path: 'productmanagement', component: ProductAddComponent }
 
 ];
 
@@ -65,7 +66,7 @@ const appRoutes: Routes = [
     TruncatePipe,
     FilterPipe,
     SearchPipe,
-    ProductManagementComponent
+    ProductAddComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,104 @@
+<form #regiffddsters='ngForm'>
+  <div class="form-group">
+    <label for="inputAddress">Product Name</label>
+    <input type="text" class="form-control" [(ngModel)]="productName" name="productName" placeholder="Apple iphone x">
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="brandName">Brand Name</label>
+      <select id="brandName" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="category">Category</label>
+      <select id="category" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="subCategory">Sub Category</label>
+      <select id="subCategory" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label>Brand Name</label>
+      <input type="text" class="form-control" [(ngModel)]="brandName" name="brandName">
+    </div>
+    <div class="form-group col-md-4">
+      <label>Category</label>
+      <input type="text" class="form-control" [(ngModel)]="category" name="category">
+    </div>
+    <div class="form-group col-md-4">
+      <label>Sub Category</label>
+      <input type="text" class="form-control" [(ngModel)]="subCategory" name="subCategory">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Image Path</label>
+    <input type="text" class="form-control" [(ngModel)]="imagePath" name="imagePath"
+      placeholder="https://ss7.vzw.com/is/image/VerizonWireless/iphone-x-kf-device-tab-d-1-hero?$pngalpha$&scl=2">
+  </div>
+
+  <div class="form-group">
+    <label>Product Description</label>
+    <textarea class="form-control" [(ngModel)]="productDescription" name="productDescription" rows="5"></textarea>
+  </div>
+
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Listing Type</label>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="listTypePretty" name="listType" (click)="changeLabel()" value="0" [(ngModel)]="listType"
+          class="custom-control-input" checked>
+        <label class="custom-control-label" for="listTypePretty">Pretty ( Just Listing for Sale )</label>
+      </div>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="listTypePenny" name="listType" (click)="changeLabel()" value="1" [(ngModel)]="listType"
+          class="custom-control-input">
+        <label class="custom-control-label" for="listTypePenny">Penny ( Wholesale Retail with minimum quantity
+          )</label>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">{{quantityLabel}}</label>
+      <input type="password" class="form-control" [(ngModel)]="quantity" name="quantity"
+        placeholder="{{quantityLabel}}">
+    </div>
+  </div>
+
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">MSRP (Manufacturer's Suggested Retail Price)</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="msrp" name="msrp">
+      </div>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="inputZip">Sale Price</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="salePrice" name="salePrice">
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" (click)="addProduct()">List Product</button>
+</form>
