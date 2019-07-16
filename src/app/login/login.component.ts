@@ -49,8 +49,8 @@ export class LoginComponent implements OnInit {
             (u) => {
               this.user = u;
               this.helper.localStorageSet('email', this.user.email);
-              this.helper.localStorageSet('firstname', this.user.firstName);
-              this.helper.localStorageSet('lastname', this.user.lastName);
+              this.helper.localStorageSet('firstName', this.user.firstName);
+              this.helper.localStorageSet('lastName', this.user.lastName);
               this.helper.localStorageSet('address', this.user.address);
               this.helper.localStorageSet('creditCardNumber', this.user.creditCardNumber);
               this.helper.localStorageSet('cvv', this.user.cvv);
