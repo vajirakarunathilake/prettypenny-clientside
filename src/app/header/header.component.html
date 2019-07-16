@@ -12,52 +12,47 @@
       </div>
     </div>
 
-      <div id="navbarExampleTransparentExample" class="navbar-menu" [ngClass]="{'is-active': menuToggle}">
-        <div class="navbar-start">
-          <a
-            class="navbar-item"
-            routerLink="/"
-            routerLinkActive="is-active"
-            [routerLinkActiveOptions]="{exact: true}">
-            <span class="icon">
-              <i class="fas fa-home"></i>
-            </span><span></span>
-            Home
-          </a>
-          <a class="navbar-item" routerLink="/products" routerLinkActive="is-active">
-            <span class="icon">
-              <i class="fas fa-shopping-bag"></i>
-            </span>
-            Products
-          </a>
-          <a class="navbar-item" routerLink="/contact" routerLinkActive="is-active">
-            <span class="icon">
-              <i class="fas fa-envelope-open"></i>
-            </span><span></span>
-            Contact
-          </a>
-           <a class="navbar-item" routerLink="/productmanagement" routerLinkActive="is-active">
+    <div id="navbarExampleTransparentExample" class="navbar-menu" [ngClass]="{'is-active': menuToggle}">
+      <div class="navbar-start">
+        <a class="navbar-item" routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span><span></span>
+          Home
+        </a>
+        <a class="navbar-item" routerLink="/products" routerLinkActive="is-active">
+          <span class="icon">
+            <i class="fas fa-shopping-bag"></i>
+          </span>
+          Products
+        </a>
+        <a class="navbar-item" routerLink="/contact" routerLinkActive="is-active">
+          <span class="icon">
+            <i class="fas fa-envelope-open"></i>
+          </span><span></span>
+          Contact
+        </a>
+        <a class="navbar-item" routerLink="/productmanagement" routerLinkActive="is-active">
           <span class="icon">
             <i class="fas fa-key"></i>
           </span><span></span>
           Product Management
         </a>
-          <ng-container *ngIf="this.helper.localStorageItem('email') == null; else nobody">
-            <a class="navbar-item" routerLink="/login" routerLinkActive="is-active">
-              <span class="icon">
-                <i class="fas fa-user"></i>
-              </span><span></span>
-              Login
-            </a>
-            </ng-container>
-          <ng-template #nobody>
-              <a class="navbar-item" ng-click="userService.logout()"> <span></span> Logout</a>
-              <span class="icon">
-                  <i class="fas fa-user"></i>
-                </span>
-          </ng-template>
-
-        </div>
+        <ng-container *ngIf="this.helper.localStorageItem('email') == null; else nobody">
+          <a class="navbar-item" routerLink="/login" routerLinkActive="is-active">
+            <span class="icon">
+              <i class="fas fa-user"></i>
+            </span><span></span>
+            Login
+          </a>
+        </ng-container>
+        <ng-template #nobody>
+          <a class="navbar-item" ng-click="userService.logout()"> <span></span> Logout</a>
+          <span class="icon">
+            <i class="fas fa-user"></i>
+          </span>
+        </ng-template>
+      </div>
 
       <app-cartmini class="navbar-end mini-cart-wrap"></app-cartmini>
     </div>
