@@ -10,8 +10,12 @@ import { Helpers } from '../helpers';
   providedIn: 'root'
 })
 export class ProductService {
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  private headers = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
   constructor(private http: HttpClient, private helper: Helpers) { }
+
 
   findAll(): Observable<Product[]> {
     return this.http.get(`${environment.apiBase}/products`)
@@ -50,8 +54,9 @@ export class ProductService {
 
   insert(product: Product): Observable<any> {
     console.log(JSON.stringify(product));
-    return this.http.post(`${environment.apiBase}/product`, JSON.stringify(product))
+    return this.http.post(`${environment.apiBase}/product`, JSON.stringify(product), this.headers)
       .pipe(map((response: any) => response));
+
   }
 
   update(productName: string, productPrice: number, salePrice: number, prodStatus: string, id: number, interestThreshold: number, image: string): Observable<any> {

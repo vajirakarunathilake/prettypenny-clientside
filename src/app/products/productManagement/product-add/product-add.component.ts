@@ -5,6 +5,7 @@ import { Product } from './../../product';
 import { ProductService } from './../../../services/product.service';
 import { TaxonomyService } from './../../../services/taxonomy.service';
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/user';
 
 @Component({
   selector: 'app-product-add',
@@ -15,10 +16,10 @@ export class ProductAddComponent implements OnInit {
 
   product: Product = new Product();
   taxonomy: Taxonomy = new Taxonomy();
-  quantityLabel: String = "Quantity";
-  brandName: String;
-  category: String;
-  subCategory: String;
+  quantityLabel = `Quantity`;
+  brandName: string;
+  category: string;
+  subCategory: string;
   listType: number;
   resp: string;
   responseStatus: boolean = null;
@@ -26,7 +27,12 @@ export class ProductAddComponent implements OnInit {
   categories = ['Electronics', 'Cloths', 'Watches', 'Furnitures'];
   subCategories = ['TV', 'Phone', 'Shirts', 'Chairs'];
 
-  constructor(private productService: ProductService, private taxonomyService: TaxonomyService, private router: Router, public helper: Helpers) { }
+  constructor(
+    private productService: ProductService,
+    private taxonomyService: TaxonomyService,
+    private router: Router,
+    public helper: Helpers
+  ) { }
 
   ngOnInit() {
 
@@ -43,13 +49,13 @@ export class ProductAddComponent implements OnInit {
 
     this.product.user.userId = 68;
     this.product.taxonomy.taxonomyId= 54;
+
     this.productService.insert(this.product).subscribe(
       (response) => {
         this.resp = response;
-        console.log(this.resp);
         if (this.resp !== 'User Product Add Failed') {
           this.router.navigate(['/productmanagement']);
-        }else{
+        } else {
           this.responseStatus = false;
         }
       });
@@ -59,8 +65,8 @@ export class ProductAddComponent implements OnInit {
     if (this.listType == 0) {
       this.quantityLabel = "Quantity";
 
-    } else if (this.listType == 1) {
-      this.quantityLabel = "Minimum Threshold Value";
+    } else if (this.listType === 1) {
+      this.quantityLabel = `Minimum Threshold Value`;
     }
   }
 
