@@ -34,6 +34,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { SearchPipe } from './pipes/search.pipe';
 import { ProductAddComponent } from './products/productManagement/product-add/product-add.component';
+import { ProductViewComponent } from './products/productManagement/product-view/product-view.component';
 import { PurchasehistoryComponent } from './purchasehistory/purchasehistory.component';
 
 
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'cart', component: CartComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'productmanagement', component: ProductAddComponent },
+  { path: 'addproduct', component: ProductAddComponent },
+  { path: 'viewproduct', component: ProductViewComponent }
   { path: 'purchasehistory', component: PurchasehistoryComponent}
 
 ];
@@ -70,6 +72,7 @@ const appRoutes: Routes = [
     FilterPipe,
     SearchPipe,
     ProductAddComponent,
+    ProductViewComponent,
     PurchasehistoryComponent
   ],
   imports: [

@@ -5,6 +5,7 @@ import { User } from '../user';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { Helpers } from '../helpers';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,9 @@ export class ProductService {
   private headers = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  constructor(private http: HttpClient) { }
 
+  constructor(private http: HttpClient, private helper: Helpers) { }
+  
   findAll(): Observable<Product[]> {
     return this.http.get(`${environment.apiBase}/products`)
       .pipe(map((p) => p as Product[]));
@@ -40,10 +42,20 @@ export class ProductService {
       .pipe(map((p) => p as Product));
   }
 
+  findPrettiesBySeller(): Observable<Product[]> {
+    return this.http.get(`${environment.apiBase}/pretty/by_seller?sellerId=${this.helper.localStorageItem("userId")}`)
+      .pipe(map((p) => p as Product[]));
+  }
 
-  insert(sendObj: Product): Observable<any> {
+  findPenniesBySeller(): Observable<Product[]> {
+    return this.http.get(`${environment.apiBase}/pennies/by_seller?sellerId=${this.helper.localStorageItem("userId")}`)
+      .pipe(map((p) => p as Product[]));
+  }
 
-      return this.http.post(`${environment.apiBase}/product`, sendObj ).pipe(map((response: any) => response));
+  insert(product: Product): Observable<any> {
+    console.log(JSON.stringify(product));
+    return this.http.post(`${environment.apiBase}/product`, JSON.stringify(product), this.headers)
+      .pipe(map((response: any) => response));
   }
 
   update(product: Product): Observable<any> {
