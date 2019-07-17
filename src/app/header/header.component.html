@@ -42,26 +42,30 @@
           </span><span></span>
           Product Management
         </a>
-          <ng-container *ngIf="this.helper.localStorageItem('email') == null; else nobody">
+          <ng-container *ngIf="this.helper.localStorageItem('email') == null">
             <a class="navbar-item" routerLink="/login" routerLinkActive="is-active">
               <span class="icon">
                 <i class="fas fa-user"></i>
               </span>
-              Login
+               Login
             </a>
             </ng-container>
-          <ng-template #nobody>
+          <ng-container *ngIf="this.helper.localStorageItem('email') != null">
               <a class="navbar-item" routerLink="/purchasehistory" routerLinkActive="is-active">
                 <span class="icon">
-                  <i class="fas fa-comment-dollar"></i>
-                </span>
-                My Purchases
-              </a>
-              <a class="navbar-item" ng-click="userService.logout()"> <span></span> Logout</a>
-              <span class="icon">
                   <i class="fas fa-user"></i>
+
                 </span>
-          </ng-template>
+                 My Purchases
+              </a>
+            </ng-container>
+              <ng-container *ngIf="this.helper.localStorageItem('email') != null">
+              <a class="navbar-item" role="button" (click)="logout()">
+                <span class="icon">
+                  <i class="fas fa-user"></i>
+                </span> Logout</a>
+
+          </ng-container>
 
         </div>
 

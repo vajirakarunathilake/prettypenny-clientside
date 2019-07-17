@@ -27,6 +27,7 @@ import { LoginComponent } from './login/login.component';
 import { FiltersComponent } from './products/filters/filters.component';
 import { ProductListItemComponent } from './products/product-list-item/product-list-item.component';
 import { ToastyNotificationsService } from './services/toasty-notifications.service';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ProductsService } from './services/products.service';
 import { Routes, RouterModule } from '@angular/router';
 import { TruncatePipe } from './pipes/truncate.pipe';
@@ -73,6 +74,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    AngularFontAwesomeModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
     NgbModule,
