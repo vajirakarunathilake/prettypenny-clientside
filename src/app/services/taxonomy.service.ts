@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Taxonomy } from '../products/taxonomy';
 import { Observable } from 'rxjs';
+import { Product } from '../products/product';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
@@ -24,14 +25,27 @@ export class TaxonomyService {
   }
 
   insert(taxonomyName: string, taxType: string, subTypee: string, prodId: number): Observable<any> {
-    return this.http.post(`${environment.apiBase}/taxonomy`,
-     {name: taxonomyName, type: taxType, subType: subTypee, productId: prodId})
+    let taxonomy = new Taxonomy();
+    let product = new Product();
+    taxonomy.name = taxonomyName;
+    taxonomy.type = taxType;
+    taxonomy.subType = subTypee;
+    product.productId = prodId;
+    taxonomy.product = product;
+    return this.http.post(`${environment.apiBase}/taxonomy`, taxonomy)
      .pipe( map( (response: any) => response));
   }
 
   update(taxonomyName: string, taxType: string, subTypee: string, prodId: number, id: number): Observable<any> {
-    return this.http.put(`${environment.apiBase}/taxonomy`,
-     {name: taxonomyName, type: taxType, subType: subTypee, productId: prodId, taxonomyId: id})
+    let taxonomy = new Taxonomy();
+    let product = new Product();
+    taxonomy.name = taxonomyName;
+    taxonomy.type = taxType;
+    taxonomy.subType = subTypee;
+    product.productId = prodId;
+    taxonomy.product = product;
+    taxonomy.taxonomyId = id;
+    return this.http.put(`${environment.apiBase}/taxonomy`, taxonomy)
      .pipe( map( (response: any) => response));
   }
 

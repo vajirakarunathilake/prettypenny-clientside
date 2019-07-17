@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Product } from '../products/product';
+import { User } from '../user';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
@@ -37,15 +38,34 @@ export class ProductService {
       .pipe(map((p) => p as Product));
   }
 
-  insert(productName: string, productPrice: number, id: number, interestThreshold: number, image: string): Observable<any> {
-    return this.http.post(`${environment.apiBase}/product`,
-      { name: productName, price: productPrice, userId: id, interestThreshold: interestThreshold, imageUrl: image })
-      .pipe(map((response: any) => response));
+  insert(productName: string, productPrice: number, id: number, interestThreshold: number,
+     image: string, description: string, taxonomy: number): Observable<any> {
+      let sendObj = new Product();
+      sendObj.ProductName = productName;
+      sendObj.price = productPrice;
+      sendObj.interestThreshold = interestThreshold;
+      sendObj.userId = id;
+      sendObj.imageUrl = image;
+      sendObj.description = description;
+      sendObj.taxonomy = taxonomy;
+      return this.http.post(`${environment.apiBase}/product`, sendObj ).pipe(map((response: any) => response));
   }
 
-  update(productName: string, productPrice: number, salePrice: number, prodStatus: string, id: number, interestThreshold: number, image: string): Observable<any> {
-    return this.http.put(`${environment.apiBase}/product`,
-      { name: productName, price: productPrice, salePrice: salePrice, status: prodStatus, productId: id, interestThreshold: interestThreshold, imageUrl: image })
+  update(productName: string, productPrice: number, salePrice: number,
+    prodStatus: string, id: number, interestThreshold: number, image: string,
+     description: string, taxonomy: number, prodId: number): Observable<any> {
+      let sendObj = new Product();
+      sendObj.ProductName = productName;
+      sendObj.price = productPrice;
+      sendObj.interestThreshold = interestThreshold;
+      sendObj.imageUrl = image;
+      sendObj.description = description;
+      sendObj.taxonomy = taxonomy;
+      sendObj.salePrice = salePrice;
+      sendObj.productId = prodId;
+      sendObj.status = prodStatus;
+      sendObj.userId = id;
+      return this.http.put(`${environment.apiBase}/product`, sendObj)
       .pipe(map((response: any) => response));
   }
 

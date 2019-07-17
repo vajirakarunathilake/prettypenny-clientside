@@ -13,7 +13,10 @@ export class UserService {
   constructor(private http: HttpClient, public helper: Helpers) { }
   id: number;
   login(email: string, password: string): Observable<User> {
-    return this.http.post(`${environment.apiBase}/user/login`, {email, password})
+    let user = new User();
+    user.email = email;
+    user.password = password;
+    return this.http.post(`${environment.apiBase}/user/login`, user)
       .pipe( map( (u) => u as User));
   }
 
@@ -42,7 +45,7 @@ export class UserService {
   }
 
   update(user: User): Observable<any> {
-    return this.http.put(`${environment.apiBase}/user`, JSON.stringify(user))
+    return this.http.put(`${environment.apiBase}/user`, user)
     .pipe( map( (response: any) => response));
   }
 

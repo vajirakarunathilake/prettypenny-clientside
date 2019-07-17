@@ -46,11 +46,17 @@
             <a class="navbar-item" routerLink="/login" routerLinkActive="is-active">
               <span class="icon">
                 <i class="fas fa-user"></i>
-              </span><span></span>
+              </span>
               Login
             </a>
             </ng-container>
           <ng-template #nobody>
+              <a class="navbar-item" routerLink="/purchasehistory" routerLinkActive="is-active">
+                <span class="icon">
+                  <i class="fas fa-comment-dollar"></i>
+                </span>
+                My Purchases
+              </a>
               <a class="navbar-item" ng-click="userService.logout()"> <span></span> Logout</a>
               <span class="icon">
                   <i class="fas fa-user"></i>
