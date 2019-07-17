@@ -12,9 +12,10 @@ import { PurchaseService } from '../services/purchase.service';
 export class PurchasehistoryComponent implements OnInit {
 
   constructor(public helper: Helpers, private purchaseService: PurchaseService) { }
-  myPurchase: Purchase[];
-  allPurchase: Purchase[];
+  myPurchase: Purchase[] = new Array();
+  allPurchase: Purchase[] = new Array();
   myStuff = '';
+
   getPurchases(){
     this.purchaseService.findAll().subscribe(
       (p) => {
@@ -35,7 +36,7 @@ export class PurchasehistoryComponent implements OnInit {
   ngOnInit() {
     this.getMyPurchases();
     for (let i = 0; i < this.myPurchase.length; i++){
-      this.myStuff = this.myStuff + `Purchase Date: ${this.myPurchase[i].datePurchased} <br> Product: ${this.myPurchase[i].product} <br>`;
+      this.myStuff = this.myStuff + `Purchase Date: ${this.myPurchase[i].datePurchased} <br> Product: ${this.myPurchase[i].product} <br><br>`;
     }
   }
 
