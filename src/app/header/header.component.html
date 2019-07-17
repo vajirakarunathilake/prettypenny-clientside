@@ -32,12 +32,19 @@
           </span><span></span>
           Contact
         </a>
-        <a class="navbar-item" routerLink="/productmanagement" routerLinkActive="is-active">
+        <a class="navbar-item" routerLink="/addproduct" routerLinkActive="is-active">
           <span class="icon">
             <i class="fas fa-key"></i>
           </span><span></span>
-          Product Management
+          Add Products
         </a>
+        <a class="navbar-item" routerLink="/viewproduct" routerLinkActive="is-active">
+          <span class="icon">
+            <i class="fas fa-key"></i>
+          </span><span></span>
+          View Product
+        </a>
+
         <ng-container *ngIf="this.helper.localStorageItem('email') == null; else nobody">
           <a class="navbar-item" routerLink="/login" routerLinkActive="is-active">
             <span class="icon">

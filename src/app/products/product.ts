@@ -1,3 +1,4 @@
+import { Taxonomy } from './taxonomy';
 import { User } from '../user';
 export class Product {
   productId: number;
@@ -7,9 +8,9 @@ export class Product {
   onSale: number;
   dateListed: Date;
   status: string;
-  userId: number;
+  user: User;
   interestThreshold: number;
   imageUrl: string;
   description: string;
-  taxonomy: number
+  taxonomy: Taxonomy;
 }

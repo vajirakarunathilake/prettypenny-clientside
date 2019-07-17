@@ -34,18 +34,16 @@ export class ProductAddComponent implements OnInit {
 
   addProduct() {
     if (this.listType == 0) {
-      if (this.product.price - this.product.onSale > 0) {
-        this.product.status = "On Sale";
-      } else {
-        this.product.status = "Standard";
-      }
-    } else if (this.listType == 1) {
+      this.product.status = "Pretty";
+      this.product.onSale = 1;
+    } else{
       this.product.status = "Within Threshold";
+      this.product.onSale = 0;
     }
 
-    this.product.userId = 68;
-    this.product.taxonomy = 54;
-    this.productService.insertt(this.product).subscribe(
+    this.product.user.userId = 68;
+    this.product.taxonomy.taxonomyId= 54;
+    this.productService.insert(this.product).subscribe(
       (response) => {
         this.resp = response;
         console.log(this.resp);
@@ -58,8 +56,6 @@ export class ProductAddComponent implements OnInit {
   }
 
   changeLabel() {
-
-
     if (this.listType == 0) {
       this.quantityLabel = "Quantity";
 
