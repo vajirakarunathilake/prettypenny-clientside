@@ -53,8 +53,8 @@ export class ProductService {
   }
 
   insert(product: Product): Observable<any> {
-    console.log(JSON.stringify(product));
-    return this.http.post(`${environment.apiBase}/product`, JSON.stringify(product), this.headers)
+    console.log(product);
+    return this.http.post(`${environment.apiBase}/product`, product, this.headers)
       .pipe(map((response: any) => response));
   }
 

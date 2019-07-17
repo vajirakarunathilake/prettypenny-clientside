@@ -47,8 +47,8 @@ export class ProductAddComponent implements OnInit {
       this.product.onSale = 0;
     }
 
-    this.product.user.userId = 68;
-    this.product.taxonomy.taxonomyId= 54;
+    this.product.user.userId = Number(this.helper.localStorageItem("userId"));
+    this.product.taxonomy.taxonomyId= 200;
     this.productService.insert(this.product).subscribe(
       (response) => {
         this.resp = response;
