@@ -1,3 +1,5 @@
+import { Taxonomy } from './taxonomy';
+import { User } from '../user';
 export class Product {
   productId: number;
   productName: string;
@@ -6,10 +8,10 @@ export class Product {
   onSale: number;
   dateListed: Date;
   status: string;
-  user: number;
+  user: User;
   interestThreshold: number;
   imageUrl: string;
   description: string;
-  taxonomy: number;
+  taxonomy: Taxonomy;
   generatedInterest: number;
 }
