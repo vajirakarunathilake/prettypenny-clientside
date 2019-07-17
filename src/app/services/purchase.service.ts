@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Purchase } from '../products/purchase';
 import { Observable } from 'rxjs';
+import { User } from '../user';
+import { Product } from '../products/product';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
@@ -23,15 +25,15 @@ export class PurchaseService {
       .pipe( map( (p) => p as Purchase));
   }
 
-  insert(purchaseDate: Date, userId: number, productId: number): Observable<any> {
+  insert(purchase: Purchase): Observable<any> {
     return this.http.post(`${environment.apiBase}/purchase`,
-     {'datePurchased': purchaseDate, 'userId': userId, 'productId': productId})
+     purchase)
      .pipe( map( (response: any) => response));
   }
 
-  update(purchaseDate: Date, uId: number, prodId: number, purchId: number): Observable<any> {
+  update(purchase: Purchase): Observable<any> {
     return this.http.put(`${environment.apiBase}/purchase`,
-     {datePurchased: purchaseDate, userId: uId, productId: prodId, purchaseId: purchId})
+     purchase)
      .pipe( map( (response: any) => response));
   }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Product } from '../products/product';
+import { User } from '../user';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
@@ -49,12 +50,10 @@ export class ProductService {
       );
   }
 
-  insert(product: Product): Observable<any> {
 
-    return this.http.post<Product>(`${environment.apiBase}/product`, product, this.headers)
-      .pipe(
-        map((response) => response)
-      );
+  insert(sendObj: Product): Observable<any> {
+
+      return this.http.post(`${environment.apiBase}/product`, sendObj ).pipe(map((response: any) => response));
   }
 
   update(product: Product): Observable<any> {

@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Favorite } from '../products/favorite';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { User } from '../user';
+import { Product } from '../products/product';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -27,21 +29,21 @@ export class FavoriteService {
       .pipe( map( (f) => f as Favorite));
   }
 
-  insert(custId: number, prodId: number): Observable<any> {
-    return this.http.post(`${environment.apiBase}/favorite`,
-    {userId: custId, productId: prodId})
+  insert(favorite: Favorite): Observable<any> {
+    return this.http.post(`${environment.apiBase}/favorite`, favorite)
     .pipe( map( (response: any) => response));
   }
 
-  update(favoriteId: number, custId: number, prodId: number): Observable<any> {
-    return this.http.put(`${environment.apiBase}/favorite`,
-    {favoriteId: favoriteId, userId: custId, productId: prodId})
+  update(favorite: Favorite): Observable<any> {
+    return this.http.put(`${environment.apiBase}/favorite`, favorite)
     .pipe( map( (response: any) => response));
   }
 
   delete(favoriteId: number): Observable<any> {
+    let fave = new Favorite();
+    fave.favoriteId = favoriteId;
     return this.http.delete(`${environment.apiBase}/favorite?favoriteId=${favoriteId}`)
-    .pipe( map( (response: any) => response.json()));
+    .pipe( map( (response: any) => response));
   }
 //backup
 //,{},{params: {favorite_id: favoriteId, customer_id: custId, product_id: prodId}}
