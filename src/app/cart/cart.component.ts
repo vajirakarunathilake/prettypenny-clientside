@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Product } from '../products/product.model';
-import { ProductsService } from '../services/products.service';
+import { Product } from '../products/product';
+import { ProductService } from '../services/product.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -14,7 +14,7 @@ export class CartComponent implements OnInit, OnDestroy {
   cartAdditionSubscription: Subscription;
   cartTotalSubscription: Subscription;
 
-  constructor(private prodService: ProductsService) {}
+  constructor(private prodService: ProductService) {}
 
   ngOnInit() {
     this.cartProducts = this.prodService.getCartAddedProducts();
@@ -34,7 +34,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
 
   onValAdd(product: Product) {
-    this.prodService.cartProductManipulate(product, true);
+    this.prodService.cartProductManipulate(product, 0, true);
   }
   onValSub(product: Product) {
     this.prodService.cartProductManipulate(product);
