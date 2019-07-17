@@ -50,7 +50,13 @@ export class UserService {
   }
 
   delete(user: User): Observable<any> {
-    return this.http.delete(`${environment.apiBase}/user?userId=${user.userId}`)
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(user)
+    };
+    return this.http.delete(`${environment.apiBase}/user`, options)
     .pipe( map( (response: any) => response));
   }
 

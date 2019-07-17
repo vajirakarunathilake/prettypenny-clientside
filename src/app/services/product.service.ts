@@ -16,7 +16,7 @@ export class ProductService {
   };
 
   constructor(private http: HttpClient, private helper: Helpers) { }
-  
+
   findAll(): Observable<Product[]> {
     return this.http.get(`${environment.apiBase}/products`)
       .pipe(map((p) => p as Product[]));
@@ -64,8 +64,14 @@ export class ProductService {
       .pipe(map((response: any) => response));
   }
 
-  delete(productId: number): Observable<any> {
-    return this.http.delete(`${environment.apiBase}/product?productId=${productId}`)
+  delete(product: Product): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(product)
+    };
+    return this.http.delete(`${environment.apiBase}/product`, options)
       .pipe(map((response: any) => response));
   }
 
