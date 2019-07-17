@@ -9,7 +9,9 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class ProductService {
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  private headers = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
   constructor(private http: HttpClient) { }
 
   findAll(): Observable<Product[]> {
@@ -37,16 +39,12 @@ export class ProductService {
       .pipe(map((p) => p as Product));
   }
 
-  insert(productName: string, productPrice: number, id: number, interestThreshold: number, image: string): Observable<any> {
-    return this.http.post(`${environment.apiBase}/product`,
-      { name: productName, price: productPrice, userId: id, interestThreshold: interestThreshold, imageUrl: image })
-      .pipe(map((response: any) => response));
-  }
-  insertt(product: Product): Observable<any> {
-    console.log(product);
-    
-    return this.http.post(`${environment.apiBase}/product`, product)
-      .pipe(map((response: any) => response));
+  insert(product: Product): Observable<any> {
+
+    return this.http.post<Product>(`${environment.apiBase}/product`, product, this.headers)
+      .pipe(
+        map((response) => response)
+      );
   }
 
   update(productName: string, productPrice: number, salePrice: number, prodStatus: string, id: number, interestThreshold: number, image: string): Observable<any> {
