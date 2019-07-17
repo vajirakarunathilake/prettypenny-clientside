@@ -7,32 +7,32 @@
       <form #registers='ngForm'>
         <div class="form-group">
           <label for="emailR">Email address</label>
-          <input type="Email" class="form-control" [(ngModel)]="emailR" name="emailR" aria-describedby="emailHelp" placeholder="Enter email">
+          <input type="Email" id="emailR" class="form-control" [(ngModel)]="emailR" name="emailR" aria-describedby="emailHelp" placeholder="Enter email">
           <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
           <label for="passwordR">Password</label>
-          <input type="Password" class="form-control" [(ngModel)]="passwordR" name="passwordR" placeholder="Password">
+          <input type="Password" id="password" class="form-control" [(ngModel)]="passwordR" name="passwordR" placeholder="Password">
         </div>
         <div class="form-group">
           <label for="firstname">First Name</label>
-          <input type="Text" class="form-control" [(ngModel)]="firstname" name="firstname" placeholder="First Name">
+          <input type="Text" id="firstname" class="form-control" [(ngModel)]="firstname" name="firstname" placeholder="First Name">
         </div>
         <div class="form-group">
           <label for="lastname">Last Name</label>
-          <input type="Text" class="form-control" [(ngModel)]="lastname" name="lastname" placeholder="Last Name">
+          <input type="Text" id="lastname" class="form-control" [(ngModel)]="lastname" name="lastname" placeholder="Last Name">
         </div>
         <div class="form-group">
           <label for="address">Address</label>
-          <input type="Text" class="form-control" [(ngModel)]="address" name="address" placeholder="Address">
+          <input type="Text" id="address" class="form-control" [(ngModel)]="address" name="address" placeholder="Address">
         </div>
         <div class="form-group">
           <label for="creditcardnumber">Credit Card Number</label>
-          <input type="Number" class="form-control" [(ngModel)]="creditcardnumber" name="creditcardnumber" placeholder=0000000000000000>
+          <input type="Number" id="creditcardnumber" class="form-control" [(ngModel)]="creditcardnumber" name="creditcardnumber" placeholder=0000000000000000>
         </div>
         <div class="form-group">
           <label for="ccv">CVV</label>
-          <input type="Number" class="form-control" [(ngModel)]="ccv" name="ccv" placeholder=000>
+          <input type="Number" id="ccv" class="form-control" [(ngModel)]="ccv" name="ccv" placeholder=000>
         </div>
         <button type="button" (click)="submitRegistration()" class="btn btn-success" id="sbmtBtn">Submit</button>
       </form>
@@ -45,12 +45,12 @@
         <form #logins='ngForm'>
           <div class="form-group">
             <label for="emailL">Email address</label>
-            <input type="email" class="form-control" [(ngModel)]="emailL" name="emailL" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="email" id="emailL" class="form-control" [(ngModel)]="emailL" name="emailL" aria-describedby="emailHelp" placeholder="Enter email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <div class="form-group">
             <label for="passwordL">Password</label>
-            <input type="password" class="form-control" [(ngModel)]="passwordL" name="passwordL" placeholder="Password">
+            <input type="password" id="passwordL" class="form-control" [(ngModel)]="passwordL" name="passwordL" placeholder="Password">
           </div>
           <button type="button" (click)="loginUser()" class="btn btn-success" id="logBtn">Login</button>
         </form>
