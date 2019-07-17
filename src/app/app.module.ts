@@ -27,12 +27,14 @@ import { LoginComponent } from './login/login.component';
 import { FiltersComponent } from './products/filters/filters.component';
 import { ProductListItemComponent } from './products/product-list-item/product-list-item.component';
 import { ToastyNotificationsService } from './services/toasty-notifications.service';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ProductsService } from './services/products.service';
 import { Routes, RouterModule } from '@angular/router';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { SearchPipe } from './pipes/search.pipe';
 import { ProductAddComponent } from './products/productManagement/product-add/product-add.component';
+import { PurchasehistoryComponent } from './purchasehistory/purchasehistory.component';
 
 
 const appRoutes: Routes = [
@@ -42,7 +44,8 @@ const appRoutes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'cart', component: CartComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'productmanagement', component: ProductAddComponent }
+  { path: 'productmanagement', component: ProductAddComponent },
+  { path: 'purchasehistory', component: PurchasehistoryComponent}
 
 ];
 
@@ -66,10 +69,12 @@ const appRoutes: Routes = [
     TruncatePipe,
     FilterPipe,
     SearchPipe,
-    ProductAddComponent
+    ProductAddComponent,
+    PurchasehistoryComponent
   ],
   imports: [
     BrowserModule,
+    AngularFontAwesomeModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
     NgbModule,

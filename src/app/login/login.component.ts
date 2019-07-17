@@ -10,8 +10,8 @@ import { Helpers } from '../helpers';
 })
 export class LoginComponent implements OnInit {
   @Input() user: User;
-  ccv: string;
-  creditcardnumber: string;
+  ccv: number;
+  creditCardCumber: number;
   address: string;
   passwordR: string;
   emailR: string;
@@ -29,20 +29,20 @@ export class LoginComponent implements OnInit {
 
   submitRegistration() {
     console.log(this.firstname);
-    
+
     let newUser = new User();
     newUser.email = this.emailR;
     newUser.password = this.passwordR;
     newUser.firstName = this.firstname;
     newUser.lastName = this.lastname;
     newUser.address = this.address;
-    newUser.creditCardNumber = this.creditcardnumber;
+    newUser.creditCardNumber = this.creditCardCumber;
     newUser.cvv = this.ccv;
     newUser.role = 'USER';
     this.userService.insert(newUser).subscribe(
       (response) => {
         this.resp = response;
-        if (this.resp !== 'User Inserted') {
+        if (this.resp !== '1') {
           this.goodInf = false;
         }
         else {
@@ -54,12 +54,12 @@ export class LoginComponent implements OnInit {
               this.helper.localStorageSet('firstName', this.user.firstName);
               this.helper.localStorageSet('lastName', this.user.lastName);
               this.helper.localStorageSet('address', this.user.address);
-              this.helper.localStorageSet('creditCardNumber', this.user.creditCardNumber);
-              this.helper.localStorageSet('cvv', this.user.cvv);
+              this.helper.localStorageSet('creditCardNumber', this.user.creditCardNumber + '');
+              this.helper.localStorageSet('cvv', this.user.cvv + '');
               this.helper.localStorageSet('role', this.user.role);
-              this.helper.localStorageSet('userId', (this.user.userId + ""));
+              this.helper.localStorageSet('userId', (u.userId + ""));
               console.log('User is logged in');
-              this.router.navigate(['/products']);
+              this.router.navigate(['']);
             }
           );
         }
@@ -83,12 +83,12 @@ export class LoginComponent implements OnInit {
           this.helper.localStorageSet('firstName', this.user.firstName);
           this.helper.localStorageSet('lastName', this.user.lastName);
           this.helper.localStorageSet('address', this.user.address);
-          this.helper.localStorageSet('creditCardNumber', this.user.creditCardNumber);
-          this.helper.localStorageSet('cvv', this.user.cvv);
+          this.helper.localStorageSet('creditCardNumber', this.user.creditCardNumber + '');
+          this.helper.localStorageSet('cvv', this.user.cvv + '');
           this.helper.localStorageSet('role', this.user.role);
-          this.helper.localStorageSet('userId', (this.user.userId + ""));
+          this.helper.localStorageSet('userId', (u.userId + ""));
           console.log('User is logged in');
-          this.router.navigate(['/products']);
+          this.router.navigate(['']);
         }
       }
     );
