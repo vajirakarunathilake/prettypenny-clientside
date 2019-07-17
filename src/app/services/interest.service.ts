@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Interest } from '../products/interest';
+import { Product } from '../products/product';
+import { User } from '../user';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
@@ -23,13 +25,13 @@ export class InterestService {
       .pipe( map( (t) => t as Interest));
   }
 
-  insert(uId: number, prodId: number, interestQuantity: number): Observable<any> {
-    return this.http.post(`${environment.apiBase}/interest`, {userId: uId, productId: prodId, quantity: interestQuantity})
+  insert(interest: Interest): Observable<any> {
+    return this.http.post(`${environment.apiBase}/interest`, interest)
     .pipe( map( (response: any) => response));
   }
 
-  update(uId: number, prodId: number, interestQuantity: number, id: number): Observable<any> {
-    return this.http.put(`${environment.apiBase}/interest`, {userId: uId, productId: prodId, quantity: interestQuantity, interestId: id})
+  update(interest: Interest): Observable<any> {
+    return this.http.put(`${environment.apiBase}/interest`, interest)
     .pipe( map( (response: any) => response));
   }
 

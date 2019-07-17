@@ -1,7 +1,7 @@
 import { Taxonomy } from './taxonomy';
 import { User } from '../user';
 export class Product {
-  id: number;
+  productId: number;
   productName: string;
   price: number;
   salePrice: number;

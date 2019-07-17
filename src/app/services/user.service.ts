@@ -13,7 +13,10 @@ export class UserService {
   constructor(private http: HttpClient, public helper: Helpers) { }
   id: number;
   login(email: string, password: string): Observable<User> {
-    return this.http.post(`${environment.apiBase}/user/login`, {email, password})
+    let user = new User();
+    user.email = email;
+    user.password = password;
+    return this.http.post(`${environment.apiBase}/user/login`, user)
       .pipe( map( (u) => u as User));
   }
 
@@ -29,20 +32,20 @@ export class UserService {
   }
 
   logout(): any {
-    this.helper.removeStorageItem('email');
-    this.helper.removeStorageItem('firstName');
-    this.helper.removeStorageItem('lastName');
-    this.helper.removeStorageItem('address');
-    this.helper.removeStorageItem('creditCardNumber');
-    this.helper.removeStorageItem('cvv');
-    this.helper.removeStorageItem('role');
-    this.helper.removeStorageItem('userId');
+    localStorage.removeItem('email');
+    localStorage.removeItem('firstName');
+    localStorage.removeItem('lastName');
+    localStorage.removeItem('address');
+    localStorage.removeItem('creditCardNumber');
+    localStorage.removeItem('cvv');
+    localStorage.removeItem('role');
+    localStorage.removeItem('userId');
     return this.http.get(`${environment.apiBase}/user/logout`)
     .pipe( map( (response: any) => response));
   }
 
   update(user: User): Observable<any> {
-    return this.http.put(`${environment.apiBase}/user`, JSON.stringify(user))
+    return this.http.put(`${environment.apiBase}/user`, user)
     .pipe( map( (response: any) => response));
   }
 

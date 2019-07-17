@@ -36,7 +36,7 @@
         </div>
         <button type="button" (click)="submitRegistration()" class="btn btn-success" id="sbmtBtn">Submit</button>
       </form>
-      <p *ngIf="this.goodInf == false">
+      <p *ngIf="this.goodInf == false" id="passer">
             Invalid Entry/Email Taken
         </p>
     </div>
@@ -54,7 +54,7 @@
           </div>
           <button type="button" (click)="loginUser()" class="btn btn-success" id="logBtn">Login</button>
         </form>
-        <p *ngIf="this.goodCred == false">
+        <p *ngIf="this.goodCred == false" id="credible">
             Invalid Credentials
         </p>
   </div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Product } from '../products/product';
+import { User } from '../user';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
@@ -57,9 +58,9 @@ export class ProductService {
       .pipe(map((response: any) => response));
   }
 
-  update(productName: string, productPrice: number, salePrice: number, prodStatus: string, id: number, interestThreshold: number, image: string): Observable<any> {
-    return this.http.put(`${environment.apiBase}/product`,
-      { name: productName, price: productPrice, salePrice: salePrice, status: prodStatus, productId: id, interestThreshold: interestThreshold, imageUrl: image })
+  update(product: Product): Observable<any> {
+
+      return this.http.put(`${environment.apiBase}/product`, product)
       .pipe(map((response: any) => response));
   }
 

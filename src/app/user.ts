@@ -6,6 +6,6 @@ export class User {
     password: string;
     role: string;
     address: string;
-    creditCardNumber: string;
-    cvv: string;
+    creditCardNumber: number;
+    cvv: number;
 }
