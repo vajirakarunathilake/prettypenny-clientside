@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     this.userService.insert(newUser).subscribe(
       (response) => {
         this.resp = response;
-        if (this.resp !== 'User Inserted') {
+        if (this.resp !== '1') {
           this.goodInf = false;
         }
         else {
