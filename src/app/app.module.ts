@@ -28,7 +28,7 @@ import { FiltersComponent } from './products/filters/filters.component';
 import { ProductListItemComponent } from './products/product-list-item/product-list-item.component';
 import { ToastyNotificationsService } from './services/toasty-notifications.service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { ProductsService } from './services/products.service';
+import { ProductService } from './services/product.service';
 import { Routes, RouterModule } from '@angular/router';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
@@ -46,7 +46,7 @@ const appRoutes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'login', component: LoginComponent },
   { path: 'addproduct', component: ProductAddComponent },
-  { path: 'viewproduct', component: ProductViewComponent }
+  { path: 'viewproduct', component: ProductViewComponent },
   { path: 'purchasehistory', component: PurchasehistoryComponent}
 
 ];
@@ -88,7 +88,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     UserService,
-    ProductsService,
+    ProductService,
     PurchaseService,
     TaxonomyService,
     InterestService,

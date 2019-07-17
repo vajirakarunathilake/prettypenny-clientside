@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Product } from '../products/product.model';
+import { Product } from '../products/product';
 
 @Pipe({
   name: 'filter'
@@ -10,7 +10,7 @@ export class FilterPipe implements PipeTransform {
       return products;
     } else {
       return products.filter(product => {
-        return product.type === type;
+        return product.status === type;
       });
     }
   }

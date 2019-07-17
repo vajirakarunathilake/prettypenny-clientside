@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ProductsService } from '../../services/products.service';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-filters',
@@ -12,7 +12,7 @@ export class FiltersComponent implements OnInit {
   @ViewChild('searchInput', {static: false}) searchText: ElementRef;
   layoutMode: boolean; // true for grid, false for list
 
-  constructor(private prodService: ProductsService) { }
+  constructor(private prodService: ProductService) { }
 
   ngOnInit() {
     this.setFilterToggle();
