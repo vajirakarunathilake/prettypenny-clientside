@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 
-import { Product } from '../products/product.model';
+import { Product } from '../products/product';
+import { Interest } from '../products/interest';
 
 
 @Injectable({
@@ -36,7 +37,7 @@ export class ProductsService {
   ) {}
 
   fetchProductsFromDB(): Observable<any> {
-    return this.httpClient.get(`${environment.mockApiBase}/products.json`)
+    return this.httpClient.get(`${environment.apiBase}/products`)
       .map(productSingle => {
         const adjustedFetchedProducts: any[] = [];
         for (const key in productSingle) {
@@ -52,7 +53,7 @@ export class ProductsService {
 
 
   fetchSingleProductFromDB(indexID: string): Observable<any> {
-    return this.httpClient.get(`${environment.mockApiBase}/products/${indexID}.json`)
+    return this.httpClient.get(`${environment.apiBase}/product?productId=${indexID}`)
       .map(singleProduct => {
         if (singleProduct === null) {
           this.router.navigate(['/products']);
@@ -96,26 +97,16 @@ export class ProductsService {
     return this.allProducts.slice();
   }
 
-  // get max 3 similar products sorted from high price > low
-  getSimilarProducts(prodType: string, prodId: string) {
-    const SIMILAR_PRODUCTS = this.getAllProducts().sort((a, b) => b.price - a.price);
-    return SIMILAR_PRODUCTS.filter((p) => {
-      return p.id !== prodId && p.type === prodType;
-    }).slice(0, 3); // get max 3 items
-  }
 
 
-
-
-
-  addToCart(product: Product) {
+  addToCart(product: Product, interest: Interest) {
     // if item is already in cart ++ its qty, don't readd it
     const added = this.cartAddedProducts.find(p => p === product);
-    added ? added.qty++ : this.cartAddedProducts.push(product);
+    added ? added.generatedInterest += interest.quantity : this.cartAddedProducts.push(product);
     this.cartAdditionEmitter.emit(this.cartAddedProducts);
     this.calculateCartTotal();
     this.cartTotalEmitter.emit(this.cartTotal);
-    this.toastyNotifications.addToast(false, product.name, true);
+    this.toastyNotifications.addToast(false, product.productName, true);
   }
 
   getCartAddedProducts() {

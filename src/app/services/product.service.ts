@@ -16,27 +16,37 @@ export class ProductService {
 
   findAll(): Observable<Product[]> {
     return this.http.get(`${environment.apiBase}/products`)
-      .pipe(map((p) => p as Product[]));
+      .pipe(
+        map((p) => p as Product[])
+      );
   }
 
   findAllStandard(): Observable<Product[]> {
     return this.http.get(`${environment.apiBase}/products/pretty`)
-      .pipe(map((p) => p as Product[]));
+      .pipe(
+        map((p) => p as Product[])
+      );
   }
 
   findAllSale(): Observable<Product[]> {
     return this.http.get(`${environment.apiBase}/products/on_sale`)
-      .pipe(map((p) => p as Product[]));
+      .pipe(
+        map((p) => p as Product[])
+      );
   }
 
   findAllInterest(): Observable<Product[]> {
     return this.http.get(`${environment.apiBase}/product/penny`)
-      .pipe(map((p) => p as Product[]));
+      .pipe(
+        map((p) => p as Product[])
+      );
   }
 
   findById(productId: number): Observable<Product> {
     return this.http.get(`${environment.apiBase}/product?productId=${productId}`)
-      .pipe(map((p) => p as Product));
+      .pipe(
+        map((p) => p as Product)
+      );
   }
 
   insert(product: Product): Observable<any> {
@@ -47,15 +57,24 @@ export class ProductService {
       );
   }
 
-  update(productName: string, productPrice: number, salePrice: number, prodStatus: string, id: number, interestThreshold: number, image: string): Observable<any> {
-    return this.http.put(`${environment.apiBase}/product`,
-      { name: productName, price: productPrice, salePrice: salePrice, status: prodStatus, productId: id, interestThreshold: interestThreshold, imageUrl: image })
-      .pipe(map((response: any) => response));
+  update(product: Product): Observable<any> {
+    return this.http.put(`${environment.apiBase}/product`, product)
+      .pipe(
+        map((response: any) => response)
+      );
   }
 
-  delete(productId: number): Observable<any> {
-    return this.http.delete(`${environment.apiBase}/product?productId=${productId}`)
-      .pipe(map((response: any) => response));
+  delete(product: Product): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(product)
+    };
+    return this.http.delete(`${environment.apiBase}/product`, options)
+      .pipe(
+        map((response: any) => response)
+      );
   }
 
 

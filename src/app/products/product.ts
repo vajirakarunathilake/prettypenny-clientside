@@ -1,5 +1,5 @@
 export class Product {
-  id: number;
+  productId: number;
   productName: string;
   price: number;
   salePrice: number;
@@ -11,4 +11,5 @@ export class Product {
   imageUrl: string;
   description: string;
   taxonomy: number;
+  generatedInterest: number;
 }
