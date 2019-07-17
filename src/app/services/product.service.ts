@@ -10,7 +10,9 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class ProductService {
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  private headers = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
   constructor(private http: HttpClient) { }
 
   findAll(): Observable<Product[]> {
@@ -38,16 +40,9 @@ export class ProductService {
       .pipe(map((p) => p as Product));
   }
 
-  insert(productName: string, productPrice: number, id: number, interestThreshold: number,
-     image: string, description: string, taxonomy: number): Observable<any> {
-      let sendObj = new Product();
-      sendObj.ProductName = productName;
-      sendObj.price = productPrice;
-      sendObj.interestThreshold = interestThreshold;
-      sendObj.userId = id;
-      sendObj.imageUrl = image;
-      sendObj.description = description;
-      sendObj.taxonomy = taxonomy;
+
+  insert(sendObj: Product): Observable<any> {
+
       return this.http.post(`${environment.apiBase}/product`, sendObj ).pipe(map((response: any) => response));
   }
 
@@ -55,7 +50,7 @@ export class ProductService {
     prodStatus: string, id: number, interestThreshold: number, image: string,
      description: string, taxonomy: number, prodId: number): Observable<any> {
       let sendObj = new Product();
-      sendObj.ProductName = productName;
+      sendObj.productName = productName;
       sendObj.price = productPrice;
       sendObj.interestThreshold = interestThreshold;
       sendObj.imageUrl = image;
@@ -64,7 +59,7 @@ export class ProductService {
       sendObj.salePrice = salePrice;
       sendObj.productId = prodId;
       sendObj.status = prodStatus;
-      sendObj.userId = id;
+      sendObj.user = id;
       return this.http.put(`${environment.apiBase}/product`, sendObj)
       .pipe(map((response: any) => response));
   }

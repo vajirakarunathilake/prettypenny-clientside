@@ -1,15 +1,14 @@
-import { User } from '../user';
 export class Product {
   productId: number;
-  ProductName: string;
+  productName: string;
   price: number;
   salePrice: number;
   onSale: number;
   dateListed: Date;
   status: string;
-  userId: number;
+  user: number;
   interestThreshold: number;
   imageUrl: string;
   description: string;
-  taxonomy: number
+  taxonomy: number;
 }
