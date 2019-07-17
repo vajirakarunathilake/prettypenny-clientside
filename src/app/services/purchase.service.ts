@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 })
 export class PurchaseService {
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
-  constructor(private http: HttpClient,) { }
+  constructor(private http: HttpClient) { }
 
   findAll(): Observable<Purchase[]> {
     return this.http.get(`${environment.apiBase}/purchases`)
@@ -25,30 +25,13 @@ export class PurchaseService {
       .pipe( map( (p) => p as Purchase));
   }
 
-  insert(purchaseDate: Date, uId: number, prodId: number): Observable<any> {
-    let user = new User();
-    let product = new Product();
-    user.userId = uId;
-    product.productId = prodId;
-    let purchase = new Purchase();
-    purchase.datePurchased = purchaseDate;
-    purchase.user = user;
-    purchase.product = product;
+  insert(purchase: Purchase): Observable<any> {
     return this.http.post(`${environment.apiBase}/purchase`,
      purchase)
      .pipe( map( (response: any) => response));
   }
 
-  update(purchaseDate: Date, uId: number, prodId: number, purchId: number): Observable<any> {
-    let user = new User();
-    let product = new Product();
-    user.userId = uId;
-    product.productId = prodId;
-    let purchase = new Purchase();
-    purchase.datePurchased = purchaseDate;
-    purchase.user = user;
-    purchase.product = product;
-    purchase.purchaseId = purchId;
+  update(purchase: Purchase): Observable<any> {
     return this.http.put(`${environment.apiBase}/purchase`,
      purchase)
      .pipe( map( (response: any) => response));

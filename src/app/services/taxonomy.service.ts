@@ -24,27 +24,13 @@ export class TaxonomyService {
       .pipe( map( (t) => t as Taxonomy));
   }
 
-  insert(taxonomyName: string, taxType: string, subTypee: string, prodId: number): Observable<any> {
-    let taxonomy = new Taxonomy();
-    let product = new Product();
-    taxonomy.name = taxonomyName;
-    taxonomy.type = taxType;
-    taxonomy.subType = subTypee;
-    product.productId = prodId;
-    taxonomy.product = product;
+  insert(taxonomy: Taxonomy): Observable<any> {
     return this.http.post(`${environment.apiBase}/taxonomy`, taxonomy)
      .pipe( map( (response: any) => response));
   }
 
-  update(taxonomyName: string, taxType: string, subTypee: string, prodId: number, id: number): Observable<any> {
-    let taxonomy = new Taxonomy();
-    let product = new Product();
-    taxonomy.name = taxonomyName;
-    taxonomy.type = taxType;
-    taxonomy.subType = subTypee;
-    product.productId = prodId;
-    taxonomy.product = product;
-    taxonomy.taxonomyId = id;
+  update(taxonomy: Taxonomy): Observable<any> {
+
     return this.http.put(`${environment.apiBase}/taxonomy`, taxonomy)
      .pipe( map( (response: any) => response));
   }

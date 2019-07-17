@@ -11,7 +11,7 @@ import { Helpers } from '../helpers';
 export class LoginComponent implements OnInit {
   @Input() user: User;
   ccv: number;
-  creditcardnumber: number;
+  creditCardCumber: number;
   address: string;
   passwordR: string;
   emailR: string;
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     newUser.firstName = this.firstname;
     newUser.lastName = this.lastname;
     newUser.address = this.address;
-    newUser.creditCardNumber = this.creditcardnumber;
+    newUser.creditCardNumber = this.creditCardCumber;
     newUser.cvv = this.ccv;
     newUser.role = 'USER';
     this.userService.insert(newUser).subscribe(

@@ -46,21 +46,9 @@ export class ProductService {
       return this.http.post(`${environment.apiBase}/product`, sendObj ).pipe(map((response: any) => response));
   }
 
-  update(productName: string, productPrice: number, salePrice: number,
-    prodStatus: string, id: number, interestThreshold: number, image: string,
-     description: string, taxonomy: number, prodId: number): Observable<any> {
-      let sendObj = new Product();
-      sendObj.productName = productName;
-      sendObj.price = productPrice;
-      sendObj.interestThreshold = interestThreshold;
-      sendObj.imageUrl = image;
-      sendObj.description = description;
-      sendObj.taxonomy = taxonomy;
-      sendObj.salePrice = salePrice;
-      sendObj.productId = prodId;
-      sendObj.status = prodStatus;
-      sendObj.user = id;
-      return this.http.put(`${environment.apiBase}/product`, sendObj)
+  update(product: Product): Observable<any> {
+
+      return this.http.put(`${environment.apiBase}/product`, product)
       .pipe(map((response: any) => response));
   }
 

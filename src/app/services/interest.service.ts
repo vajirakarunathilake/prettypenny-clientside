@@ -25,25 +25,12 @@ export class InterestService {
       .pipe( map( (t) => t as Interest));
   }
 
-  insert(uId: number, prodId: number, interestQuantity: number): Observable<any> {
-    let interest = new Interest();
-    interest.quantity = interestQuantity;
-    let user = new User();
-    let product = new Product();
-    user.userId = uId;
-    product.productId = prodId;
+  insert(interest: Interest): Observable<any> {
     return this.http.post(`${environment.apiBase}/interest`, interest)
     .pipe( map( (response: any) => response));
   }
 
-  update(uId: number, prodId: number, interestQuantity: number, id: number): Observable<any> {
-    let interest = new Interest();
-    interest.quantity = interestQuantity;
-    let user = new User();
-    let product = new Product();
-    user.userId = uId;
-    product.productId = prodId;
-    interest.id = id;
+  update(interest: Interest): Observable<any> {
     return this.http.put(`${environment.apiBase}/interest`, interest)
     .pipe( map( (response: any) => response));
   }

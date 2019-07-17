@@ -29,28 +29,13 @@ export class FavoriteService {
       .pipe( map( (f) => f as Favorite));
   }
 
-  insert(custId: number, prodId: number): Observable<any> {
-    let fave = new Favorite();
-    let cust = new User();
-    let product = new Product();
-    cust.userId = custId;
-    product.productId = prodId;
-    fave.user = cust;
-    fave.product = product;
-    return this.http.post(`${environment.apiBase}/favorite`, fave)
+  insert(favorite: Favorite): Observable<any> {
+    return this.http.post(`${environment.apiBase}/favorite`, favorite)
     .pipe( map( (response: any) => response));
   }
 
-  update(favoriteId: number, custId: number, prodId: number): Observable<any> {
-    let fave = new Favorite();
-    let cust = new User();
-    let product = new Product();
-    fave.favoriteId = favoriteId;
-    cust.userId = custId;
-    product.productId = prodId;
-    fave.user = cust;
-    fave.product = product;
-    return this.http.put(`${environment.apiBase}/favorite`, fave)
+  update(favorite: Favorite): Observable<any> {
+    return this.http.put(`${environment.apiBase}/favorite`, favorite)
     .pipe( map( (response: any) => response));
   }
 

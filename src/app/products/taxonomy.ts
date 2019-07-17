@@ -4,5 +4,4 @@ export class Taxonomy {
   name: string;
   type: string;
   subType: string;
-  product: Product;
 }
