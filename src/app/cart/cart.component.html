@@ -12,21 +12,21 @@
         <tbody>
           <tr *ngFor="let product of cartProducts; let i = index">
             <td class="cart-img">
-              <img [src]="product.imagePath" [alt]="product.name" />
+              <img [src]="product.imageUrl" [alt]="product.productName" />
             </td>
             <td class="cart-desc">
               <h2>
-                <strong>{{ product.name }}</strong>
+                <strong>{{ product.productName }}</strong>
               </h2>
               <p>{{ product.description | truncate:200 }}</p>
             </td>
             <td>
               <div>
                 <app-number-input
-                  [val]="product.qty"
+                  [val]="product.generatedInterest"
                   (valAdd)="onValAdd(product)"
                   (valSub)="onValSub(product)"
-                  [minDisabled]="product.qty === 1"
+                  [minDisabled]="product.generatedInterest === 1"
                 ></app-number-input>
               </div>
             </td>

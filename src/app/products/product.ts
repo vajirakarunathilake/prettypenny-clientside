@@ -13,4 +13,5 @@ export class Product {
   imageUrl: string;
   description: string;
   taxonomy: Taxonomy;
+  generatedInterest: number;
 }
