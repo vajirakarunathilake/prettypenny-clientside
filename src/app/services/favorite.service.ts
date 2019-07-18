@@ -39,10 +39,14 @@ export class FavoriteService {
     .pipe( map( (response: any) => response));
   }
 
-  delete(favoriteId: number): Observable<any> {
-    let fave = new Favorite();
-    fave.favoriteId = favoriteId;
-    return this.http.delete(`${environment.apiBase}/favorite?favoriteId=${favoriteId}`)
+  delete(favorite: Favorite): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(favorite)
+    };
+    return this.http.delete(`${environment.apiBase}/favorite`, options)
     .pipe( map( (response: any) => response));
   }
 //backup

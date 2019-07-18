@@ -23,7 +23,7 @@
         <a class="navbar-item" routerLink="/products" routerLinkActive="is-active">
           <span class="icon">
             <i class="fas fa-shopping-bag"></i>
-          </span>
+          </span><span></span>
           Products
         </a>
         <a class="navbar-item" routerLink="/contact" routerLinkActive="is-active">
@@ -32,42 +32,44 @@
           </span><span></span>
           Contact
         </a>
-        <a class="navbar-item" routerLink="/productmanagement" routerLinkActive="is-active">
+        <a class="navbar-item" routerLink="/addproduct" routerLinkActive="is-active">
           <span class="icon">
             <i class="fas fa-key"></i>
           </span><span></span>
-          Product Management
+          Add Products
+        </a>
+        <a class="navbar-item" routerLink="/viewproduct" routerLinkActive="is-active">
+          <span class="icon">
+            <i class="fas fa-key"></i>
+          </span><span></span>
+          View Product
         </a>
 
-          <ng-container *ngIf="this.helper.localStorageItem('email') == null">
+        <ng-container *ngIf="this.helper.localStorageItem('email') == null">
 
-            <a class="navbar-item" routerLink="/login" routerLinkActive="is-active">
-              <span class="icon">
-                <i class="fas fa-user"></i>
-              </span>
-               Login
-            </a>
-            </ng-container>
-          <ng-container *ngIf="this.helper.localStorageItem('email') != null">
-              <a class="navbar-item" routerLink="/purchasehistory" routerLinkActive="is-active">
-                <span class="icon">
-                  <i class="fas fa-user"></i>
+          <a class="navbar-item" routerLink="/login" routerLinkActive="is-active">
+            <span class="icon">
+              <i class="fas fa-user"></i>
+            </span><span></span>
+            Login
+          </a>
+        </ng-container>
+        <ng-container *ngIf="this.helper.localStorageItem('email') != null">
+          <a class="navbar-item" routerLink="/purchasehistory" routerLinkActive="is-active">
+            <span class="icon">
+              <i class="fas fa-user"></i>
+            </span><span></span>
+            My Purchases
+          </a>
+        </ng-container>
+        <ng-container *ngIf="this.helper.localStorageItem('email') != null">
+          <a class="navbar-item" role="button" (click)="logout()">
+            <span class="icon">
+              <i class="fas fa-user"></i>
+            </span><span></span>Logout</a>
 
-                </span>
-                 My Purchases
-              </a>
-            </ng-container>
-              <ng-container *ngIf="this.helper.localStorageItem('email') != null">
-              <a class="navbar-item" role="button" (click)="logout()">
-                <span class="icon">
-                  <i class="fas fa-user"></i>
-                </span> Logout</a>
-
-          </ng-container>
-
-        </div>
-
-
+        </ng-container>
+      </div>
       <app-cartmini class="navbar-end mini-cart-wrap"></app-cartmini>
     </div>
   </div>

@@ -8,7 +8,7 @@
     <div class="card">
       <header class="card-header">
         <p class="card-header-title">
-          {{ product ? product?.name : 'loading' }}
+          {{ product ? product?.productName : 'loading' }}
         </p>
         <span class="card-header-icon">
           <small>{{ product ? (product.price | currency) : 'loading' }}</small>
@@ -16,7 +16,7 @@
       </header>
       <div class="card-image">
         <figure class="image is-4by3">
-          <img [src]="product ? product.imagePath : 'http://via.placeholder.com/500x500'" [alt]="product?.name" />
+          <img [src]="product ? product.imageUrl : 'http://via.placeholder.com/500x500'" [alt]="product?.productName" />
         </figure>
       </div>
     </div>
@@ -30,6 +30,7 @@
 
     <hr>
 
+    <input type="number" [(ngModel)]="quantity">
     <a class="button is-success" (click)="addToCart(product)">
       <span class="icon">
         <i class="fas fa-cart-plus"></i>
@@ -47,14 +48,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<hr>
-
- <h3 class="similar-items-title">You may also be interested in these</h3>
-<div class="columns is-multiline">
-  <app-product-card
-    class="column is-one-third-desktop"
-    *ngFor="let product of similarProducts"
-    [product]="product"></app-product-card>
 </div>

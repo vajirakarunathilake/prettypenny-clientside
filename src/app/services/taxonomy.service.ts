@@ -35,8 +35,14 @@ export class TaxonomyService {
      .pipe( map( (response: any) => response));
   }
 
-  delete(taxonomyId: number): Observable<any> {
-    return this.http.delete(`${environment.apiBase}/taxonomy?taxonomyId=${taxonomyId}`)
+  delete(taxonomy: Taxonomy): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(taxonomy)
+    };
+    return this.http.delete(`${environment.apiBase}/taxonomy`, options)
     .pipe( map( (response: any) => response));
   }
 }

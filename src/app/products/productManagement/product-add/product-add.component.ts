@@ -1,11 +1,10 @@
-import { Router } from '@angular/router';
 import { Helpers } from './../../../helpers';
 import { Taxonomy } from './../../taxonomy';
 import { Product } from './../../product';
 import { ProductService } from './../../../services/product.service';
-import { TaxonomyService } from './../../../services/taxonomy.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/user';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-product-add',
@@ -16,76 +15,59 @@ export class ProductAddComponent implements OnInit {
 
   product: Product = new Product();
   taxonomy: Taxonomy = new Taxonomy();
+  user: User = new User();
   quantityLabel = `Quantity`;
-  brandName: string;
-  category: string;
-  subCategory: string;
   listType: number;
   resp: string;
-  responseStatus: boolean = null;
   brands = ['Apple', 'Samsung', 'Sony', 'Dell'];
   categories = ['Electronics', 'Cloths', 'Watches', 'Furnitures'];
   subCategories = ['TV', 'Phone', 'Shirts', 'Chairs'];
+  alertClass: string;
+  alertShow = false;
+  alertContent: string;
 
   constructor(
     private productService: ProductService,
-    private taxonomyService: TaxonomyService,
-    private router: Router,
     public helper: Helpers
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { }
 
-  }
-
-  addProduct() {
-    if (this.listType === 0) {
-      if (this.product.price - this.product.onSale > 0) {
-        this.product.status = `On Sale`;
-      } else {
-        this.product.status = `Standard`;
-      }
-    } else if (this.listType === 1) {
-      this.product.status = `Within Threshold`;
+  addProduct(addProductForm: NgForm) {
+    if (+this.listType === 0) {
+      this.product.status = 'Pretty';
+      this.product.onSale = 1;
+    } else {
+      this.product.status = 'Within Threshold';
+      this.product.onSale = 0;
     }
 
-    this.product.user = 202;
-    this.product.taxonomy = 54;
+    this.user.userId = Number(this.helper.localStorageItem('userId'));
+    this.product.user = this.user;
+    this.product.taxonomy = this.taxonomy;
+
     this.productService.insert(this.product).subscribe(
       (response) => {
         this.resp = response;
-        if (this.resp !== 'User Product Add Failed') {
-          this.router.navigate(['/productmanagement']);
+
+        if (this.resp + '' !== '-1') {
+          this.alertShow = true;
+          this.alertClass = 'alert alert-success';
+          this.alertContent = 'Successfullt Added.';
+          addProductForm.onReset();
         } else {
-          this.responseStatus = false;
+          this.alertShow = true;
+          this.alertClass = 'alert alert-danger';
+          this.alertContent = 'Wrong Informations. Please check it again.';
         }
       });
   }
 
   changeLabel() {
-
-
-    if (this.listType === 0) {
-      this.quantityLabel = `Quantity`;
-
-    } else if (this.listType === 1) {
-      this.quantityLabel = `Minimum Threshold Value`;
+    if (+this.listType === 0) {
+      this.quantityLabel = 'Quantity';
+    } else if (+this.listType === 1) {
+      this.quantityLabel = 'Minimum Threshold Value';
     }
   }
-
-  nameOnChange() {
-    console.log(this.taxonomy.name);
-
-  }
-
-  typeOnChange() {
-    console.log(this.taxonomy.type);
-
-  }
-
-  subTypeOnChange() {
-    console.log(this.taxonomy.subType);
-
-  }
-
 }

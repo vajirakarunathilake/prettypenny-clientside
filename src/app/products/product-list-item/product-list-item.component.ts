@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ProductService } from '../../services/product.service';
+import { Product } from '../product';
 
-
-import { Product } from '../product.model';
-import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-product-list-item',
@@ -12,14 +11,15 @@ import { ProductsService } from '../../services/products.service';
 export class ProductListItemComponent implements OnInit {
   @Input() product: Product;
   @Input() layoutMode: boolean;
+  quantity = 0;
 
-  constructor(private prodService: ProductsService) { }
+  constructor(private prodService: ProductService) { }
 
   ngOnInit() {
   }
 
 
   onAddToCart(product: Product) {
-    this.prodService.addToCart(product);
+    this.prodService.addToCart(product, this.quantity);
   }
 }

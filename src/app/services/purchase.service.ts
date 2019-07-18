@@ -37,8 +37,14 @@ export class PurchaseService {
      .pipe( map( (response: any) => response));
   }
 
-  delete(purchaseId: number): Observable<any> {
-    return this.http.delete(`${environment.apiBase}/purchase?purchaseId=${purchaseId}`)
+  delete(purchase: Purchase): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(purchase)
+    };
+    return this.http.delete(`${environment.apiBase}/purchase`, options)
     .pipe( map( (response: any) => response));
   }
 }

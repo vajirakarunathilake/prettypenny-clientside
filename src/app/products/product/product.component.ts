@@ -1,10 +1,10 @@
-import { ToastyNotificationsService } from './../../services/toasty-notifications.service';
 // import { Component, OnInit, DoCheck } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { ProductService } from '../../services/product.service';
+import { Product } from '../product';
+import { Interest } from '../interest';
 
-import { Product } from '../product.model';
-import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-product',
@@ -17,10 +17,11 @@ export class ProductComponent implements OnInit {
   product: Product;
   similarProducts: Product[];
   isLoading = true;
+  quantity = 0;
 
   constructor(
     private route: ActivatedRoute,
-    private prodService: ProductsService
+    private prodService: ProductService
   ) { }
 
   ngOnInit() {
@@ -35,10 +36,9 @@ export class ProductComponent implements OnInit {
   // helper fn to save repeating same code in init and doCheck hooks
   initProductSingleView() {
     this.id = this.route.snapshot.params['id'];
-    this.prodService.fetchSingleProductFromDB(this.id).subscribe(
+    this.prodService.findById(+this.id).subscribe(
       product => {
         this.product = product;
-        // this.getSimilarProducts(this.product.type, this.product.id);
       },
       err => console.error(err),
       () => this.isLoading = false
@@ -47,12 +47,8 @@ export class ProductComponent implements OnInit {
 
 
   addToCart(product: Product) {
-    this.prodService.addToCart(product);
+    this.prodService.addToCart(product, this.quantity);
   }
 
-
-  // getSimilarProducts(prodType: string, prodId: string) {
-  //   this.similarProducts = this.prodService.getSimilarProducts(prodType, prodId);
-  // }
 
 }
