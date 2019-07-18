@@ -1,54 +1,62 @@
-<p class="h2">Pretty Items</p>
+<div class="card mb-3">
+  <div class="card-header text-white bg-secondary">Pretty Items</div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Product Name</th>
+          <th scope="col">Brand Name</th>
+          <th scope="col">Category</th>
+          <th scope="col">Sub Category</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Sale Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prettyProduct of prettyProducts">
+          <td>{{prettyProduct.productName}}</td>
+          <td>{{prettyProduct.taxonomy.name}}</td>
+          <td>{{prettyProduct.taxonomy.type}}</td>
+          <td>{{prettyProduct.taxonomy.subType}}</td>
+          <td>{{prettyProduct.interestThreshold}}</td>
+          <td>{{prettyProduct.price}}</td>
+          <td>{{prettyProduct.salePrice}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<table class="table table-striped">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Product Name</th>
-        <th scope="col">Brand Name</th>
-        <th scope="col">Category</th>
-        <th scope="col">Sub Category</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Price</th>
-        <th scope="col">Sale Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let prettyProduct of prettyProducts">
-        <td>{{prettyProduct.productName}}</td>
-        <td>{{prettyProduct.taxonomy.name}}</td>
-        <td>{{prettyProduct.taxonomy.type}}</td>
-        <td>{{prettyProduct.taxonomy.subType}}</td>
-        <td>{{prettyProduct.interestThreshold}}</td>
-        <td>{{prettyProduct.price}}</td>
-        <td>{{prettyProduct.salePrice}}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="card mb-3">
+  <div class="card-header text-white bg-warning">Penny Items</div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Product Name</th>
+          <th scope="col">Brand Name</th>
+          <th scope="col">Category</th>
+          <th scope="col">Sub Category</th>
+          <th scope="col">Threshold Value</th>
+          <th scope="col">Generated Interest</th>
+          <th scope="col">Price</th>
+          <th scope="col">Sale Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pennieProduct of pennieProducts">
+          <td>{{pennieProduct.productName}}</td>
+          <td>{{pennieProduct.taxonomy.name}}</td>
+          <td>{{pennieProduct.taxonomy.type}}</td>
+          <td>{{pennieProduct.taxonomy.subType}}</td>
+          <td>{{pennieProduct.interestThreshold}}</td>
+          <td>{{pennieProduct.generatedInterest}}</td>
+          <td>{{pennieProduct.price}}</td>
+          <td>{{pennieProduct.salePrice}}</td>
+        </tr>
 
-  <p class="h2" style="padding-top: 10px; color: #ffdd57;">Penny Items</p>
-  <table class="table table-striped">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Product Name</th>
-        <th scope="col">Brand Name</th>
-        <th scope="col">Category</th>
-        <th scope="col">Sub Category</th>
-        <th scope="col">Threshold Value</th>
-        <th scope="col">Price</th>
-        <th scope="col">Sale Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let pennieProduct of pennieProducts">
-        <td>{{pennieProduct.productName}}</td>
-        <td>{{pennieProduct.taxonomy.name}}</td>
-        <td>{{pennieProduct.taxonomy.type}}</td>
-        <td>{{pennieProduct.taxonomy.subType}}</td>
-        <td>{{pennieProduct.interestThreshold}}</td>
-        <td>{{pennieProduct.price}}</td>
-        <td>{{pennieProduct.salePrice}}</td>
-      </tr>
-     
-    </tbody>
-  </table>
-  
+      </tbody>
+    </table>
+  </div>
+</div>
