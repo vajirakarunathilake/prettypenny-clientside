@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../product';
+import { Helpers } from 'src/app/helpers';
 
 
 @Component({
@@ -17,16 +18,18 @@ export class ProductComponent implements OnInit {
   similarProducts: Product[];
   isLoading = true;
   quantity = 1;
+  loggedIn = false;
 
   constructor(
     private route: ActivatedRoute,
-    private prodService: ProductService
+    private prodService: ProductService,
+    public helper: Helpers
   ) { }
 
   ngOnInit() {
     this.initProductSingleView();
+    this.loggedIn = this.helper.localStorageItem('email') != null;
   }
-
 
   // ngDoCheck() {
   //   this.initProductSingleView();
