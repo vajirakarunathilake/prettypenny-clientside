@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   lastname: string;
   passwordL: string;
   emailL: string;
+  role: string;
   goodCred: boolean = null;
   goodInf: boolean = null;
   resp: string;
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
     newUser.address = this.address;
     newUser.creditCardNumber = this.creditCardNumber;
     newUser.cvv = this.ccv;
-    newUser.role = 'USER';
+    newUser.role = this.role;
     this.userService.insert(newUser).subscribe(
       (response) => {
         this.resp = response;

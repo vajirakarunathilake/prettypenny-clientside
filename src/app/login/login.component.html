@@ -34,6 +34,19 @@
           <label for="ccv">CVV</label>
           <input type="Number" id="ccv" class="form-control" [(ngModel)]="ccv" name="ccv" placeholder=000>
         </div>
+        <div class="form-group">
+          <label>Role</label>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="user" name="user" value="USER" [(ngModel)]="role"
+              class="custom-control-input" checked="checked">
+            <label class="custom-control-label" for="user">User</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="seller" name="seller" value="SELLER" [(ngModel)]="role"
+              class="custom-control-input">
+            <label class="custom-control-label" for="seller">Seller</label>
+          </div>
+        </div>
         <button type="button" (click)="submitRegistration()" class="btn btn-success" id="sbmtBtn">Submit</button>
       </form>
       <p *ngIf="this.goodInf == false" id="passer">
