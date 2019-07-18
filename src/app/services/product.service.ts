@@ -76,12 +76,12 @@ export class ProductService {
   }
 
   findPrettiesBySeller(user: User): Observable<Product[]> {
-    return this.http.get(`${environment.apiBase}/pennies/by_seller?sellerId=${this.helper.localStorageItem("userId")}`)
+    return this.http.get(`${environment.apiBase}/products/pretties/by_seller?sellerId=${user.userId}`)
       .pipe(map((p) => p as Product[]));
   }
 
   findPenniesBySeller(user: User): Observable<Product[]> {
-    return this.http.get(`${environment.apiBase}/pennies/by_seller?sellerId=${this.helper.localStorageItem("userId")}`)
+    return this.http.get(`${environment.apiBase}/products/pennies/by_seller?sellerId=${user.userId}`)
       .pipe(map((p) => p as Product[]));
   }
 

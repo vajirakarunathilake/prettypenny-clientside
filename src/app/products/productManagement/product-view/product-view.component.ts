@@ -11,14 +11,14 @@ import { User } from 'src/app/user';
 })
 export class ProductViewComponent implements OnInit {
 
-  prettyProducts : Product[];
-  pennieProducts : Product[];
+  prettyProducts: Product[];
+  pennieProducts: Product[];
   private user: User = new User();
 
 
   constructor(
-    private productService : ProductService
-    ) { }
+    private productService: ProductService
+  ) { }
 
   ngOnInit() {
 
@@ -29,10 +29,10 @@ export class ProductViewComponent implements OnInit {
         this.prettyProducts = p;
       });
 
-      this.productService.findPenniesBySeller(this.user).subscribe(
-        (p) => {
-          this.pennieProducts = p;
-        });
+    this.productService.findPenniesBySeller(this.user).subscribe(
+      (p) => {
+        this.pennieProducts = p;
+      });
 
   }
 
