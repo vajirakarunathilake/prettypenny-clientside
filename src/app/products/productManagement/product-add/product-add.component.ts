@@ -5,6 +5,7 @@ import { ProductService } from './../../../services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/user';
 import { NgForm } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-add',
@@ -19,9 +20,9 @@ export class ProductAddComponent implements OnInit {
   quantityLabel = `Quantity`;
   listType: number;
   resp: string;
-  brands = ['Apple', 'Samsung', 'Sony', 'Dell'];
-  categories = ['Electronics', 'Cloths', 'Watches', 'Furnitures'];
-  subCategories = ['TV', 'Phone', 'Shirts', 'Chairs'];
+  brands = environment.brands;
+  categories = environment.categories;
+  subCategories = environment.subCategories;
   alertClass: string;
   alertShow = false;
   alertContent: string;
