@@ -30,7 +30,8 @@
 
     <hr>
 
-    <input type="number" [(ngModel)]="quantity">
+    <app-number-input [(val)]="quantity" (valAdd)="onValAdd()" (valSub)="onValSub()" [minDisabled]="quantity === 10">
+    </app-number-input>
     <a class="button is-success" (click)="addToCart(product)">
       <span class="icon">
         <i class="fas fa-cart-plus"></i>

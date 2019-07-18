@@ -14,13 +14,20 @@ export class ProductCardComponent implements OnInit {
   @Input() product: Product;
   @Input() interest: Interest;
   @Input() layoutMode: boolean;
-  quantity = 0;
+  quantity = 10;
 
   constructor(private prodService: ProductService) { }
 
   ngOnInit() {
   }
 
+  onValAdd() {
+    this.quantity++;
+  }
+
+  onValSub() {
+    this.quantity--;
+  }
 
   onAddToCart(product: Product) {
     this.prodService.addToCart(product, this.quantity);

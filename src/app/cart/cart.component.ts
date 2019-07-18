@@ -34,11 +34,11 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
 
-  onValAdd(product: Product) {
-    this.prodService.cartProductManipulate(product, 0, true);
+  onValAdd(interest: Interest) {
+    this.prodService.cartProductManipulate(interest, true);
   }
-  onValSub(product: Product) {
-    this.prodService.cartProductManipulate(product);
+  onValSub(interest: Interest) {
+    this.prodService.cartProductManipulate(interest);
   }
 
 

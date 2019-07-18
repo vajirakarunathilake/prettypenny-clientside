@@ -10,7 +10,10 @@ export class FilterPipe implements PipeTransform {
       return products;
     } else {
       return products.filter(product => {
-        return product.taxonomy.type === type || product.taxonomy.name === type || product.taxonomy.subType === type;
+        return product.taxonomy.type === type
+        || product.taxonomy.name === type
+        || product.taxonomy.subType === type
+        || product.status === type;
       });
     }
   }
