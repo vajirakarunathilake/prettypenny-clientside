@@ -1,3 +1,4 @@
+import { Helpers } from './../../../helpers';
 import { ProductService } from './../../../services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../product';
@@ -17,12 +18,13 @@ export class ProductViewComponent implements OnInit {
 
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    public helper: Helpers
   ) { }
 
   ngOnInit() {
 
-    this.user.userId = 110;
+    this.user.userId = Number(this.helper.localStorageItem('userId'));
 
     this.productService.findPrettiesBySeller(this.user).subscribe(
       (p) => {

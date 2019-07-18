@@ -4,9 +4,9 @@
   </div>
   <div class="card-body">
     <form #addProductForm='ngForm' (ngSubmit)="addProduct(addProductForm)">
-        <div *ngIf="this.alertShow" [ngClass]="alertClass"> 
-            <strong>{{alertContent}}</strong>
-       </div> 
+      <div *ngIf="this.alertShow" [ngClass]="alertClass" id="productaddalert">
+        {{alertContent}}
+      </div>
       <div class="form-group">
         <label for="inputAddress">Product Name</label>
         <input type="text" class="form-control" [(ngModel)]="product.productName" name="productName"
@@ -16,22 +16,19 @@
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="brandName">Brand Name</label>
-          <select id="brandName" class="form-control" [(ngModel)]="taxonomy.name" name="brandName"
-            (change)="nameOnChange()">
+          <select id="brandName" class="form-control" [(ngModel)]="taxonomy.name" name="brandName">
             <option *ngFor="let brand of brands" [value]="brand">{{brand}}</option>
           </select>
         </div>
         <div class="form-group col-md-4">
           <label for="category">Category</label>
-          <select id="category" class="form-control" [(ngModel)]="taxonomy.type" name="brandType"
-            (change)="typeOnChange()">
+          <select id="category" class="form-control" [(ngModel)]="taxonomy.type" name="brandType">
             <option *ngFor="let category of categories" [value]="category">{{category}}</option>
           </select>
         </div>
         <div class="form-group col-md-4">
           <label for="subCategory">Sub Category</label>
-          <select id="subCategory" class="form-control" [(ngModel)]="taxonomy.subType" name="brandSubType"
-            (change)="subTypeOnChange()">
+          <select id="subCategory" class="form-control" [(ngModel)]="taxonomy.subType" name="brandSubType">
             <option *ngFor="let subCategory of subCategories" [value]="subCategory">{{subCategory}}</option>
           </select>
         </div>
@@ -54,7 +51,7 @@
           <label>Listing Type</label>
           <div class="custom-control custom-radio">
             <input type="radio" id="listTypePretty" name="listType" (change)="changeLabel()" value="0"
-              [(ngModel)]="listType" class="custom-control-input" >
+              [(ngModel)]="listType" class="custom-control-input">
             <label class="custom-control-label" for="listTypePretty">Pretty ( Just Listing for Sale )</label>
           </div>
           <div class="custom-control custom-radio">
@@ -93,9 +90,7 @@
           </div>
         </div>
       </div>
-
       <button type="submit" class="btn btn-primary">List Product</button>
-     
     </form>
   </div>
 </div>
