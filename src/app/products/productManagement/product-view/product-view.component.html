@@ -1,4 +1,12 @@
-<div class="card mb-3">
+<div *ngIf="this.alertShow" class="card mb-3">
+  <div class="card-body">
+    <div [ngClass]="alertClass" id="productviewalert">
+      {{alertContent}}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.prettyShow" class="card mb-3">
   <div class="card-header text-white bg-secondary">Pretty Items</div>
   <div class="card-body">
     <table class="table table-striped">
@@ -28,7 +36,7 @@
   </div>
 </div>
 
-<div class="card mb-3">
+<div *ngIf="this.pennyShow" class="card mb-3">
   <div class="card-header text-white bg-warning">Penny Items</div>
   <div class="card-body">
     <table class="table table-striped">
@@ -45,15 +53,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let pennieProduct of pennieProducts">
-          <td>{{pennieProduct.productName}}</td>
-          <td>{{pennieProduct.taxonomy.name}}</td>
-          <td>{{pennieProduct.taxonomy.type}}</td>
-          <td>{{pennieProduct.taxonomy.subType}}</td>
-          <td>{{pennieProduct.interestThreshold}}</td>
-          <td>{{pennieProduct.generatedInterest}}</td>
-          <td>{{pennieProduct.price}}</td>
-          <td>{{pennieProduct.salePrice}}</td>
+        <tr *ngFor="let pennyProduct of pennyProducts">
+          <td>{{pennyProduct.productName}}</td>
+          <td>{{pennyProduct.taxonomy.name}}</td>
+          <td>{{pennyProduct.taxonomy.type}}</td>
+          <td>{{pennyProduct.taxonomy.subType}}</td>
+          <td>{{pennyProduct.interestThreshold}}</td>
+          <td>{{pennyProduct.generatedInterest}}</td>
+          <td>{{pennyProduct.price}}</td>
+          <td>{{pennyProduct.salePrice}}</td>
         </tr>
 
       </tbody>
