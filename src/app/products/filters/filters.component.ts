@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from '../../services/product.service';
+import { Taxonomy } from '../taxonomy';
+import { TaxonomyService } from 'src/app/services/taxonomy.service';
 
 @Component({
   selector: 'app-filters',
@@ -9,13 +11,45 @@ import { ProductService } from '../../services/product.service';
 export class FiltersComponent implements OnInit {
   filterBy: string;
   filterToggle: boolean;
-  @ViewChild('searchInput', {static: false}) searchText: ElementRef;
+  filters: Taxonomy[];
+  filterNames: string[];
+  filterTypes: string[];
+  filterSubTypes: string[];
+
+  @ViewChild('searchInput', { static: false }) searchText: ElementRef;
   layoutMode: boolean; // true for grid, false for list
 
-  constructor(private prodService: ProductService) { }
+  constructor(
+    private prodService: ProductService,
+    private taxService: TaxonomyService
+  ) { }
 
   ngOnInit() {
     this.setFilterToggle();
+    const filterNames = [];
+    const filterTypes = [];
+    const filterSubTypes = [];
+    this.taxService.findAll().subscribe(
+      (taxonomies: Taxonomy[]) => {
+        this.filters = taxonomies;
+        this.filters.forEach(
+          filter => {
+            if (!filterNames.includes(filter.name)) {
+              filterNames.push(filter.name);
+            }
+            if (!filterTypes.includes(filter.type)) {
+              filterTypes.push(filter.type);
+            }
+            if (!filterSubTypes.includes(filter.subType)) {
+              filterSubTypes.push(filter.subType);
+            }
+          }
+        );
+        this.filterNames = filterNames;
+        this.filterTypes = filterTypes;
+        this.filterSubTypes = filterSubTypes;
+      }
+    );
     this.filterBy = this.prodService.getFilter();
     this.prodService.filterTypeEmitter.subscribe(
       (filverValue: string) => {
@@ -29,9 +63,6 @@ export class FiltersComponent implements OnInit {
       }
     );
   }
-
-
-
 
   setLayout(layoutVal: boolean) {
     this.prodService.setLayout(layoutVal);
