@@ -30,7 +30,7 @@
 
     <hr>
 
-    <app-number-input [(val)]="quantity" (valAdd)="onValAdd()" (valSub)="onValSub()" [minDisabled]="quantity === 10">
+    <app-number-input [(val)]="quantity" (valAdd)="onValAdd()" (valSub)="onValSub()" [minDisabled]="quantity === 1">
     </app-number-input>
     <a class="button is-success" (click)="addToCart(product)">
       <span class="icon">

@@ -16,7 +16,7 @@ export class ProductComponent implements OnInit {
   product: Product;
   similarProducts: Product[];
   isLoading = true;
-  quantity = 10;
+  quantity = 1;
 
   constructor(
     private route: ActivatedRoute,

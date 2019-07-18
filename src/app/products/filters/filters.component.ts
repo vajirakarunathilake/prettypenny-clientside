@@ -15,6 +15,8 @@ export class FiltersComponent implements OnInit {
   filterNames: string[];
   filterTypes: string[];
   filterSubTypes: string[];
+  selectedPretty: boolean;
+  selectedPenny: boolean;
 
   @ViewChild('searchInput', { static: false }) searchText: ElementRef;
   layoutMode: boolean; // true for grid, false for list
@@ -76,10 +78,21 @@ export class FiltersComponent implements OnInit {
     this.prodService.searchFilter(this.searchText.nativeElement.value);
   }
 
+  switchProducts(selectedGroup: string) {
+    if (selectedGroup === 'Pretty') {
+      this.selectedPretty = true;
+      this.selectedPenny = !this.selectedPretty;
+    } else {
+      this.selectedPenny = true;
+      this.selectedPretty = !this.selectedPenny;
+    }
+    this.prodService.setFilter(selectedGroup);
+
+  }
+
   setFilter(filterValue: string) {
     this.prodService.setFilter(filterValue);
   }
-
 
   resetFilters() {
     this.prodService.setFilter('all');

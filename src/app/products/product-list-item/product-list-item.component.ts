@@ -11,7 +11,7 @@ import { Product } from '../product';
 export class ProductListItemComponent implements OnInit {
   @Input() product: Product;
   @Input() layoutMode: boolean;
-  quantity = 10;
+  quantity = 1;
 
   constructor(private prodService: ProductService) { }
 

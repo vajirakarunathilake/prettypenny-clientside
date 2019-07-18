@@ -14,7 +14,7 @@ export class ProductCardComponent implements OnInit {
   @Input() product: Product;
   @Input() interest: Interest;
   @Input() layoutMode: boolean;
-  quantity = 10;
+  quantity = 1;
 
   constructor(private prodService: ProductService) { }
 

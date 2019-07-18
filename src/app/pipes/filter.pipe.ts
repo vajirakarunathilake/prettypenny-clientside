@@ -5,15 +5,15 @@ import { Product } from '../products/product';
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
-  transform(products: Product[], type: string): any {
-    if (type === 'all') {
+  transform(products: Product[], filterBy: string): any {
+    if (filterBy === 'all') {
       return products;
     } else {
       return products.filter(product => {
-        return product.taxonomy.type === type
-        || product.taxonomy.name === type
-        || product.taxonomy.subType === type
-        || product.status === type;
+        return product.taxonomy.type === filterBy
+        || product.taxonomy.name === filterBy
+        || product.taxonomy.subType === filterBy
+        || product.status === filterBy;
       });
     }
   }
