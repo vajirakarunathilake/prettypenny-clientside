@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Product } from '../products/product';
 import { ProductService } from '../services/product.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Interest } from '../products/interest';
 
 @Component({
   selector: 'app-cart',
@@ -9,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit, OnDestroy {
-  cartProducts: Product[];
+  cartItems: Interest[];
   cartTotal: number;
   cartAdditionSubscription: Subscription;
   cartTotalSubscription: Subscription;
@@ -17,10 +18,10 @@ export class CartComponent implements OnInit, OnDestroy {
   constructor(private prodService: ProductService) {}
 
   ngOnInit() {
-    this.cartProducts = this.prodService.getCartAddedProducts();
+    this.cartItems = this.prodService.getCartAddedItems();
     this.cartAdditionSubscription = this.prodService.cartAdditionEmitter.subscribe(
-      (products: Product[]) => {
-        this.cartProducts = products;
+      (interests: Interest[]) => {
+        this.cartItems = interests;
       }
     );
 
@@ -50,7 +51,8 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   onCheckout() {
-    alert(JSON.stringify(this.cartProducts) + '\n\n\n' + 'Total: ' + this.cartTotal);
+
+    alert(JSON.stringify(this.cartItems) + '\n\n\n' + 'Total: ' + this.cartTotal);
   }
 
 

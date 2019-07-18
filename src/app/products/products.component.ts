@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Product } from './product';
 import { Interest } from './interest';
+import { TaxonomyService } from '../services/taxonomy.service';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -16,11 +18,21 @@ export class ProductsComponent implements OnInit, OnDestroy {
   layoutMode: boolean; // true for grid, false for list
   isLoading = true;
 
-  constructor( private prodService: ProductService ) {}
+  constructor(
+    private prodService: ProductService,
+    private taxService: TaxonomyService
+    ) {}
 
   ngOnInit() {
     this.prodService.findAll().subscribe(
       products => {
+        products.forEach(product => {
+          this.taxService.findById(product.taxonomy.taxonomyId).subscribe(
+            taxonomy => {
+              product.taxonomy = taxonomy;
+            }
+          );
+        });
         this.prodService.setAllProducts(products);
         this.products = this.prodService.getAllProducts();
       },
