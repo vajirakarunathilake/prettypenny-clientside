@@ -14,7 +14,9 @@ export class ProductViewComponent implements OnInit {
   pennieProducts : Product[];
 
 
-  constructor(private productService : ProductService) { }
+  constructor(
+    private productService : ProductService
+    ) { }
 
   ngOnInit() {
 
