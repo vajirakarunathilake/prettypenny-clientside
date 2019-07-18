@@ -1,6 +1,8 @@
+import { User } from 'src/app/user';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Helpers } from '../helpers';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,14 +11,16 @@ import { Helpers } from '../helpers';
 })
 export class HeaderComponent implements OnInit {
   menuToggle = false;
+  private user: User = new User();
 
-  constructor(private userService: UserService, public helper: Helpers) { }
-  logout(){
+  constructor(private userService: UserService, private router: Router, public helper: Helpers) { }
+  logout() {
     this.userService.logout();
+    this.router.navigate(['']);
   }
   readLocalStorageValue(key) {
     return localStorage.getItem(key);
-}
+  }
   ngOnInit() {
     localStorage.setItem('check', '0');
   }

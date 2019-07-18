@@ -53,7 +53,7 @@ export class ProductAddComponent implements OnInit {
         if (this.resp + '' !== '-1') {
           this.alertShow = true;
           this.alertClass = 'alert alert-success';
-          this.alertContent = 'Successfullt Added.';
+          this.alertContent = 'Successfully Added.';
           addProductForm.onReset();
         } else {
           this.alertShow = true;
