@@ -132,6 +132,8 @@ export class ProductViewComponent implements OnInit {
     this.editAlertShow = false;
     this.viewAlertShow = false;
     this.editcardShow = false;
+    this.prettyShow = true;
+    this.pennyShow = true;
   }
 
   changeLabel() {
