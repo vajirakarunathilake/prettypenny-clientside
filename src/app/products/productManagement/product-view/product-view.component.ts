@@ -1,6 +1,7 @@
 import { ProductService } from './../../../services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../product';
+import { User } from 'src/app/user';
 
 
 @Component({
@@ -12,6 +13,7 @@ export class ProductViewComponent implements OnInit {
 
   prettyProducts : Product[];
   pennieProducts : Product[];
+  private user: User = new User();
 
 
   constructor(
@@ -20,12 +22,14 @@ export class ProductViewComponent implements OnInit {
 
   ngOnInit() {
 
-    this.productService.findPrettiesBySeller().subscribe(
+    this.user.userId = 110;
+
+    this.productService.findPrettiesBySeller(this.user).subscribe(
       (p) => {
         this.prettyProducts = p;
       });
 
-      this.productService.findPenniesBySeller().subscribe(
+      this.productService.findPenniesBySeller(this.user).subscribe(
         (p) => {
           this.pennieProducts = p;
         });

@@ -8,6 +8,7 @@ import { Helpers } from '../helpers';
 import { Interest } from '../products/interest';
 import { Product } from '../products/product';
 import { ToastyNotificationsService } from './toasty-notifications.service';
+import { User } from '../user';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,7 @@ export class ProductService {
     private toastyNotifications: ToastyNotificationsService,
     private http: HttpClient,
     private helper: Helpers
-    ) { }
+  ) { }
 
 
   findAll(): Observable<Product[]> {
@@ -76,12 +77,12 @@ export class ProductService {
       );
   }
 
-  findPrettiesBySeller(): Observable<Product[]> {
-    return this.http.get(`${environment.apiBase}/pretty/by_seller?sellerId=${this.helper.localStorageItem("userId")}`)
+  findPrettiesBySeller(user: User): Observable<Product[]> {
+    return this.http.get(`${environment.apiBase}/pennies/by_seller?sellerId=${this.helper.localStorageItem("userId")}`)
       .pipe(map((p) => p as Product[]));
   }
 
-  findPenniesBySeller(): Observable<Product[]> {
+  findPenniesBySeller(user: User): Observable<Product[]> {
     return this.http.get(`${environment.apiBase}/pennies/by_seller?sellerId=${this.helper.localStorageItem("userId")}`)
       .pipe(map((p) => p as Product[]));
   }
