@@ -1,10 +1,10 @@
 <!-- list layout -->
   <td class="card--list__img">
-    <img [src]="product.imagePath" [alt]="product.name" />
+    <img [src]="product.imageUrl" [alt]="product.productName" />
   </td>
   <td class="card--list__name">
     <h2>
-      <strong>{{ product.name }}</strong>
+      <strong>{{ product.productName }}</strong>
     </h2>
     <p>{{ product.description | truncate:200 }}</p>
   </td>
@@ -15,11 +15,12 @@
   </td>
   <td class="card--list__ctas">
     <div class="buttons has-addons">
-      <a class="button" [routerLink]="['/products', product.id]">
+      <a class="button" [routerLink]="['/products', product.productId]">
         <span class="icon is-small">
           <i class="fas fa-search-plus"></i>
         </span>
       </a>
+      <input type="number" [(ngModel)]="quantity">
       <a class="button" (click)="onAddToCart(product)">
         <span class="icon is-small">
           <i class="fas fa-cart-plus"></i>

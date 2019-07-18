@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Product } from '../products/product.model';
+import { Product } from '../products/product';
 @Pipe({
   name: 'search'
 })
@@ -11,7 +11,7 @@ export class SearchPipe implements PipeTransform {
     searchText = searchText.toLowerCase();
     return products.filter(it => {
       // searches based on name || description
-      return it.name.toLowerCase().includes(searchText) || it.description.toLowerCase().includes(searchText);
+      return it.productName.toLowerCase().includes(searchText) || it.description.toLowerCase().includes(searchText);
     });
   }
 }
