@@ -91,12 +91,16 @@ export class FiltersComponent implements OnInit {
   }
 
   setFilter(filterValue: string) {
+    this.selectedPretty = false;
+    this.selectedPenny = false;
     this.prodService.setFilter(filterValue);
   }
 
   resetFilters() {
     this.prodService.setFilter('all');
     this.searchText.nativeElement.value = '';
+    this.selectedPretty = false;
+    this.selectedPenny = false;
     this.prodService.searchFilter('');
   }
 
