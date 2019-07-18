@@ -56,10 +56,16 @@ export class InterestService {
       );
   }
 
-  delete(interestId: number): Observable<any> {
-    return this.http.delete(`${environment.apiBase}/interest?interestId=${interestId}`)
-      .pipe(
-        map((response: any) => response)
-      );
+
+  delete(interest: Interest): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(interest)
+    };
+    return this.http.delete(`${environment.apiBase}/interest`, options)
+    .pipe( map( (response: any) => response));
+
   }
 }

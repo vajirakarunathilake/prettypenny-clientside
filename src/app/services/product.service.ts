@@ -17,6 +17,7 @@ export class ProductService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+
   cartAdditionEmitter = new EventEmitter<Product[]>(); // emitted for card and single product, minicart listens to it
   cartTotalEmitter = new EventEmitter<number>(); // emitted for price total calculation on, addition, substraction, increase or removal
   filterTypeEmitter = new EventEmitter<string>(); // emittet when filtering through product categories
@@ -38,6 +39,7 @@ export class ProductService {
     private http: HttpClient,
     private helper: Helpers
     ) { }
+
 
   findAll(): Observable<Product[]> {
     return this.http.get(`${environment.apiBase}/products`)
@@ -206,6 +208,7 @@ export class ProductService {
     window.localStorage.setItem('ngShopLayout', layoutValue ? 'grid' : 'list');
     this.layoutMode = layoutValue;
     this.layoutModeEmitter.emit(this.layoutMode);
+
   }
 
 
