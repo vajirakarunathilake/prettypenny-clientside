@@ -112,17 +112,6 @@ export class ProductService {
       );
   }
 
-
-  delete(product: Product): Observable<any> {
-    const options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-      body: JSON.stringify(product)
-    };
-    return this.http.delete(`${environment.apiBase}/product`, options)
-      .pipe(map((response: any) => response));
-
   setFilter(filterValue: string) {
     this.filterBy = filterValue;
     this.filterTypeEmitter.emit(this.filterBy);
