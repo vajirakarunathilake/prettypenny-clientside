@@ -39,6 +39,7 @@ export class ProductService {
     private helper: Helpers
     ) { }
 
+
   findAll(): Observable<Product[]> {
     return this.http.get(`${environment.apiBase}/products`)
       .pipe(
@@ -208,6 +209,7 @@ export class ProductService {
     window.localStorage.setItem('ngShopLayout', layoutValue ? 'grid' : 'list');
     this.layoutMode = layoutValue;
     this.layoutModeEmitter.emit(this.layoutMode);
+
   }
 
 
