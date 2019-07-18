@@ -23,11 +23,8 @@
 
     <app-number-input [(val)]="quantity" (valAdd)="onValAdd()" (valSub)="onValSub()" [minDisabled]="quantity === 1">
     </app-number-input>
-    <a class="card-footer-item has-text-dark" style="cursor: pointer;" (click)="onAddToCart(product)">
-      <span class="icon">
-        <i class="fas fa-cart-plus"></i>
-      </span>
+    <button class="card-footer-item btn btn-primary" [disabled]="!loggedIn" style="cursor: pointer;" (click)="onAddToCart(product)">
       Add to Cart
-    </a>
+    </button>
   </footer>
 </div>

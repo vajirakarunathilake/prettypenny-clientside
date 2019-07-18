@@ -4,6 +4,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../../services/product.service';
 import { Interest } from '../interest';
+import { Helpers } from 'src/app/helpers';
 
 @Component({
   selector: 'app-product-card',
@@ -15,10 +16,15 @@ export class ProductCardComponent implements OnInit {
   @Input() interest: Interest;
   @Input() layoutMode: boolean;
   quantity = 1;
+  loggedIn = false;
 
-  constructor(private prodService: ProductService) { }
+  constructor(
+    private prodService: ProductService,
+    public helper: Helpers
+    ) { }
 
   ngOnInit() {
+    this.loggedIn = this.helper.localStorageItem('email') != null;
   }
 
   onValAdd() {

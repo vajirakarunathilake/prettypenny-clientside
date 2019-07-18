@@ -95,7 +95,7 @@
 
       </div>
 
-      <app-cartmini class="navbar-end mini-cart-wrap"></app-cartmini>
+      <app-cartmini *ngIf="this.helper.localStorageItem('email') != null" class="navbar-end mini-cart-wrap"></app-cartmini>
 
     </div>
   </div>
