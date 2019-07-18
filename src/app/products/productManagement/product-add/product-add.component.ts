@@ -1,9 +1,7 @@
-import { Router } from '@angular/router';
 import { Helpers } from './../../../helpers';
 import { Taxonomy } from './../../taxonomy';
 import { Product } from './../../product';
 import { ProductService } from './../../../services/product.service';
-import { TaxonomyService } from './../../../services/taxonomy.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/user';
 import { NgForm } from '@angular/forms';
@@ -30,14 +28,10 @@ export class ProductAddComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private taxonomyService: TaxonomyService,
-    private router: Router,
     public helper: Helpers
   ) { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   addProduct(addProductForm: NgForm) {
     if (this.listType == 0) {
@@ -52,14 +46,14 @@ export class ProductAddComponent implements OnInit {
 
     // this.user.userId = Number(this.helper.localStorageItem("userId"));
     this.user.userId = 110;
-    this.taxonomy.taxonomyId = 50;
     this.product.user = this.user;
     this.product.taxonomy = this.taxonomy;
 
     this.productService.insert(this.product).subscribe(
       (response) => {
         this.resp = response;
-        if (this.resp !== 'User Product Add Failed') {
+        
+        if (this.resp != '-1') {
           this.alertShow = true;
           this.alertClass = 'alert alert-success';
           this.alertContent = 'Successfullt Added.';
