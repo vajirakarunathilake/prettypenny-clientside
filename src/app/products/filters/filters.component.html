@@ -37,7 +37,7 @@
   <div class="card-content" [ngClass]="{'dn': !filterToggle}">
     <div class="content has-text-centered">
       <nav class="panel">
-        <div class="panel-block"> 
+        <div class="panel-block">
             <input type="checkbox" checked data-toggle="toggle" data-onstyle="warning" data-offstyle="info">
         </div>
         <div class="panel-block">
@@ -51,11 +51,11 @@
         <a class="panel-block" [ngClass]="{'is-active': filterBy==='all'}" (click)="setFilter('all')">
           All
         </a>
-        <a class="panel-block" [class.is-active]="filterBy==='tshirts'" (click)="setFilter('tshirts')">
-          T-shirts
+        <a class="panel-block" [class.is-active]="filterBy==='Phones'" (click)="setFilter('tshirts')">
+          Phones
         </a>
-        <a class="panel-block" [class.is-active]="filterBy==='shoes'" (click)="setFilter('shoes')">
-          Shoes
+        <a class="panel-block" [class.is-active]="filterBy==='TVs'" (click)="setFilter('shoes')">
+          TVs
         </a>
         <div class="panel-block">
           <button class="button is-outlined is-fullwidth" (click)="resetFilters()">

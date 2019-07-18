@@ -19,14 +19,14 @@
     </div>
   </div>
   <footer class="card-footer">
-    <a class="card-footer-item has-text-dark" [routerLink]="['/products', product.productId]">
+    <a class="card-footer-item has-text-dark col-4" [routerLink]="['/products', product.productId]">
       <span class="icon">
         <i class="fas fa-search-plus"></i>
       </span>
       View
     </a>
-    <input type="number" [(ngModel)]="quantity">
-    <a class="card-footer-item has-text-dark" style="cursor: pointer;" (click)="onAddToCart(product)">
+    <input class="col-4" type="number" [(ngModel)]="quantity">
+    <a class="col-4 card-footer-item has-text-dark" style="cursor: pointer;" (click)="onAddToCart(product)">
       <span class="icon">
         <i class="fas fa-cart-plus"></i>
       </span>

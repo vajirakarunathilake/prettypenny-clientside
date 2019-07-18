@@ -1,38 +1,38 @@
 <h1 class="has-text-centered">Your Cart</h1>
 
 <div class="columns">
-  <ng-container *ngIf="cartProducts.length">
+  <ng-container *ngIf="cartItems.length">
     <div class="column is-three-thirds">
       <table class="table is-fullwidth">
         <thead>
           <tr>
-            <th colspan="5">Items total: {{ cartProducts.length }}</th>
+            <th colspan="5">Items total: {{ cartItems.length }}</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of cartProducts; let i = index">
+          <tr *ngFor="let item of cartItems; let i = index">
             <td class="cart-img">
-              <img [src]="product.imageUrl" [alt]="product.productName" />
+              <img [src]="item.product.imageUrl" [alt]="item.product.productName" />
             </td>
             <td class="cart-desc">
               <h2>
-                <strong>{{ product.productName }}</strong>
+                <strong>{{ item.product.productName }}</strong>
               </h2>
-              <p>{{ product.description | truncate:200 }}</p>
+              <p>{{ item.product.description | truncate:200 }}</p>
             </td>
             <td>
               <div>
                 <app-number-input
-                  [val]="product.generatedInterest"
-                  (valAdd)="onValAdd(product)"
-                  (valSub)="onValSub(product)"
-                  [minDisabled]="product.generatedInterest === 1"
+                  [val]="item.product.generatedInterest"
+                  (valAdd)="onValAdd(item)"
+                  (valSub)="onValSub(item)"
+                  [minDisabled]="item.product.generatedInterest === 1"
                 ></app-number-input>
               </div>
             </td>
             <td>
               <div>
-                 {{ product.price | currency }}
+                 {{ item.product.price | currency }}
               </div>
             </td>
             <td>
