@@ -37,6 +37,7 @@ export class PurchasehistoryComponent implements OnInit {
     this.getMyPurchases();
     for (let i = 0; i < this.myPurchase.length; i++){
       this.myStuff = this.myStuff + `Purchase Date: ${this.myPurchase[i].datePurchased} <br> Product: ${this.myPurchase[i].product} <br><br>`;
+      console.log(this.myPurchase);
     }
   }
 
