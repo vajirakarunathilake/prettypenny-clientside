@@ -18,15 +18,15 @@
               <h2>
                 <strong>{{ item.product.productName }}</strong>
               </h2>
-              <p>{{ item.product.description | truncate:200 }}</p>
+              <p>{{ item.product.description }}</p>
             </td>
             <td>
               <div>
                 <app-number-input
-                  [val]="item.product.generatedInterest"
+                  [val]="item.quantity"
                   (valAdd)="onValAdd(item)"
                   (valSub)="onValSub(item)"
-                  [minDisabled]="item.product.generatedInterest === 1"
+                  [minDisabled]="item.quantity === 1"
                 ></app-number-input>
               </div>
             </td>

@@ -1,9 +1,10 @@
 <!-- grid layout -->
 <div class="card">
   <header class="card-header">
-    <p class="card-header-title">
+    <a class="card-header-title" [routerLink]="['/products', product.productId]">
       {{ product.productName }}
-    </p>
+    </a>
+
     <span class="card-header-icon has-text-grey-light">
       <small>{{ product.price | currency }}</small>
     </span>
@@ -15,22 +16,15 @@
   </div>
   <div class="card-content">
     <div class="content has-text-centered">
-       {{ product.description | truncate:60 }}
+      {{ product.description | truncate:60 }}
     </div>
   </div>
   <footer class="card-footer">
-    <a class="card-footer-item has-text-dark col-4" [routerLink]="['/products', product.productId]">
-      <span class="icon">
-        <i class="fas fa-search-plus"></i>
-      </span>
-      View
-    </a>
-    <input class="col-4" type="number" [(ngModel)]="quantity">
-    <a class="col-4 card-footer-item has-text-dark" style="cursor: pointer;" (click)="onAddToCart(product)">
-      <span class="icon">
-        <i class="fas fa-cart-plus"></i>
-      </span>
+
+    <app-number-input [(val)]="quantity" (valAdd)="onValAdd()" (valSub)="onValSub()" [minDisabled]="quantity === 1">
+    </app-number-input>
+    <button class="card-footer-item btn btn-primary" [disabled]="!loggedIn" style="cursor: pointer;" (click)="onAddToCart(product)">
       Add to Cart
-    </a>
+    </button>
   </footer>
 </div>

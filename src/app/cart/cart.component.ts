@@ -1,8 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Product } from '../products/product';
-import { ProductService } from '../services/product.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Interest } from '../products/interest';
+import { Purchase } from '../products/purchase';
+import { InterestService } from '../services/interest.service';
+import { ProductService } from '../services/product.service';
+import { PurchaseService } from '../services/purchase.service';
+import { User } from '../user';
+import { Helpers } from '../helpers';
+
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +20,12 @@ export class CartComponent implements OnInit, OnDestroy {
   cartAdditionSubscription: Subscription;
   cartTotalSubscription: Subscription;
 
-  constructor(private prodService: ProductService) {}
+  constructor(
+    private interestService: InterestService,
+    private purchaseService: PurchaseService,
+    private prodService: ProductService,
+    public helper: Helpers
+  ) { }
 
   ngOnInit() {
     this.cartItems = this.prodService.getCartAddedItems();
@@ -34,11 +44,11 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
 
-  onValAdd(product: Product) {
-    this.prodService.cartProductManipulate(product, 0, true);
+  onValAdd(interest: Interest) {
+    this.prodService.cartProductManipulate(interest, true);
   }
-  onValSub(product: Product) {
-    this.prodService.cartProductManipulate(product);
+  onValSub(interest: Interest) {
+    this.prodService.cartProductManipulate(interest);
   }
 
 
@@ -52,7 +62,19 @@ export class CartComponent implements OnInit, OnDestroy {
 
   onCheckout() {
 
-    alert(JSON.stringify(this.cartItems) + '\n\n\n' + 'Total: ' + this.cartTotal);
+    this.cartItems.forEach(item => {
+      const interest = item;
+      const purchase = new Purchase();
+      purchase.user = new User();
+      purchase.user.userId = +this.helper.localStorageItem('userId');
+      purchase.product = item.product;
+      purchase.cost = item.product.price * item.quantity;
+      item.product.dateListed = null;
+      this.purchaseService.insert(purchase).subscribe();
+      this.interestService.insert(interest).subscribe();
+    });
+
+    alert(`Total: ${this.cartTotal}. Your card information has been processed.\n\nThank you for shopping with Pretty Penny!`);
   }
 
 

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../product';
+import { Helpers } from 'src/app/helpers';
 
 
 @Component({
@@ -11,13 +12,25 @@ import { Product } from '../product';
 export class ProductListItemComponent implements OnInit {
   @Input() product: Product;
   @Input() layoutMode: boolean;
-  quantity = 0;
+  quantity = 1;
+  loggedIn = false;
 
-  constructor(private prodService: ProductService) { }
+  constructor(
+    private prodService: ProductService,
+    public helper: Helpers
+    ) { }
 
   ngOnInit() {
+    this.loggedIn = this.helper.localStorageItem('email') != null;
   }
 
+  onValAdd() {
+    this.quantity++;
+  }
+
+  onValSub() {
+    this.quantity--;
+  }
 
   onAddToCart(product: Product) {
     this.prodService.addToCart(product, this.quantity);

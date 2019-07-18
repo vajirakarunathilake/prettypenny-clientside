@@ -145,7 +145,7 @@ export class ProductService {
     interest.product = product;
     interest.user = new User();
     interest.user.userId = +this.helper.localStorageItem('userId');
-    added ? added.product.generatedInterest += interest.quantity : this.cartAddedItems.push(interest);
+    added ? added.quantity += interest.quantity : this.cartAddedItems.push(interest);
     this.cartAdditionEmitter.emit(this.cartAddedItems);
     this.calculateCartTotal();
     this.cartTotalEmitter.emit(this.cartTotal);
@@ -159,7 +159,7 @@ export class ProductService {
   calculateCartTotal() {
     this.cartTotal = 0;
     this.cartAddedItems.forEach(item => {
-      this.cartTotal += item.product.price * item.product.generatedInterest;
+      this.cartTotal += item.product.price * item.quantity;
     });
   }
 
@@ -167,9 +167,9 @@ export class ProductService {
     return this.cartTotal;
   }
 
-  cartProductManipulate(product: Product, quantity: number = 0, increase: boolean = false) {
-    const manipulatedProduct = this.cartAddedItems.find(mp => mp.product === product);
-    increase ? manipulatedProduct.product.generatedInterest += quantity : manipulatedProduct.product.generatedInterest -= quantity;
+  cartProductManipulate(interest: Interest, increase: boolean = false) {
+    const manipulatedItem = this.cartAddedItems.find(mp => mp.product === interest.product);
+    increase ? manipulatedItem.quantity++ : manipulatedItem.quantity--;
     this.calculateCartTotal();
     this.cartTotalEmitter.emit(this.cartTotal);
   }

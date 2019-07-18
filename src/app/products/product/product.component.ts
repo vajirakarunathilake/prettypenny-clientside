@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../product';
-import { Interest } from '../interest';
+import { Helpers } from 'src/app/helpers';
 
 
 @Component({
@@ -17,17 +17,19 @@ export class ProductComponent implements OnInit {
   product: Product;
   similarProducts: Product[];
   isLoading = true;
-  quantity = 0;
+  quantity = 1;
+  loggedIn = false;
 
   constructor(
     private route: ActivatedRoute,
-    private prodService: ProductService
+    private prodService: ProductService,
+    public helper: Helpers
   ) { }
 
   ngOnInit() {
     this.initProductSingleView();
+    this.loggedIn = this.helper.localStorageItem('email') != null;
   }
-
 
   // ngDoCheck() {
   //   this.initProductSingleView();
@@ -45,6 +47,13 @@ export class ProductComponent implements OnInit {
     );
   }
 
+  onValAdd() {
+    this.quantity++;
+  }
+
+  onValSub() {
+    this.quantity--;
+  }
 
   addToCart(product: Product) {
     this.prodService.addToCart(product, this.quantity);

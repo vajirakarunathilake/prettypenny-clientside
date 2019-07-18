@@ -1,10 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Product } from './product';
-import { Interest } from './interest';
 import { TaxonomyService } from '../services/taxonomy.service';
-import { map } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-products',

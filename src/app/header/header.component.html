@@ -5,14 +5,14 @@
         Pretty<b>Penny</b>
       </a>
       <div class="navbar-burger burger" [ngClass]="{'is-active': menuToggle}"
-        data-target="navbarExampleTransparentExample" (click)="menuToggle = !menuToggle">
+        data-target="header-navbar" (click)="menuToggle = !menuToggle">
         <span></span>
         <span></span>
         <span></span>
       </div>
     </div>
 
-    <div id="navbarExampleTransparentExample" class="navbar-menu" [ngClass]="{'is-active': menuToggle}">
+    <div id="header-navbar" class="navbar-menu" [ngClass]="{'is-active': menuToggle}">
       <div class="navbar-start">
 
         <a class="navbar-item" routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">
@@ -95,7 +95,7 @@
 
       </div>
 
-      <app-cartmini class="navbar-end mini-cart-wrap"></app-cartmini>
+      <app-cartmini *ngIf="this.helper.localStorageItem('email') != null" class="navbar-end mini-cart-wrap"></app-cartmini>
 
     </div>
   </div>
