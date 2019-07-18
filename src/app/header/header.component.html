@@ -14,31 +14,54 @@
 
     <div id="navbarExampleTransparentExample" class="navbar-menu" [ngClass]="{'is-active': menuToggle}">
       <div class="navbar-start">
+
         <a class="navbar-item" routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">
           <span class="icon">
             <i class="fas fa-home"></i>
           </span><span></span>
           Home
         </a>
+
         <a class="navbar-item" routerLink="/products" routerLinkActive="is-active">
           <span class="icon">
             <i class="fas fa-shopping-bag"></i>
           </span><span></span>
           Products
         </a>
+
         <a class="navbar-item" routerLink="/contact" routerLinkActive="is-active">
           <span class="icon">
             <i class="fas fa-envelope-open"></i>
           </span><span></span>
           Contact
         </a>
-        <a class="navbar-item" routerLink="/addproduct" routerLinkActive="is-active">
+
+        <!-- <li class="navbar-item dropdown">
+          <a class="navbar-item dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <span class="icon">
+              <i class="fas fa-key"></i>
+            </span><span></span>
+            Product Mangement
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li> -->
+
+        <a *ngIf="this.helper.localStorageItem('role') == 'SELLER'" class="navbar-item" routerLink="/addproduct"
+          routerLinkActive="is-active">
           <span class="icon">
             <i class="fas fa-key"></i>
           </span><span></span>
           Add Products
         </a>
-        <a class="navbar-item" routerLink="/viewproduct" routerLinkActive="is-active">
+
+        <a *ngIf="this.helper.localStorageItem('role') == 'SELLER'" class="navbar-item" routerLink="/viewproduct"
+          routerLinkActive="is-active">
           <span class="icon">
             <i class="fas fa-key"></i>
           </span><span></span>
@@ -46,7 +69,6 @@
         </a>
 
         <ng-container *ngIf="this.helper.localStorageItem('email') == null">
-
           <a class="navbar-item" routerLink="/login" routerLinkActive="is-active">
             <span class="icon">
               <i class="fas fa-user"></i>
@@ -54,6 +76,7 @@
             Login
           </a>
         </ng-container>
+
         <ng-container *ngIf="this.helper.localStorageItem('email') != null">
           <a class="navbar-item" routerLink="/purchasehistory" routerLinkActive="is-active">
             <span class="icon">
@@ -62,15 +85,18 @@
             My Purchases
           </a>
         </ng-container>
+
         <ng-container *ngIf="this.helper.localStorageItem('email') != null">
           <a class="navbar-item" role="button" (click)="logout()">
             <span class="icon">
               <i class="fas fa-user"></i>
-            </span><span></span>Logout</a>
-
+            </span><span></span>Logout {{this.helper.localStorageItem('firstName')}}</a>
         </ng-container>
+
       </div>
+
       <app-cartmini class="navbar-end mini-cart-wrap"></app-cartmini>
+
     </div>
   </div>
 </nav>

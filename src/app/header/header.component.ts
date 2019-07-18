@@ -1,3 +1,4 @@
+import { User } from 'src/app/user';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Helpers } from '../helpers';
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   menuToggle = false;
+  private user: User = new User();
 
   constructor(private userService: UserService, private router: Router, public helper: Helpers) { }
   logout() {

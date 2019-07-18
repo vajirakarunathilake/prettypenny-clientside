@@ -3,8 +3,6 @@ import { ProductService } from './../../../services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../product';
 import { User } from 'src/app/user';
-import { TouchSequence } from 'selenium-webdriver';
-
 
 @Component({
   selector: 'app-product-view',
@@ -14,7 +12,7 @@ import { TouchSequence } from 'selenium-webdriver';
 export class ProductViewComponent implements OnInit {
 
   prettyProducts: Product[] = [];
-  pennieProducts: Product[] = [];
+  pennyProducts: Product[] = [];
   private user: User = new User();
   prettyShow = false;
   pennyShow = false;
@@ -45,8 +43,8 @@ export class ProductViewComponent implements OnInit {
 
     this.productService.findPenniesBySeller(this.user).subscribe(
       (p) => {
-        this.pennieProducts = p;
-        if (+this.pennieProducts.length !== 0) {
+        this.pennyProducts = p;
+        if (+this.pennyProducts.length !== 0) {
           this.pennyShow = true;
           this.alertShow = false;
         }
