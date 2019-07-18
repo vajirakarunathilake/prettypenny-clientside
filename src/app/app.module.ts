@@ -64,7 +64,6 @@ const appRoutes: Routes = [
     ProductsComponent,
     ProductCardComponent,
     ProductComponent,
-    //FavoriteComponent,
     LoginComponent,
     FiltersComponent,
     ProductListItemComponent,
