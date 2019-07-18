@@ -37,7 +37,7 @@ export class ProductService {
     private toastyNotifications: ToastyNotificationsService,
     private http: HttpClient,
     private helper: Helpers
-    ) { }
+  ) { }
 
 
   findAll(): Observable<Product[]> {
@@ -76,17 +76,16 @@ export class ProductService {
   }
 
   findPrettiesBySeller(): Observable<Product[]> {
-    return this.http.get(`${environment.apiBase}/pretty/by_seller?sellerId=${this.helper.localStorageItem("userId")}`)
+    return this.http.get(`${environment.apiBase}/pretty/by_seller?sellerId=${this.helper.localStorageItem('userId')}`)
       .pipe(map((p) => p as Product[]));
   }
 
   findPenniesBySeller(): Observable<Product[]> {
-    return this.http.get(`${environment.apiBase}/pennies/by_seller?sellerId=${this.helper.localStorageItem("userId")}`)
+    return this.http.get(`${environment.apiBase}/pennies/by_seller?sellerId=${this.helper.localStorageItem('userId')}`)
       .pipe(map((p) => p as Product[]));
   }
 
   insert(product: Product): Observable<any> {
-    console.log(product);
     return this.http.post(`${environment.apiBase}/product`, product, this.headers)
       .pipe(map((response: any) => response));
   }
@@ -145,6 +144,7 @@ export class ProductService {
     interest.quantity = quantity;
     interest.product = product;
     interest.user = new User();
+    interest.user.userId = +this.helper.localStorageItem('userId');
     added ? added.product.generatedInterest += interest.quantity : this.cartAddedItems.push(interest);
     this.cartAdditionEmitter.emit(this.cartAddedItems);
     this.calculateCartTotal();
@@ -158,8 +158,8 @@ export class ProductService {
 
   calculateCartTotal() {
     this.cartTotal = 0;
-    this.cartAddedItems.forEach(element => {
-      this.cartTotal += element.product.price * element.product.generatedInterest;
+    this.cartAddedItems.forEach(item => {
+      this.cartTotal += item.product.price * item.product.generatedInterest;
     });
   }
 

@@ -5,9 +5,8 @@
     </p>
 
     <span class="card--filters__layout-option">
-      <a
-        class="card-header-icon"
-        [ngClass]="{'has-text-dark': layoutMode, 'has-text-grey-light': !layoutMode}" (click)="setLayout(true)">
+      <a class="card-header-icon" [ngClass]="{'has-text-dark': layoutMode, 'has-text-grey-light': !layoutMode}"
+        (click)="setLayout(true)">
         <span class="icon">
           <i class="fas fa-th" aria-hidden="true "></i>
         </span>
@@ -15,20 +14,16 @@
     </span>
 
     <span class="card--filters__layout-option">
-      <a
-        class="card-header-icon"
-        [ngClass]="{'has-text-dark': !layoutMode, 'has-text-grey-light': layoutMode}" (click)="setLayout(false)">
+      <a class="card-header-icon" [ngClass]="{'has-text-dark': !layoutMode, 'has-text-grey-light': layoutMode}"
+        (click)="setLayout(false)">
         <span class="icon">
           <i class="fas fa-list" aria-hidden="true "></i>
         </span>
       </a>
     </span>
 
-    <a
-      class="card-header-icon"
-      [ngClass]="{'has-text-dark': filterToggle, 'has-text-grey-light': !filterToggle}"
-      (click)="filterToggle = !filterToggle"
-    >
+    <a class="card-header-icon" [ngClass]="{'has-text-dark': filterToggle, 'has-text-grey-light': !filterToggle}"
+      (click)="filterToggle = !filterToggle">
       <span class="icon">
         <i class="fas fa-filter" aria-hidden="true "></i>
       </span>
@@ -38,7 +33,10 @@
     <div class="content has-text-centered">
       <nav class="panel">
         <div class="panel-block">
-            <input type="checkbox" checked data-toggle="toggle" data-onstyle="warning" data-offstyle="info">
+          <label for="Pretty">Pretty Products</label>
+          <input type="radio" value="Pretty" id="Pretty" (click)="setFilter('pretties')">
+          <label for="Penny">Penny Products</label>
+          <input type="radio" value="Penny" id="Penny" (click)="setFilter('pretties')">
         </div>
         <div class="panel-block">
           <p class="control has-icons-left">
@@ -48,23 +46,38 @@
             </span>
           </p>
         </div>
+
         <a class="panel-block" [ngClass]="{'is-active': filterBy==='all'}" (click)="setFilter('all')">
           All
         </a>
-        <a class="panel-block" [class.is-active]="filterBy==='Phones'" (click)="setFilter('tshirts')">
-          Phones
+        <span>By Brand Name</span>
+        <a class="panel-block" *ngFor="let filter of filterNames" [class.is-active]="filterBy===filter"
+          (click)="setFilter(filter)">
+          {{filter}}
         </a>
-        <a class="panel-block" [class.is-active]="filterBy==='TVs'" (click)="setFilter('shoes')">
-          TVs
+
+        <span>By Category</span>
+        <a class="panel-block" *ngFor="let filter of filterTypes" [class.is-active]="filterBy===filter"
+          (click)="setFilter(filter)">
+          {{filter}}
         </a>
+
+        <span>By Subcategory</span>
+        <a class="panel-block" *ngFor="let filter of filterSubTypes" [class.is-active]="filterBy===filter"
+          (click)="setFilter(filter)">
+          {{filter}}
+        </a>
+
+        <!-- <a class="panel-block" [class.is-active]="filterBy==='Electronics'" (click)="setFilter('Electronics')">
+          Electronics
+        </a>
+        <a class="panel-block" [class.is-active]="filterBy==='Wearable Electronics'" (click)="setFilter('Wearable Electronics')">
+          Wearable Electronics
+        </a> -->
         <div class="panel-block">
           <button class="button is-outlined is-fullwidth" (click)="resetFilters()">
-            reset all filters
+            Reset All Filters
           </button>
-        </div>
-
-        <div class="panel-block">
-          To add: price filter (maybe a slider), asc / dsc, sorting... Toasty & filters in their own services
         </div>
       </nav>
     </div>
