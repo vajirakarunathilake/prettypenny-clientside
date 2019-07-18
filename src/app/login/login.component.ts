@@ -70,7 +70,6 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
-    console.log(this.emailL);
     this.userService.login(this.emailL, this.passwordL).subscribe(
       (u) => {
         if (u === null) {
@@ -87,7 +86,6 @@ export class LoginComponent implements OnInit {
           this.helper.localStorageSet('cvv', this.user.cvv + '');
           this.helper.localStorageSet('role', this.user.role);
           this.helper.localStorageSet('userId', (u.userId + ""));
-          console.log('User is logged in');
           this.router.navigate(['']);
         }
       }

@@ -1,4 +1,12 @@
-<div class="card mb-3">
+<div *ngIf="this.alertShow" class="card mb-3">
+  <div class="card-body">
+    <div [ngClass]="alertClass" id="productaddalert">
+      {{alertContent}}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.prettyShow" class="card mb-3">
   <div class="card-header text-white bg-secondary">Pretty Items</div>
   <div class="card-body">
     <table class="table table-striped">
@@ -28,7 +36,7 @@
   </div>
 </div>
 
-<div class="card mb-3">
+<div *ngIf="this.pennyShow" class="card mb-3">
   <div class="card-header text-white bg-warning">Penny Items</div>
   <div class="card-body">
     <table class="table table-striped">
