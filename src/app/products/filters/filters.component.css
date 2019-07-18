@@ -2,11 +2,6 @@ a.panel-block.is-active {
   background-color: whitesmoke;
 }
 
-
-@media (min-width: 769px) {
-  .card--filters { position: fixed; }
-}
-
 @media (min-width: 769px) and (max-width: 1023px) {
   .card--filters { width: 174.25px; }
 }

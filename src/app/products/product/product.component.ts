@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../product';
-import { Interest } from '../interest';
 
 
 @Component({
@@ -17,7 +16,7 @@ export class ProductComponent implements OnInit {
   product: Product;
   similarProducts: Product[];
   isLoading = true;
-  quantity = 0;
+  quantity = 1;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,6 +44,13 @@ export class ProductComponent implements OnInit {
     );
   }
 
+  onValAdd() {
+    this.quantity++;
+  }
+
+  onValSub() {
+    this.quantity--;
+  }
 
   addToCart(product: Product) {
     this.prodService.addToCart(product, this.quantity);

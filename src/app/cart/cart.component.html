@@ -23,10 +23,10 @@
             <td>
               <div>
                 <app-number-input
-                  [val]="item.product.generatedInterest"
+                  [val]="item.quantity"
                   (valAdd)="onValAdd(item)"
                   (valSub)="onValSub(item)"
-                  [minDisabled]="item.product.generatedInterest === 1"
+                  [minDisabled]="item.quantity === 10"
                 ></app-number-input>
               </div>
             </td>
