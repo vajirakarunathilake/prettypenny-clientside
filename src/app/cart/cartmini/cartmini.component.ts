@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-
-import { ProductService } from '../../services/product.service';
-import { Product } from '../../products/product';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import { Product } from '../../products/product';
+import { ProductService } from '../../services/product.service';
+import { Interest } from 'src/app/products/interest';
+
 
 @Component({
   selector: 'app-cartmini',
@@ -10,7 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./cartmini.component.scss']
 })
 export class CartminiComponent implements OnInit, OnDestroy {
-  cartminiProducts: Product[];
+  cartMiniItems: Interest[];
   cartminiTotal: number;
   cartAdditionSubscription: Subscription;
   cartTotalSubscription: Subscription;
@@ -18,10 +19,10 @@ export class CartminiComponent implements OnInit, OnDestroy {
   constructor(private prodService: ProductService) {}
 
   ngOnInit() {
-    this.cartminiProducts = this.prodService.getCartAddedProducts();
+    this.cartMiniItems = this.prodService.getCartAddedItems();
     this.cartAdditionSubscription = this.prodService.cartAdditionEmitter.subscribe(
-      (products: Product[]) => {
-        this.cartminiProducts = products;
+      (interests: Interest[]) => {
+        this.cartMiniItems = interests;
       }
     );
     this.cartminiTotal = this.prodService.getCartTotal();
