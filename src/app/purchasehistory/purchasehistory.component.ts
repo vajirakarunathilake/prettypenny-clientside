@@ -12,33 +12,26 @@ import { PurchaseService } from '../services/purchase.service';
 export class PurchasehistoryComponent implements OnInit {
 
   constructor(public helper: Helpers, private purchaseService: PurchaseService) { }
-  myPurchase: Purchase[] = new Array();
-  allPurchase: Purchase[] = new Array();
+  myPurchases: Purchase[] = [];
+  allPurchases: Purchase[] = [];
   myStuff = '';
 
-  getPurchases(){
+  getPurchases() {
     this.purchaseService.findAll().subscribe(
       (p) => {
-        this.allPurchase = p;
+        this.allPurchases = p as Purchase[];
+        for (const purchase of this.allPurchases) {
+          if (purchase.user.userId === +this.helper.localStorageItem('userId')) {
+            this.myPurchases.push(purchase);
+          }
+        }
       }
     );
   }
 
-  getMyPurchases(){
-    this.getPurchases();
-    for (let i = 0; i < this.allPurchase.length; i++){
-      if (localStorage.getItem('userId') === ('' + this.allPurchase[i].user.userId)){
-        this.myPurchase.push(this.allPurchase[i]);
-      }
-    }
-  }
 
   ngOnInit() {
-    this.getMyPurchases();
-    for (let i = 0; i < this.myPurchase.length; i++){
-      this.myStuff = this.myStuff + `Purchase Date: ${this.myPurchase[i].datePurchased} <br> Product: ${this.myPurchase[i].product} <br><br>`;
-      console.log(this.myPurchase);
-    }
+    this.getPurchases();
   }
 
 }
