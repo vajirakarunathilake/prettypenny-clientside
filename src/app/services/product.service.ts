@@ -91,7 +91,7 @@ export class ProductService {
   }
 
   update(product: Product): Observable<any> {
-    return this.http.put(`${environment.apiBase}/product`, product)
+    return this.http.put(`${environment.apiBase}/product`, product,  this.headers)
       .pipe(
         map((response: any) => response)
       );
