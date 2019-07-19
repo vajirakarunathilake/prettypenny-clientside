@@ -17,6 +17,7 @@ export class ProductCardComponent implements OnInit {
   @Input() layoutMode: boolean;
   quantity = 1;
   loggedIn = false;
+  pretty = false;
 
   constructor(
     private prodService: ProductService,
@@ -25,6 +26,8 @@ export class ProductCardComponent implements OnInit {
 
   ngOnInit() {
     this.loggedIn = this.helper.localStorageItem('email') != null;
+    this.pretty = this.product.status === 'Pretty' ? true : false;
+
   }
 
   onValAdd() {

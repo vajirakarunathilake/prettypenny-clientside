@@ -12,6 +12,7 @@ import { environment } from '../../environments/environment';
 })
 export class InterestService {
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  userInterests: Interest[];
   constructor(private http: HttpClient) { }
 
   findAll(): Observable<Interest[]> {

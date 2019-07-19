@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   submitRegistration() {
     console.log(this.firstname);
 
-    let newUser = new User();
+    const newUser = new User();
     newUser.email = this.emailR;
     newUser.password = this.passwordR;
     newUser.firstName = this.firstname;
@@ -45,8 +45,7 @@ export class LoginComponent implements OnInit {
         this.resp = response;
         if (this.resp !== '1') {
           this.goodInf = false;
-        }
-        else {
+        } else {
           this.goodInf = null;
           this.userService.login(newUser.email, newUser.password).subscribe(
             (u) => {
@@ -58,7 +57,7 @@ export class LoginComponent implements OnInit {
               this.helper.localStorageSet('creditCardNumber', this.user.creditCardNumber + '');
               this.helper.localStorageSet('cvv', this.user.cvv + '');
               this.helper.localStorageSet('role', this.user.role);
-              this.helper.localStorageSet('userId', (u.userId + ""));
+              this.helper.localStorageSet('userId', (u.userId + ''));
               console.log('User is logged in');
               this.router.navigate(['']);
             }
@@ -75,8 +74,7 @@ export class LoginComponent implements OnInit {
       (u) => {
         if (u === null) {
           this.goodCred = false;
-        }
-        else {
+        } else {
           this.user = u;
           this.goodCred = null;
           this.helper.localStorageSet('email', this.user.email);
@@ -86,7 +84,7 @@ export class LoginComponent implements OnInit {
           this.helper.localStorageSet('creditCardNumber', this.user.creditCardNumber + '');
           this.helper.localStorageSet('cvv', this.user.cvv + '');
           this.helper.localStorageSet('role', this.user.role);
-          this.helper.localStorageSet('userId', (u.userId + ""));
+          this.helper.localStorageSet('userId', (u.userId + ''));
           this.router.navigate(['']);
         }
       }

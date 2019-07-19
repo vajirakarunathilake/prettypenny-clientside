@@ -46,7 +46,7 @@ const appRoutes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'login', component: LoginComponent },
   { path: 'addproduct', component: ProductAddComponent },
-  { path: 'viewproduct', component: ProductViewComponent },
+  { path: 'manageproduct', component: ProductViewComponent },
   { path: 'purchasehistory', component: PurchasehistoryComponent}
 
 ];

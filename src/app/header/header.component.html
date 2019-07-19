@@ -4,8 +4,8 @@
       <a class="navbar-item logo" routerLink="/">
         Pretty<b>Penny</b>
       </a>
-      <div class="navbar-burger burger" [ngClass]="{'is-active': menuToggle}"
-        data-target="header-navbar" (click)="menuToggle = !menuToggle">
+      <div class="navbar-burger burger" [ngClass]="{'is-active': menuToggle}" data-target="header-navbar"
+        (click)="menuToggle = !menuToggle">
         <span></span>
         <span></span>
         <span></span>
@@ -36,37 +36,20 @@
           Contact
         </a>
 
-        <!-- <li class="navbar-item dropdown">
-          <a class="navbar-item dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <span class="icon">
-              <i class="fas fa-key"></i>
-            </span><span></span>
-            Product Mangement
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+        <div *ngIf="this.helper.localStorageItem('role') == 'SELLER'" class="navbar-item dropdown">
+          <div ngbDropdown class="d-inline-block">
+            <a class="navbar-item" id="dropdownBasic" ngbDropdownToggle>
+              <span class="icon">
+                <i class="fas fa-key"></i>
+              </span><span></span>
+              Product Management
+            </a>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+              <button ngbDropdownItem routerLink="/addproduct">Add Products</button>
+              <button ngbDropdownItem routerLink="/manageproduct">Manage My Products</button>
+            </div>
           </div>
-        </li> -->
-
-        <a *ngIf="this.helper.localStorageItem('role') == 'SELLER'" class="navbar-item" routerLink="/addproduct"
-          routerLinkActive="is-active">
-          <span class="icon">
-            <i class="fas fa-key"></i>
-          </span><span></span>
-          Add Products
-        </a>
-
-        <a *ngIf="this.helper.localStorageItem('role') == 'SELLER'" class="navbar-item" routerLink="/viewproduct"
-          routerLinkActive="is-active">
-          <span class="icon">
-            <i class="fas fa-key"></i>
-          </span><span></span>
-          View Product
-        </a>
+        </div>
 
         <ng-container *ngIf="this.helper.localStorageItem('email') == null">
           <a class="navbar-item" routerLink="/login" routerLinkActive="is-active">
@@ -77,25 +60,24 @@
           </a>
         </ng-container>
 
-        <ng-container *ngIf="this.helper.localStorageItem('email') != null">
-          <a class="navbar-item" routerLink="/purchasehistory" routerLinkActive="is-active">
-            <span class="icon">
-              <i class="fas fa-user"></i>
-            </span><span></span>
-            My Purchases
-          </a>
-        </ng-container>
-
-        <ng-container *ngIf="this.helper.localStorageItem('email') != null">
-          <a class="navbar-item" role="button" (click)="logout()">
-            <span class="icon">
-              <i class="fas fa-user"></i>
-            </span><span></span>Logout {{this.helper.localStorageItem('firstName')}}</a>
-        </ng-container>
-
+        <div *ngIf="this.helper.localStorageItem('role') == 'SELLER'" class="navbar-item dropdown">
+          <div ngbDropdown class="d-inline-block">
+            <a class="navbar-item" id="dropdownBasic" ngbDropdownToggle>
+              <span class="icon">
+                <i class="fas fa-user"></i>
+              </span><span></span>
+              My PrettyPenny
+            </a>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+              <button ngbDropdownItem routerLink="/purchasehistory">My Purchases</button>
+              <button ngbDropdownItem (click)="logout()">Logout {{this.helper.localStorageItem('firstName')}}</button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <app-cartmini *ngIf="this.helper.localStorageItem('email') != null" class="navbar-end mini-cart-wrap"></app-cartmini>
+      <app-cartmini *ngIf="this.helper.localStorageItem('email') != null" class="navbar-end mini-cart-wrap">
+      </app-cartmini>
 
     </div>
   </div>

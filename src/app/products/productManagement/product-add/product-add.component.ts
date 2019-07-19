@@ -43,7 +43,7 @@ export class ProductAddComponent implements OnInit {
       this.product.onSale = 0;
     }
 
-    this.user.userId = Number(this.helper.localStorageItem('userId'));
+    this.user.userId = +this.helper.localStorageItem('userId');
     this.product.user = this.user;
     this.product.taxonomy = this.taxonomy;
 
@@ -59,7 +59,7 @@ export class ProductAddComponent implements OnInit {
         } else {
           this.alertShow = true;
           this.alertClass = 'alert alert-danger';
-          this.alertContent = 'Wrong Informations. Please check it again.';
+          this.alertContent = 'Please enter all relevant information.';
         }
       });
   }

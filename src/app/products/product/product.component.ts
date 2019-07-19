@@ -19,6 +19,7 @@ export class ProductComponent implements OnInit {
   isLoading = true;
   quantity = 1;
   loggedIn = false;
+  pretty = false;
 
   constructor(
     private route: ActivatedRoute,
