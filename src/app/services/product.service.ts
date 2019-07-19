@@ -135,8 +135,6 @@ export class ProductService {
     return this.allProducts.slice();
   }
 
-
-
   addToCart(product: Product, quantity: number) {
     // if item is already in cart ++ its qty, don't read it
     const added = this.cartAddedItems.find(i => i.product === product);

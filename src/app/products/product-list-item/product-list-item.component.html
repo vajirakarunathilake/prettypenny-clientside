@@ -27,10 +27,10 @@
       (valSub)="onValSub()"
       [minDisabled]="quantity === 1"
     ></app-number-input>
-    <button class="btn btn-primary" [disabled]="!loggedIn" (click)="onAddToCart(product)">
-      <span class="icon is-small">
-        <i class="fas fa-cart-plus"></i>
-      </span>
-    </button>
+      <button [ngClass]="pretty ? 'btn-primary' : 'btn-secondary'" class="btn" [disabled]="!loggedIn" (click)="onAddToCart(product)">
+        <span class="icon is-small">
+          <i class="fas fa-cart-plus"></i>
+        </span>
+      </button>
   </div>
 </td>
