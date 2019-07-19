@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../product';
 import { Helpers } from 'src/app/helpers';
+import { InterestService } from 'src/app/services/interest.service';
 
 
 @Component({
@@ -14,14 +15,17 @@ export class ProductListItemComponent implements OnInit {
   @Input() layoutMode: boolean;
   quantity = 1;
   loggedIn = false;
+  pretty = false;
 
   constructor(
     private prodService: ProductService,
+    private interestService: InterestService,
     public helper: Helpers
     ) { }
 
   ngOnInit() {
     this.loggedIn = this.helper.localStorageItem('email') != null;
+    this.pretty = this.product.status === 'Pretty' ? true : false;
   }
 
   onValAdd() {
