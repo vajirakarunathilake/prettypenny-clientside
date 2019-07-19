@@ -3,5 +3,24 @@
     My Purchases
   </h2>
   <br>
-  
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Date</th>
+        <th>Price</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mine of myPurchases">
+        <th></th>
+        <th>{{mine.datePurchased.year}} {{mine.datePurchased.month}} {{mine.datePurchased.dayOfMonth}}</th>
+        <th>{{mine.cost}}</th>
+        <th>{{mine.product.productName}}</th>
+      </tr>
+    </tbody>
+  </table>
+
 </div>
