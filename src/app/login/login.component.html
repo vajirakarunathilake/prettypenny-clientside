@@ -35,17 +35,10 @@
           <input type="Number" id="ccv" class="form-control" [(ngModel)]="ccv" name="ccv" placeholder=000>
         </div>
         <div class="form-group">
-          <label>Role</label>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="user" name="user" value="USER" [(ngModel)]="role"
-              class="custom-control-input" checked="checked">
-            <label class="custom-control-label" for="user">User</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="seller" name="seller" value="SELLER" [(ngModel)]="role"
-              class="custom-control-input">
-            <label class="custom-control-label" for="seller">Seller</label>
-          </div>
+          <label for="role">Role</label>
+          <select id="role" class="form-control" [(ngModel)]="role" name="role">
+            <option *ngFor="let entry of entries" [value]="entry">{{entry}}</option> 
+          </select>
         </div>
         <button type="button" (click)="submitRegistration()" class="btn btn-success" id="sbmtBtn">Submit</button>
       </form>
