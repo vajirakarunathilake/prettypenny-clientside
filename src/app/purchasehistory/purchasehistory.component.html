@@ -9,7 +9,7 @@
       <tr>
         <th></th>
         <th>Date</th>
-        <th>Price</th>
+        <th>Cost</th>
         <th>Name</th>
       </tr>
     </thead>
@@ -17,7 +17,7 @@
       <tr *ngFor="let mine of myPurchases">
         <th></th>
         <th>{{mine.datePurchased.year}} {{mine.datePurchased.month}} {{mine.datePurchased.dayOfMonth}}</th>
-        <th>{{mine.cost}}</th>
+        <th>${{mine.cost}}</th>
         <th>{{mine.product.productName}}</th>
       </tr>
     </tbody>
