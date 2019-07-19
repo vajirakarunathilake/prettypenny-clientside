@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   passwordL: string;
   emailL: string;
   role: string;
+  entries:string[] = [];
   goodCred: boolean = null;
   goodInf: boolean = null;
   resp: string;
@@ -27,7 +28,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router, public helper: Helpers) {
   }
-
   submitRegistration() {
     console.log(this.firstname);
 
@@ -96,6 +96,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.entries.push("USER");
+    this.entries.push("SELLER");
+    this.role="USER";
   }
 
 }
