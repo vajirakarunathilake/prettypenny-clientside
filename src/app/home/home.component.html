@@ -1,4 +1,36 @@
-<h1 class="has-text-centered">Welcome to PrettyPenny</h1>
-<!-- <hr /> -->
+<div class='container-fluid bg-secondary'>
 
-<!-- <button class="btn is-success" (click)="addItem()">add product</button> -->
+  <div class='col-12 carousel-container'>
+    <ngb-carousel>
+      <ng-template ngbSlide>
+        <img src="../../assets/images/1.jpg" alt="Random first slide">
+        <div class="carousel-caption">
+          <h3>10 seconds between slides...</h3>
+          <p>This carousel uses customized default values.</p>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <img src="../../assets/images/2.jpg" alt="Random second slide">
+        <div class="carousel-caption">
+          <h3>No mouse events...</h3>
+          <p>This carousel doesn't pause or resume on mouse events</p>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <img src="../../assets/images/3.jpg" alt="Random third slide">
+        <div class="carousel-caption">
+          <h3>No keyboard...</h3>
+          <p>This carousel uses customized default values.</p>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <img src="../../assets/images/4.jpg" alt="Random fourth slide">
+        <div class="carousel-caption">
+          <h3>And no wrap after last slide.</h3>
+          <p>This carousel uses customized default values.</p>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+
+</div>
