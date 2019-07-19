@@ -23,12 +23,12 @@
 
     <app-number-input [(val)]="quantity" (valAdd)="onValAdd()" (valSub)="onValSub()" [minDisabled]="quantity === 1">
     </app-number-input>
-    <div *ngIf="pretty">
+    <div *ngIf="pretty; else penny">
       <button class="card-footer-item btn btn-primary" [disabled]="!loggedIn" style="cursor: pointer;" (click)="onAddToCart(product)">
         Add to Cart
       </button>
     </div>
-    <ng-template>
+    <ng-template #penny>
       <button class="card-footer-item btn btn-secondary" [disabled]="!loggedIn" style="cursor: pointer;" (click)="onAddToCart(product)">
         Add to Interests
       </button>
