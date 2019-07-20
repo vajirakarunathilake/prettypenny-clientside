@@ -18,6 +18,14 @@ export class ProductService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Accept': 'text/html, application/xhtml+xml, */*',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }),
+    responseType: 'text'
+  };
+
   cartAdditionEmitter = new EventEmitter<Interest[]>(); // emitted for card and single product, minicart listens to it
   cartTotalEmitter = new EventEmitter<number>(); // emitted for price total calculation on, addition, substraction, increase or removal
   filterTypeEmitter = new EventEmitter<string>(); // emittet when filtering through product categories
@@ -91,7 +99,13 @@ export class ProductService {
   }
 
   update(product: Product): Observable<any> {
-    return this.http.put(`${environment.apiBase}/product`, product,  this.headers)
+    return this.http.put(`${environment.apiBase}/product`, product, {
+      headers: new HttpHeaders({
+        'Accept': 'text/html, application/xhtml+xml, */*',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }),
+      responseType: 'text'
+    })
       .pipe(
         map((response: any) => response)
       );

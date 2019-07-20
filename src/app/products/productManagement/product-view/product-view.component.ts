@@ -1,11 +1,12 @@
-import { Taxonomy } from './../../taxonomy';
-import { Helpers } from './../../../helpers';
-import { ProductService } from './../../../services/product.service';
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../product';
+import { NgForm } from '@angular/forms';
 import { User } from 'src/app/user';
 import { environment } from 'src/environments/environment';
-import { NgForm } from '@angular/forms';
+import { Product } from '../../product';
+import { Helpers } from './../../../helpers';
+import { ProductService } from './../../../services/product.service';
+import { Taxonomy } from './../../taxonomy';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-view',
@@ -48,7 +49,10 @@ export class ProductViewComponent implements OnInit {
     this.viewAlertShow = true;
     this.viewAlertClass = 'alert alert-info';
     this.viewAlertContent = 'No active listings in your account.';
+    this.getProducts();
+  }
 
+  getProducts() {
     this.productService.findPrettiesBySeller(this.user).subscribe(
       (p) => {
         this.prettyProducts = p;
@@ -69,24 +73,19 @@ export class ProductViewComponent implements OnInit {
       });
   }
 
-  prettyEdit(productId: number) {
+  prettyEdit(product: Product) {
 
-    this.productService.findById(productId).subscribe(
-      (p) => {
-        this.product = p;
-        this.taxonomy = this.product.taxonomy;
-      });
+    this.product = product;
+    this.taxonomy = this.product.taxonomy;
     this.prettyShow = false;
     this.pennyShow = false;
     this.editHeaderClass = 'card-header text-white bg-secondary';
     this.editcardShow = true;
   }
-  pennyEdit(productId: number) {
-    this.productService.findById(productId).subscribe(
-      (p) => {
-        this.product = p;
-        this.taxonomy = this.product.taxonomy;
-      });
+  pennyEdit(product: Product) {
+
+    this.product = product;
+    this.taxonomy = this.product.taxonomy;
     this.prettyShow = false;
     this.pennyShow = false;
     this.editHeaderClass = 'card-header text-white bg-warning';
@@ -103,14 +102,14 @@ export class ProductViewComponent implements OnInit {
       this.product.onSale = 0;
     }
 
-    this.user.userId = Number(this.helper.localStorageItem('userId'));
+    this.user.userId = +this.helper.localStorageItem('userId');
     this.product.user = this.user;
     this.product.taxonomy = this.taxonomy;
-
+    this.product.dateListed = null;
     this.productService.update(this.product).subscribe(
       (response) => {
         this.resp = response;
-
+        console.log(response);
         if (this.resp + '' !== '-1') {
           this.editcardShow = false;
           editProductForm.resetForm();
@@ -119,11 +118,12 @@ export class ProductViewComponent implements OnInit {
           this.viewAlertClass = 'alert alert-success';
           this.viewAlertContent = 'Successfully Added.';
           this.product = new Product();
+          this.getProducts();
         } else {
           this.editAlertShow = true;
           this.viewAlertShow = false;
           this.editAlertClass = 'alert alert-danger';
-          this.editAlertContent = 'Wrong Informations. Please check it again.';
+          this.editAlertContent = 'Please enter all relevant information.';
         }
       });
   }
