@@ -70,7 +70,7 @@
             </a>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic">
               <button ngbDropdownItem routerLink="/purchasehistory">My Purchases</button>
-              <button ngbDropdownItem (click)="logout()">Logout {{this.helper.localStorageItem('firstName')}}</button>
+              <button ngbDropdownItem (click)="logout()">Logout <strong>{{this.helper.localStorageItem('firstName')}}</strong></button>
             </div>
           </div>
         </div>

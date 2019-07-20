@@ -5,8 +5,8 @@
       {{ product.productName }}
     </a>
 
-    <span class="card-header-icon has-text-grey-light">
-      <small>{{ product.price | currency }}</small>
+    <span class="card-header-icon">
+      <strong class="text-danger">{{ product.price | currency }}</strong>
     </span>
   </header>
   <div class="card-image">
@@ -15,21 +15,44 @@
     </figure>
   </div>
   <div class="card-content">
-    <div class="content has-text-centered">
-      {{ product.description | truncate:60 }}
+
+    <div *ngIf="pretty; else peenycontent">
+      <div class="content has-text-centered">
+        {{ product.description | truncate:60 }}
+      </div>
     </div>
+    <ng-template #peenycontent>
+      <div class="content has-text-centered">
+        {{ product.description | truncate:60 }}
+      </div>
+
+      <p>
+        <ngb-progressbar type="warning" [value]="precentage" height=".5rem">.</ngb-progressbar>
+      </p>
+      <div class="row">
+        <div class="align-self-start">
+          <p class="text-success ml-3 mr-2">Sold: {{product.generatedInterest}}</p>
+        </div>
+        <div class="align-self-end">
+          <p class="text-danger">Need: {{product.interestThreshold-product.generatedInterest}} </p>
+        </div>
+      </div>
+
+    </ng-template>
   </div>
   <footer class="card-footer">
-
     <app-number-input [(val)]="quantity" (valAdd)="onValAdd()" (valSub)="onValSub()" [minDisabled]="quantity === 1">
     </app-number-input>
-    <div *ngIf="pretty; else penny">
-      <button class="card-footer-item btn btn-primary" [disabled]="!loggedIn" style="cursor: pointer;" (click)="onAddToCart(product)">
+
+    <div *ngIf="pretty; else penny" class="float-right">
+      <button class="btn btn-primary btn-sm ml-4 mt-1" [disabled]="!loggedIn" style="cursor: pointer;"
+        (click)="onAddToCart(product)">
         Add to Cart
       </button>
     </div>
     <ng-template #penny>
-      <button class="card-footer-item btn btn-secondary" [disabled]="!loggedIn" style="cursor: pointer;" (click)="onAddToCart(product)">
+      <button class="btn btn-warning btn-sm text-white ml-3" [disabled]="!loggedIn" style="cursor: pointer;"
+        (click)="onAddToCart(product)">
         Add to Interests
       </button>
     </ng-template>
