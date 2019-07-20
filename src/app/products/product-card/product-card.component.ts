@@ -1,10 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-
-
 import { Product } from '../product';
 import { ProductService } from '../../services/product.service';
 import { Interest } from '../interest';
 import { Helpers } from 'src/app/helpers';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',
@@ -19,16 +18,30 @@ export class ProductCardComponent implements OnInit {
   loggedIn = false;
   pretty = false;
   precentage: number;
+  needthresholdtext: string;
+  over: number;
+  need: number;
+  needClass: string;
 
   constructor(
     private prodService: ProductService,
-    public helper: Helpers
-    ) { }
+    public helper: Helpers,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.loggedIn = this.helper.localStorageItem('email') != null;
     this.pretty = this.product.status === 'Pretty' ? true : false;
     this.precentage = (this.product.generatedInterest / this.product.interestThreshold) * 100;
+    if (this.precentage > 100) {
+      this.needClass = 'text-primary';
+      this.over = this.product.generatedInterest - this.product.interestThreshold;
+      this.needthresholdtext = 'Over ' + this.over + ' Sold';
+    } else {
+      this.needClass = 'text-danger';
+      this.need = this.product.interestThreshold - this.product.generatedInterest;
+      this.needthresholdtext = 'Need: ' + this.need;
+    }
   }
 
   onValAdd() {
@@ -40,7 +53,10 @@ export class ProductCardComponent implements OnInit {
   }
 
   onAddToCart(product: Product) {
-    this.prodService.addToCart(product, this.quantity);
+    if (this.helper.localStorageItem('role') != null) {
+      this.prodService.addToCart(product, this.quantity);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
-
 }
