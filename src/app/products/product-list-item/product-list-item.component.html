@@ -5,9 +5,14 @@
 <td class="card--list__name">
 
   <h2>
-    <strong>{{ product.productName }}</strong>
+
+    <strong><a [routerLink]="['/products', product.productId]">
+      {{ product.productName }}
+    </a></strong>
   </h2>
   <p>{{ product.description | truncate:200 }}</p>
+
+  <app-spinner *ngIf="!pretty" [value]="interestRatio"></app-spinner>
 </td>
 <td class="card--list__price">
   <div>

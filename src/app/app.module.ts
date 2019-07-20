@@ -36,6 +36,7 @@ import { SearchPipe } from './pipes/search.pipe';
 import { ProductAddComponent } from './products/productManagement/product-add/product-add.component';
 import { ProductViewComponent } from './products/productManagement/product-view/product-view.component';
 import { PurchasehistoryComponent } from './purchasehistory/purchasehistory.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 const appRoutes: Routes = [
@@ -72,7 +73,8 @@ const appRoutes: Routes = [
     SearchPipe,
     ProductAddComponent,
     ProductViewComponent,
-    PurchasehistoryComponent
+    PurchasehistoryComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
