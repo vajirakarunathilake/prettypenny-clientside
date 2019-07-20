@@ -18,7 +18,7 @@ export class ProductAddComponent implements OnInit {
   taxonomy: Taxonomy = new Taxonomy();
   user: User = new User();
   quantityLabel = `Quantity`;
-  listType: number;
+  listType: string;
   resp: string;
   brands = environment.brands;
   categories = environment.categories;
@@ -35,39 +35,82 @@ export class ProductAddComponent implements OnInit {
   ngOnInit() { }
 
   addProduct(addProductForm: NgForm) {
-    if (+this.listType === 0) {
+    if (this.listType + '' === 'Pretty') {
       this.product.status = 'Pretty';
       this.product.onSale = 1;
-    } else {
+    }
+    if (this.listType + '' === 'Penny') {
       this.product.status = 'Within Threshold';
       this.product.onSale = 0;
     }
 
     this.user.userId = Number(this.helper.localStorageItem('userId'));
     this.product.user = this.user;
-    this.product.taxonomy = this.taxonomy;
 
-    this.productService.insert(this.product).subscribe(
-      (response) => {
-        this.resp = response;
+    if (this.product.productName === undefined) {
+      this.alertShow = true;
+      this.alertClass = 'alert alert-danger';
+      this.alertContent = 'Product Name cannot be empty.';
+    } else if (this.taxonomy.name === undefined) {
+      this.alertShow = true;
+      this.alertClass = 'alert alert-danger';
+      this.alertContent = 'Please Select Brand Name of your product';
+    } else if (this.taxonomy.type === undefined) {
+      this.alertShow = true;
+      this.alertClass = 'alert alert-danger';
+      this.alertContent = 'Please Select Category Name of your product';
+    } else if (this.taxonomy.subType === undefined) {
+      this.alertShow = true;
+      this.alertClass = 'alert alert-danger';
+      this.alertContent = 'Please Select Sub Categoty of your product';
+    } else if (this.product.imageUrl === undefined) {
+      this.alertShow = true;
+      this.alertClass = 'alert alert-danger';
+      this.alertContent = 'Image URL cannot be empty.';
+    } else if (this.product.description === undefined) {
+      this.alertShow = true;
+      this.alertClass = 'alert alert-danger';
+      this.alertContent = 'Product Description cannot be empty.';
+    } else if (this.listType === undefined) {
+      this.alertShow = true;
+      this.alertClass = 'alert alert-danger';
+      this.alertContent = 'Please select your List Type.';
+    } else if (this.product.interestThreshold === undefined) {
+      this.alertShow = true;
+      this.alertClass = 'alert alert-danger';
+      this.alertContent = 'Quantity/ Threshold Value cannot be empty.';
+    } else if (this.product.price === undefined) {
+      this.alertShow = true;
+      this.alertClass = 'alert alert-danger';
+      this.alertContent = 'Product Price cannot be empty.';
+    } else if (this.product.salePrice === undefined) {
+      this.alertShow = true;
+      this.alertClass = 'alert alert-danger';
+      this.alertContent = 'Product Sale Price cannot be empty.';
+    } else {
+      this.product.taxonomy = this.taxonomy;
+      this.productService.insert(this.product).subscribe(
+        (response) => {
+          this.resp = response;
 
-        if (this.resp + '' !== '-1') {
-          this.alertShow = true;
-          this.alertClass = 'alert alert-success';
-          this.alertContent = 'Successfully Added.';
-          addProductForm.onReset();
-        } else {
-          this.alertShow = true;
-          this.alertClass = 'alert alert-danger';
-          this.alertContent = 'Wrong Informations. Please check it again.';
-        }
-      });
+          if (this.resp + '' !== '-1') {
+            this.alertShow = true;
+            this.alertClass = 'alert alert-success';
+            this.alertContent = 'Successfully Added.';
+            addProductForm.onReset();
+          } else {
+            this.alertShow = true;
+            this.alertClass = 'alert alert-danger';
+            this.alertContent = 'Wrong Informations. Please check it again.';
+          }
+        });
+    }
   }
 
   changeLabel() {
-    if (+this.listType === 0) {
+    if (this.listType + '' === 'Pretty') {
       this.quantityLabel = 'Quantity';
-    } else if (+this.listType === 1) {
+    } else if (this.listType + '' === 'Penny') {
       this.quantityLabel = 'Minimum Threshold Value';
     }
   }

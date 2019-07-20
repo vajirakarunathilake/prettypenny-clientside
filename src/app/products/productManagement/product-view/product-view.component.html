@@ -31,7 +31,8 @@
           <td>{{prettyProduct.interestThreshold}}</td>
           <td>{{prettyProduct.price}}</td>
           <td>{{prettyProduct.salePrice}}</td>
-          <td><button type="button" class="btn btn-secondary btn-sm" (click)="prettyEdit([prettyProduct.productId])">Edit</button>
+          <td><button type="button" class="btn btn-secondary btn-sm"
+              (click)="prettyEdit([prettyProduct.productId])">Edit</button>
           </td>
         </tr>
       </tbody>
@@ -66,7 +67,8 @@
           <td>{{pennyProduct.generatedInterest}}</td>
           <td>{{pennyProduct.price}}</td>
           <td>{{pennyProduct.salePrice}}</td>
-          <td><button type="button" class="btn btn-warning btn-sm" (click)="pennyEdit([pennyProduct.productId])">Edit</button></td>
+          <td><button type="button" class="btn btn-warning btn-sm"
+              (click)="pennyEdit([pennyProduct.productId])">Edit</button></td>
         </tr>
 
       </tbody>
@@ -80,13 +82,22 @@
   </div>
   <div class="card-body">
     <form #editProductForm='ngForm' (ngSubmit)="updateProduct(editProductForm)">
-      <div *ngIf="this.editAlertShow" [ngClass]="editAlertClass" id="productaddalert">
+      
+      <div *ngIf="this.editAlertShow" [ngClass]="editAlertClass" name="editAlert" id="producteditalert">
         {{editAlertContent}}
       </div>
+
+      <div class="form-row">
+        <div class="form-group col-sm-4"></div>
+        <div class="form-group col-sm-5">
+          <img [src]="product.imageUrl" class="rounded mx-auto d-block img-thumbnail" [alt]="product.productName">
+        </div>
+        <div class="form-group col-sm-4"></div>
+      </div>
+
       <div class="form-group">
         <label for="inputAddress">Product Name</label>
-        <input type="text" class="form-control" [(ngModel)]="product.productName" name="productName"
-          placeholder="Apple iphone x">
+        <input type="text" class="form-control" [(ngModel)]="product.productName" name="productName" placeholder="Apple iphone x">
       </div>
 
       <div class="form-row">
@@ -121,21 +132,13 @@
         <textarea class="form-control" [(ngModel)]="product.description" name="productDescription" rows="5"></textarea>
       </div>
 
-
       <div class="form-row">
         <div class="form-group col-md-6">
           <label>Listing Type</label>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="listTypePretty" name="listType" (change)="changeLabel()" value="0"
-              [(ngModel)]="listType" class="custom-control-input">
-            <label class="custom-control-label" for="listTypePretty">Pretty ( Just Listing for Sale )</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="listTypePenny" name="listType" (change)="changeLabel()" value="1"
-              [(ngModel)]="listType" class="custom-control-input">
-            <label class="custom-control-label" for="listTypePenny">Penny ( Wholesale Retail with minimum quantity
-              )</label>
-          </div>
+          <select id="category" class="form-control" [(ngModel)]="listType" name="listType" (change)="changeLabel()">
+            <option value="Pretty">Pretty (Just Listing for Sale)</option>
+            <option value="Penny">Penny (Wholesale Retail with minimum quantity)</option>
+          </select>
         </div>
         <div class="form-group col-md-6">
           <label for="inputPassword4">{{quantityLabel}}</label>
@@ -143,7 +146,6 @@
             placeholder="{{quantityLabel}}">
         </div>
       </div>
-
 
       <div class="form-row">
         <div class="form-group col-md-6">

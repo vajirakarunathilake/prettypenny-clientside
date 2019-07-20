@@ -27,7 +27,7 @@ export class ProductViewComponent implements OnInit {
   editAlertContent: string;
   editcardShow = false;
   quantityLabel = `Quantity`;
-  listType: number;
+  listType: string;
   resp: string;
   editHeaderClass: string;
   brands = environment.brands;
@@ -35,6 +35,7 @@ export class ProductViewComponent implements OnInit {
   subCategories = environment.subCategories;
   product: Product = new Product();
   taxonomy: Taxonomy = new Taxonomy();
+  previousListType: number;
 
 
   constructor(
@@ -71,6 +72,7 @@ export class ProductViewComponent implements OnInit {
 
   prettyEdit(productId: number) {
 
+    this.listType = 'Pretty';
     this.productService.findById(productId).subscribe(
       (p) => {
         this.product = p;
@@ -80,8 +82,10 @@ export class ProductViewComponent implements OnInit {
     this.pennyShow = false;
     this.editHeaderClass = 'card-header text-white bg-secondary';
     this.editcardShow = true;
+    this.previousListType = this.product.onSale;
   }
   pennyEdit(productId: number) {
+    this.listType = 'Penny';
     this.productService.findById(productId).subscribe(
       (p) => {
         this.product = p;
@@ -91,41 +95,95 @@ export class ProductViewComponent implements OnInit {
     this.pennyShow = false;
     this.editHeaderClass = 'card-header text-white bg-warning';
     this.editcardShow = true;
+    this.previousListType = this.product.onSale;
   }
 
   updateProduct(editProductForm: NgForm) {
 
-    if (+this.listType === 0) {
-      this.product.status = 'Pretty';
-      this.product.onSale = 1;
-    } else {
-      this.product.status = 'Within Threshold';
-      this.product.onSale = 0;
+    if (this.listType + '' === 'Pretty') {
+      if (+this.previousListType === 0) {
+        this.product.status = 'Pretty';
+        this.product.onSale = 1;
+        this.product.generatedInterest = 0;
+      }
+    }
+    if (this.listType + '' === 'Penny') {
+      if (+this.previousListType === 1) {
+        this.product.status = 'Within Threshold';
+        this.product.onSale = 0;
+        this.product.generatedInterest = 0;
+      }
     }
 
     this.user.userId = Number(this.helper.localStorageItem('userId'));
     this.product.user = this.user;
-    this.product.taxonomy = this.taxonomy;
 
-    this.productService.update(this.product).subscribe(
-      (response) => {
-        this.resp = response;
+    if (this.product.productName === null || this.product.productName === undefined || this.product.productName === '') {
+      this.editAlertShow = true;
+      this.editAlertClass = 'alert alert-danger';
+      this.editAlertContent = 'Product Name cannot be empty.';
+    } else if (this.taxonomy.name === null || this.taxonomy.name === undefined || this.taxonomy.name === '') {
+      this.editAlertShow = true;
+      this.editAlertClass = 'alert alert-danger';
+      this.editAlertContent = 'Please Select Brand Name of your product';
+    } else if (this.taxonomy.type === null || this.taxonomy.type === undefined || this.taxonomy.type === '') {
+      this.editAlertShow = true;
+      this.editAlertClass = 'alert alert-danger';
+      this.editAlertContent = 'Please Select Category Name of your product';
+    } else if (this.taxonomy.subType === null || this.taxonomy.subType === undefined || this.taxonomy.subType === '') {
+      this.editAlertShow = true;
+      this.editAlertClass = 'alert alert-danger';
+      this.editAlertContent = 'Please Select Sub Categoty of your product';
+    } else if (this.product.imageUrl === null || this.product.imageUrl === undefined || this.product.imageUrl === '') {
+      this.editAlertShow = true;
+      this.editAlertClass = 'alert alert-danger';
+      this.editAlertContent = 'Image URL cannot be empty.';
+    } else if (this.product.description === null || this.product.description === undefined || this.product.description === '') {
+      this.editAlertShow = true;
+      this.editAlertClass = 'alert alert-danger';
+      this.editAlertContent = 'Product Description cannot be empty.';
+    } else if (this.listType === null || this.listType === undefined || this.listType === '') {
+      this.editAlertShow = true;
+      this.editAlertClass = 'alert alert-danger';
+      this.editAlertContent = 'Please select your List Type.';
+      // tslint:disable-next-line: max-line-length
+    } else if (this.product.interestThreshold === null || this.product.interestThreshold === undefined || this.product.interestThreshold === 0) {
+      this.editAlertShow = true;
+      this.editAlertClass = 'alert alert-danger';
+      this.editAlertContent = 'Quantity/ Threshold Value cannot be empty.';
+    } else if (this.product.price === null || this.product.price === undefined || this.product.price === 0) {
+      this.editAlertShow = true;
+      this.editAlertClass = 'alert alert-danger';
+      this.editAlertContent = 'Product Price cannot be empty.';
+    } else if (this.product.salePrice === null || this.product.salePrice === undefined || this.product.salePrice === 0) {
+      this.editAlertShow = true;
+      this.editAlertClass = 'alert alert-danger';
+      this.editAlertContent = 'Product Sale Price cannot be empty.';
+    } else {
+      this.product.taxonomy = this.taxonomy;
+      this.product.dateListed = null;
 
-        if (this.resp + '' !== '-1') {
-          this.editcardShow = false;
-          editProductForm.resetForm();
-          this.editAlertShow = false;
-          this.viewAlertShow = true;
-          this.viewAlertClass = 'alert alert-success';
-          this.viewAlertContent = 'Successfully Added.';
-          this.product = new Product();
-        } else {
-          this.editAlertShow = true;
-          this.viewAlertShow = false;
-          this.editAlertClass = 'alert alert-danger';
-          this.editAlertContent = 'Wrong Informations. Please check it again.';
-        }
-      });
+      this.productService.update(this.product).subscribe(
+        (response) => {
+          this.resp = response;
+          if (this.resp === 'Product Updated') {
+            this.editcardShow = false;
+            editProductForm.resetForm();
+            this.editAlertShow = false;
+            this.viewAlertShow = true;
+            this.viewAlertClass = 'alert alert-success';
+            this.viewAlertContent = 'Successfully Added.';
+            this.prettyShow = true;
+            this.pennyShow = true;
+            this.product = new Product();
+          } else {
+            this.editAlertShow = true;
+            this.viewAlertShow = false;
+            this.editAlertClass = 'alert alert-danger';
+            this.editAlertContent = 'Wrong Informations. Please check it again.';
+          }
+        });
+    }
   }
 
   canceledit() {
@@ -137,9 +195,9 @@ export class ProductViewComponent implements OnInit {
   }
 
   changeLabel() {
-    if (+this.listType === 0) {
+    if (this.listType + '' === 'Pretty') {
       this.quantityLabel = 'Quantity';
-    } else if (+this.listType === 1) {
+    } else if (this.listType + '' === 'Penny') {
       this.quantityLabel = 'Minimum Threshold Value';
     }
   }
