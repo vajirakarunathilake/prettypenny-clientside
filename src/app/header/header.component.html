@@ -60,7 +60,7 @@
           </a>
         </ng-container>
 
-        <div *ngIf="this.helper.localStorageItem('role') == 'SELLER'" class="navbar-item dropdown">
+        <div *ngIf="this.helper.localStorageItem('role') != null" class="navbar-item dropdown">
           <div ngbDropdown class="d-inline-block">
             <a class="navbar-item" id="dropdownBasic" ngbDropdownToggle>
               <span class="icon">
