@@ -12,7 +12,9 @@
   </h2>
   <p>{{ product.description | truncate:200 }}</p>
 
-  <app-spinner *ngIf="!pretty" [value]="interestRatio"></app-spinner>
+  <ngb-progressbar *ngIf="!pretty" type="warning" [value]="interestRatio" height=".5rem">.</ngb-progressbar>
+
+  <app-spinner  [value]="interestRatio"></app-spinner>
 </td>
 <td class="card--list__price">
   <div>

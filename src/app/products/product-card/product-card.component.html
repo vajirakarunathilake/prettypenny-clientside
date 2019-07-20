@@ -16,18 +16,18 @@
   </div>
   <div class="card-content">
 
-    <div *ngIf="pretty; else peenycontent">
+    <div *ngIf="pretty; else pennycontent">
       <div class="content has-text-centered">
         {{ product.description | truncate:60 }}
       </div>
     </div>
-    <ng-template #peenycontent>
+    <ng-template #pennycontent>
       <div class="content has-text-centered">
         {{ product.description | truncate:60 }}
       </div>
 
       <p>
-        <ngb-progressbar type="warning" [value]="precentage" height=".5rem">.</ngb-progressbar>
+        <ngb-progressbar type="warning" [value]="percentage" height=".5rem">.</ngb-progressbar>
       </p>
       <div class="row">
         <div class="align-self-start">
