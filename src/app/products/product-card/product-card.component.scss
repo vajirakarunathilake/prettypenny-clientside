@@ -18,16 +18,6 @@ figure img {
   margin: 0 auto;
 }
 
-
-.columns {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-
-  .column {
-    display: flex;
-  }
+footer {
+  bottom: 0;
 }
