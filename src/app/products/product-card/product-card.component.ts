@@ -17,7 +17,7 @@ export class ProductCardComponent implements OnInit {
   quantity = 1;
   loggedIn = false;
   pretty = false;
-  precentage: number;
+  percentage: number;
   needthresholdtext: string;
   over: number;
   need: number;
@@ -32,8 +32,8 @@ export class ProductCardComponent implements OnInit {
   ngOnInit() {
     this.loggedIn = this.helper.localStorageItem('email') != null;
     this.pretty = this.product.status === 'Pretty' ? true : false;
-    this.precentage = (this.product.generatedInterest / this.product.interestThreshold) * 100;
-    if (this.precentage > 100) {
+    this.percentage = (this.product.generatedInterest / this.product.interestThreshold) * 100;
+    if (this.percentage > 100) {
       this.needClass = 'text-primary';
       this.over = this.product.generatedInterest - this.product.interestThreshold;
       this.needthresholdtext = 'Over ' + this.over + ' Sold';
