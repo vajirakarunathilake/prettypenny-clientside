@@ -99,15 +99,8 @@ export class ProductService {
   }
 
   update(product: Product): Observable<any> {
-    return this.http.put(`${environment.apiBase}/product`, product, {
-      headers: new HttpHeaders({
-        'Accept': 'text/html, application/xhtml+xml, */*',
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }),
-      responseType: 'text'
-    })
-      .pipe(
-        map((response: any) => response)
+    return this.http.put(`${environment.apiBase}/product`, product, this.headers)
+       .pipe(map((response: any) => response)
       );
   }
 
