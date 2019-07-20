@@ -5,6 +5,7 @@ import { ProductService } from './../../../services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/user';
 import { NgForm } from '@angular/forms';
+
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -29,7 +30,7 @@ export class ProductAddComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    public helper: Helpers
+    public helper: Helpers,
   ) { }
 
   ngOnInit() { }

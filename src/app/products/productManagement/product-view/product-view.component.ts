@@ -6,7 +6,7 @@ import { Product } from '../../product';
 import { Helpers } from './../../../helpers';
 import { ProductService } from './../../../services/product.service';
 import { Taxonomy } from './../../taxonomy';
-import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-view',
@@ -27,6 +27,7 @@ export class ProductViewComponent implements OnInit {
   editAlertShow = false;
   editAlertContent: string;
   editcardShow = false;
+  pennyStatusShow = false;
   quantityLabel = `Quantity`;
   listType: string;
   resp: string;
@@ -36,12 +37,13 @@ export class ProductViewComponent implements OnInit {
   subCategories = environment.subCategories;
   product: Product = new Product();
   taxonomy: Taxonomy = new Taxonomy();
-  previousListType: number;
+  previousListType = 5;
 
 
   constructor(
     private productService: ProductService,
-    public helper: Helpers
+    public helper: Helpers,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -74,9 +76,10 @@ export class ProductViewComponent implements OnInit {
       });
   }
 
-  prettyEdit(product: Product) {
-
+  prettyEdit(productId: number) {
     this.listType = 'Pretty';
+    this.pennyStatusShow = false;
+    this.quantityLabel = 'Remaining Quantity';
     this.productService.findById(productId).subscribe(
       (p) => {
         this.product = p;
@@ -86,10 +89,13 @@ export class ProductViewComponent implements OnInit {
     this.pennyShow = false;
     this.editHeaderClass = 'card-header text-white bg-secondary';
     this.editcardShow = true;
-    this.previousListType = this.product.onSale;
+    this.previousListType = 1;
   }
+
   pennyEdit(productId: number) {
     this.listType = 'Penny';
+    this.pennyStatusShow = true;
+    this.quantityLabel = 'Minimum Threshold Value';
     this.productService.findById(productId).subscribe(
       (p) => {
         this.product = p;
@@ -99,10 +105,12 @@ export class ProductViewComponent implements OnInit {
     this.pennyShow = false;
     this.editHeaderClass = 'card-header text-white bg-warning';
     this.editcardShow = true;
-    this.previousListType = this.product.onSale;
+    this.previousListType = 0;
   }
 
   updateProduct(editProductForm: NgForm) {
+    console.log(this.listType);
+    console.log(this.previousListType);
 
     if (this.listType + '' === 'Pretty') {
       if (+this.previousListType === 0) {
@@ -170,7 +178,8 @@ export class ProductViewComponent implements OnInit {
       this.productService.update(this.product).subscribe(
         (response) => {
           this.resp = response;
-          if (this.resp === 'Product Updated') {
+          // if (this.resp === 'Product Updated') {
+          if (this.resp + '' === '1') {
             this.editcardShow = false;
             editProductForm.resetForm();
             this.editAlertShow = false;
@@ -180,6 +189,7 @@ export class ProductViewComponent implements OnInit {
             this.prettyShow = true;
             this.pennyShow = true;
             this.product = new Product();
+            this.getProducts();
           } else {
             this.editAlertShow = true;
             this.viewAlertShow = false;
@@ -200,7 +210,7 @@ export class ProductViewComponent implements OnInit {
 
   changeLabel() {
     if (this.listType + '' === 'Pretty') {
-      this.quantityLabel = 'Quantity';
+      this.quantityLabel = 'Remaining Quantity';
     } else if (this.listType + '' === 'Penny') {
       this.quantityLabel = 'Minimum Threshold Value';
     }
