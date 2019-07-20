@@ -76,15 +76,13 @@ export class ProductViewComponent implements OnInit {
       });
   }
 
-  prettyEdit(productId: number) {
+  prettyEdit(product: Product) {
     this.listType = 'Pretty';
     this.pennyStatusShow = false;
     this.quantityLabel = 'Remaining Quantity';
-    this.productService.findById(productId).subscribe(
-      (p) => {
-        this.product = p;
-        this.taxonomy = this.product.taxonomy;
-      });
+
+    this.product = product;
+    this.taxonomy = this.product.taxonomy;
     this.prettyShow = false;
     this.pennyShow = false;
     this.editHeaderClass = 'card-header text-white bg-secondary';
@@ -92,15 +90,12 @@ export class ProductViewComponent implements OnInit {
     this.previousListType = 1;
   }
 
-  pennyEdit(productId: number) {
+  pennyEdit(product: Product) {
     this.listType = 'Penny';
     this.pennyStatusShow = true;
     this.quantityLabel = 'Minimum Threshold Value';
-    this.productService.findById(productId).subscribe(
-      (p) => {
-        this.product = p;
-        this.taxonomy = this.product.taxonomy;
-      });
+    this.product = product;
+    this.taxonomy = this.product.taxonomy;
     this.prettyShow = false;
     this.pennyShow = false;
     this.editHeaderClass = 'card-header text-white bg-warning';
@@ -109,8 +104,6 @@ export class ProductViewComponent implements OnInit {
   }
 
   updateProduct(editProductForm: NgForm) {
-    console.log(this.listType);
-    console.log(this.previousListType);
 
     if (this.listType + '' === 'Pretty') {
       if (+this.previousListType === 0) {
