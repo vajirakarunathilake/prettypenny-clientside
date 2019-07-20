@@ -34,7 +34,7 @@
           <p class="text-success ml-3 mr-2">Sold: {{product.generatedInterest}}</p>
         </div>
         <div class="align-self-end">
-          <p class="text-danger">Need: {{product.interestThreshold-product.generatedInterest}} </p>
+          <p [ngClass]="needClass">{{needthresholdtext}} </p>
         </div>
       </div>
 
@@ -45,13 +45,13 @@
     </app-number-input>
 
     <div *ngIf="pretty; else penny" class="float-right">
-      <button class="btn btn-primary btn-sm ml-4 mt-1" [disabled]="!loggedIn" style="cursor: pointer;"
+      <button class="btn btn-primary btn-sm ml-4 mt-1" style="cursor: pointer;"
         (click)="onAddToCart(product)">
         Add to Cart
       </button>
     </div>
     <ng-template #penny>
-      <button class="btn btn-warning btn-sm text-white ml-3" [disabled]="!loggedIn" style="cursor: pointer;"
+      <button class="btn btn-warning btn-sm text-white ml-3" style="cursor: pointer;"
         (click)="onAddToCart(product)">
         Add to Interests
       </button>

@@ -80,7 +80,6 @@ export class ProductViewComponent implements OnInit {
     this.listType = 'Pretty';
     this.pennyStatusShow = false;
     this.quantityLabel = 'Remaining Quantity';
-
     this.product = product;
     this.taxonomy = this.product.taxonomy;
     this.prettyShow = false;
