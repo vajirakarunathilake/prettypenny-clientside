@@ -9,6 +9,7 @@ export class FilterPipe implements PipeTransform {
     if (filterBy === 'all') {
       return products;
     } else {
+
       return products.filter(product => {
         return product.taxonomy.type === filterBy
         || product.taxonomy.name === filterBy

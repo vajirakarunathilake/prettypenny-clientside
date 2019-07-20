@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   passwordL: string;
   emailL: string;
   role: string;
-  entries:string[] = [];
+  entries: string[] = [];
   goodCred: boolean = null;
   goodInf: boolean = null;
   resp: string;
@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
               this.helper.localStorageSet('cvv', this.user.cvv + '');
               this.helper.localStorageSet('role', this.user.role);
               this.helper.localStorageSet('userId', (u.userId + ''));
-              console.log('User is logged in');
               this.router.navigate(['']);
             }
           );
@@ -96,9 +95,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.entries.push("USER");
-    this.entries.push("SELLER");
-    this.role="USER";
+    this.entries.push('USER');
+    this.entries.push('SELLER');
+    this.role = 'USER';
   }
 
 }
