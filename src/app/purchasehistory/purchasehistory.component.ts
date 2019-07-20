@@ -14,7 +14,6 @@ export class PurchasehistoryComponent implements OnInit {
   constructor(public helper: Helpers, private purchaseService: PurchaseService) { }
   myPurchases: Purchase[] = [];
   allPurchases: Purchase[] = [];
-  myStuff = '';
 
   getPurchases() {
     this.purchaseService.findAll().subscribe(

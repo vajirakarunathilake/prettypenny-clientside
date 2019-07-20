@@ -8,7 +8,7 @@ import { InterestService } from 'src/app/services/interest.service';
 @Component({
   selector: 'app-product-list-item',
   templateUrl: './product-list-item.component.html',
-  styleUrls: ['./product-list-item.component.css']
+  styleUrls: ['./product-list-item.component.scss']
 })
 export class ProductListItemComponent implements OnInit {
   @Input() product: Product;
@@ -16,16 +16,21 @@ export class ProductListItemComponent implements OnInit {
   quantity = 1;
   loggedIn = false;
   pretty = false;
+  interestRatio = 0;
 
   constructor(
     private prodService: ProductService,
     private interestService: InterestService,
     public helper: Helpers
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.loggedIn = this.helper.localStorageItem('email') != null;
     this.pretty = this.product.status === 'Pretty' ? true : false;
+    if (this.pretty) {
+      this.interestRatio = (this.product.generatedInterest / this.product.interestThreshold) * 100;
+
+    }
   }
 
   onValAdd() {

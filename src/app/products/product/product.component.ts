@@ -9,7 +9,7 @@ import { Helpers } from 'src/app/helpers';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.scss']
 })
 // export class ProductComponent implements OnInit, DoCheck {
 export class ProductComponent implements OnInit {
@@ -19,6 +19,7 @@ export class ProductComponent implements OnInit {
   isLoading = true;
   quantity = 1;
   loggedIn = false;
+  pretty = false;
 
   constructor(
     private route: ActivatedRoute,

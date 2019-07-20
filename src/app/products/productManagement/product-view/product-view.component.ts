@@ -1,11 +1,12 @@
-import { Taxonomy } from './../../taxonomy';
-import { Helpers } from './../../../helpers';
-import { ProductService } from './../../../services/product.service';
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../product';
+import { NgForm } from '@angular/forms';
 import { User } from 'src/app/user';
 import { environment } from 'src/environments/environment';
-import { NgForm } from '@angular/forms';
+import { Product } from '../../product';
+import { Helpers } from './../../../helpers';
+import { ProductService } from './../../../services/product.service';
+import { Taxonomy } from './../../taxonomy';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-view',
@@ -49,7 +50,10 @@ export class ProductViewComponent implements OnInit {
     this.viewAlertShow = true;
     this.viewAlertClass = 'alert alert-info';
     this.viewAlertContent = 'No active listings in your account.';
+    this.getProducts();
+  }
 
+  getProducts() {
     this.productService.findPrettiesBySeller(this.user).subscribe(
       (p) => {
         this.prettyProducts = p;
@@ -70,7 +74,7 @@ export class ProductViewComponent implements OnInit {
       });
   }
 
-  prettyEdit(productId: number) {
+  prettyEdit(product: Product) {
 
     this.listType = 'Pretty';
     this.productService.findById(productId).subscribe(
@@ -115,7 +119,7 @@ export class ProductViewComponent implements OnInit {
       }
     }
 
-    this.user.userId = Number(this.helper.localStorageItem('userId'));
+    this.user.userId = +this.helper.localStorageItem('userId');
     this.product.user = this.user;
 
     if (this.product.productName === null || this.product.productName === undefined || this.product.productName === '') {

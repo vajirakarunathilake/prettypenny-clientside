@@ -64,17 +64,23 @@ export class CartComponent implements OnInit, OnDestroy {
 
     this.cartItems.forEach(item => {
       const interest = item;
-      const purchase = new Purchase();
-      purchase.user = new User();
-      purchase.user.userId = +this.helper.localStorageItem('userId');
-      purchase.product = item.product;
-      purchase.cost = item.product.price * item.quantity;
-      item.product.dateListed = null;
-      this.purchaseService.insert(purchase).subscribe();
-      this.interestService.insert(interest).subscribe();
+      interest.product.dateListed = null;
+      if (interest.product.status === 'Pretty') {
+        const purchase = new Purchase();
+        purchase.user = new User();
+        purchase.user.userId = +this.helper.localStorageItem('userId');
+        purchase.product = interest.product;
+        purchase.cost = interest.product.price * interest.quantity;
+        this.purchaseService.insert(purchase).subscribe();
+        this.interestService.insert(interest).subscribe();
+      } else {
+        this.interestService.insert(interest).subscribe();
+      }
+
     });
 
     alert(`Total: ${this.cartTotal}. Your card information has been processed.\n\nThank you for shopping with Pretty Penny!`);
+    this.emptyCart();
   }
 
 

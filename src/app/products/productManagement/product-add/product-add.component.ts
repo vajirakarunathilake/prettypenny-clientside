@@ -44,7 +44,7 @@ export class ProductAddComponent implements OnInit {
       this.product.onSale = 0;
     }
 
-    this.user.userId = Number(this.helper.localStorageItem('userId'));
+    this.user.userId = +this.helper.localStorageItem('userId');
     this.product.user = this.user;
 
     if (this.product.productName === undefined) {
