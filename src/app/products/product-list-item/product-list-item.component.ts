@@ -16,16 +16,21 @@ export class ProductListItemComponent implements OnInit {
   quantity = 1;
   loggedIn = false;
   pretty = false;
+  interestRatio = 0;
 
   constructor(
     private prodService: ProductService,
     private interestService: InterestService,
     public helper: Helpers
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.loggedIn = this.helper.localStorageItem('email') != null;
     this.pretty = this.product.status === 'Pretty' ? true : false;
+    if (this.pretty) {
+      this.interestRatio = (this.product.generatedInterest / this.product.interestThreshold) * 100;
+
+    }
   }
 
   onValAdd() {
