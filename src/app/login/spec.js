@@ -2,29 +2,30 @@ browser.ignoreSynchronization = true
 describe('LoginComponent', () => {
 
   it('Should enter values', () => {
-    browser.get('http://localhost:4200');
-    element(by.id('sbmtBtn')).click();
-    element(by.id('genAlert')).toBe('Must provide email.');
+    browser.get('http://localhost:4200/login');
+    element(by.id("sbmtBtn")).click();
+    browser.driver.sleep(10000);
+
+    expect(element(by.id("genAlert")).getText()).toBe("Must provide email.");
   });
 
   it('Should enter login values', () => {
-    browser.get('http://localhost:4200');
-    element(by.id('emailL')).sendKeys('test@test.test');
-    element(by.id('logBtn')).click();
-    element(by.id('genAlert')).toBe('Must enter a password.');
+    browser.get('http://localhost:4200/login');
+    element(by.id("emailL")).sendKeys("test@test.test");
+    element(by.id("logBtn")).click();
+    browser.driver.sleep(10000);
+
+    expect(element(by.id("genAlert")).getText()).toBe("Must enter a password.");
   });
 
 
   it('Should enter all login values', () => {
-    browser.get('http://localhost:4200');
-    element(by.id('emailL')).sendKeys('test@test.test');
-    element(by.id('passwordL')).sendKeys('password');
+    browser.get('http://localhost:4200/login');
+    element(by.id('emailL')).sendKeys('nobody');
+    element(by.id('passwordL')).sendKeys('pass');
     element(by.id('logBtn')).click();
-    if (element(by.tagName('h1')).getText() !== null) {
-      element(by.tagName('h1')).toBe('Welcome to PrettyPenny');
-    }
-    else {
-      element(by.id('genAlert')).toBe('Invalid Credentials.');
-    }
+    browser.driver.sleep(10000);
+    expect(element(by.id('genAlert')).getText()).toBe("Invalid Credentials.");
+
   });
 });
