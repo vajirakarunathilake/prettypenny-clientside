@@ -1,6 +1,12 @@
-.card-header.is-white {
-  color: #333;
+.card-header {
+  padding-left: .5em;
+  padding-right: .5em;
+  &.is-white {
+    color: #333;
+  }
 }
+
+
 
 figure {
   min-height: 270px;
@@ -18,12 +24,18 @@ figure img {
   margin: 0 auto;
 }
 
-.strikethrough {
-  text-decoration: line-through;
-}
-
 .card {
   min-width: 300px;
 }
 
+.was {
+  font-size: calc(1em - 15%);
 
+  .save {
+    padding: .2em .2em .2em .2em;
+  }
+}
+
+.price {
+  font-size: 1.5rem;
+}

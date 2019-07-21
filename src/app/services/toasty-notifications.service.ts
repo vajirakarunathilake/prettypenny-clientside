@@ -27,4 +27,15 @@ export class ToastyNotificationsService {
     alertType ? this.toastyService.success(toastOptions) : this.toastyService.error(toastOptions);
   }
 
+  checkout(cost: number) {
+    const toastOptions: ToastOptions = {
+      title: '',
+      msg: `Total: $${cost.toFixed(2)}. Thank you for shopping with Pretty Penny!`,
+      showClose: true,
+      timeout: 5000,
+      theme: 'material',
+    };
+    this.toastyService.success(toastOptions);
+  }
+
 }

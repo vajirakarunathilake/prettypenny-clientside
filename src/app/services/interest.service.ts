@@ -44,7 +44,12 @@ export class InterestService {
   }
 
   insert(interest: Interest): Observable<any> {
-    return this.http.post(`${environment.apiBase}/interest`, interest)
+    return this.http.post(`${environment.apiBase}/interest`, interest, {
+      headers: new HttpHeaders({
+        'Accept': 'text/html, application/xhtml+xml, */*',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }),
+      responseType: 'text'})
       .pipe(
         map((response: any) => response)
       );
@@ -66,7 +71,7 @@ export class InterestService {
       body: JSON.stringify(interest)
     };
     return this.http.delete(`${environment.apiBase}/interest`, options)
-    .pipe( map( (response: any) => response));
+      .pipe(map((response: any) => response));
 
   }
 }
