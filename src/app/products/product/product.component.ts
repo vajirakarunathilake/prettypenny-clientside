@@ -1,6 +1,6 @@
 // import { Component, OnInit, DoCheck } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../product';
 import { Helpers } from 'src/app/helpers';
@@ -18,24 +18,23 @@ export class ProductComponent implements OnInit {
   similarProducts: Product[];
   isLoading = true;
   quantity = 1;
-  loggedIn = false;
   pretty = false;
   percentage = 0;
   needthresholdtext: string;
   over: number;
   need: number;
   needClass: string;
+  save: number;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private prodService: ProductService,
     public helper: Helpers
   ) { }
 
   ngOnInit() {
     this.initProductSingleView();
-    this.loggedIn = this.helper.localStorageItem('email') != null;
-
   }
 
   // ngDoCheck() {
@@ -49,6 +48,7 @@ export class ProductComponent implements OnInit {
       product => {
         this.product = product;
         this.pretty = this.product.status === 'Pretty';
+        this.save = this.product.price - this.product.salePrice;
         this.percentage = (this.product.generatedInterest / this.product.interestThreshold) * 100;
         if (this.percentage > 100) {
           this.needClass = 'text-primary';
@@ -74,7 +74,12 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart(product: Product) {
-    this.prodService.addToCart(product, this.quantity);
+    if (this.helper.localStorageItem('role') != null) {
+      this.prodService.addToCart(product, this.quantity);
+    } else {
+      this.prodService.addToCart(product, this.quantity);
+      this.router.navigate(['/login']);
+    }
   }
 
 
