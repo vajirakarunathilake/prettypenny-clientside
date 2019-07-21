@@ -28,7 +28,7 @@
 <td class="card--list__price">
   <div>
     <strong class="text-danger price">{{ product.salePrice | currency }}</strong>
-    <p class="text-secondary was"><strong><span class="save bg-danger text-white">Save {{ product? (save | currency) : '' }} </span></strong><br> {{ product.price | currency }}</p>
+    <p class="text-secondary was"><strong><span class="save bg-danger text-white">Save {{ product? (save | currency) : '' }} </span></strong><br>Was {{ product.price | currency }}</p>
   </div>
 </td>
 <td class="card--list__ctas">
