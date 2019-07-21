@@ -13,7 +13,7 @@
         <div>
           <strong class="text-danger price">{{ product ? (product.salePrice | currency) : '' }}</strong>
           <p class="text-secondary was"><strong><span class="save bg-danger text-white">Save
-                {{ product ? (save | currency) : '' }} </span></strong>{{ product? (product.price | currency) : '' }}</p>
+                {{ product ? (save | currency) : '' }} </span></strong>Was {{ product? (product.price | currency) : '' }}</p>
         </div>
       </header>
       <div class="card-image">
