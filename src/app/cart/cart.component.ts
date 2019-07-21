@@ -65,6 +65,8 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cartItems.forEach(item => {
       const interest = item;
       interest.product.dateListed = null;
+      console.log(item);
+
       if (interest.product.status === 'Pretty') {
         const purchase = new Purchase();
         purchase.user = new User();
