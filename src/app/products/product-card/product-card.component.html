@@ -24,7 +24,7 @@
 
     <div *ngIf="pretty; else pennycontent">
       <div class="content has-text-centered">
-        {{ product.description | truncate:60 }}
+        {{ product.description | truncate:130 }}
       </div>
     </div>
     <ng-template #pennycontent>
