@@ -56,6 +56,7 @@ export class ProductCardComponent implements OnInit {
     if (this.helper.localStorageItem('role') != null) {
       this.prodService.addToCart(product, this.quantity);
     } else {
+      this.prodService.addToCart(product, this.quantity);
       this.router.navigate(['/login']);
     }
   }
