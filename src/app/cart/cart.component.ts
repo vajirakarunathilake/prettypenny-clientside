@@ -72,7 +72,7 @@ export class CartComponent implements OnInit, OnDestroy {
         purchase.user = new User();
         purchase.user.userId = +this.helper.localStorageItem('userId');
         purchase.product = interest.product;
-        purchase.cost = interest.product.price * interest.quantity;
+        purchase.cost = interest.product.salePrice * interest.quantity;
         this.purchaseService.insert(purchase).subscribe();
         this.interestService.insert(interest).subscribe();
       } else {

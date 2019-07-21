@@ -10,8 +10,9 @@
         <p class="card-header-title">
           {{ product ? product?.productName : 'loading' }}
         </p>
-        <span class="card-header-icon">
-          <small>{{ product ? (product.price | currency) : 'loading' }}</small>
+        <span>
+          <p class="text-secondary strikethrough">{{ product ? (product.price | currency) : 'loading' }}</p>
+          <strong class="text-danger">{{ product ? (product.salePrice | currency) : 'loading' }}</strong>
         </span>
       </header>
       <div class="card-image">
@@ -29,28 +30,44 @@
     </a>
 
     <hr>
-
+    <span class="text-success" *ngIf="pretty">Amount left: {{ product.interestThreshold }}</span>
     <app-number-input [(val)]="quantity" (valAdd)="onValAdd()" (valSub)="onValSub()" [minDisabled]="quantity === 1">
     </app-number-input>
-      <div *ngIf="pretty; else penny">
-        <button class="card-footer-item btn btn-primary" [disabled]="!loggedIn" style="cursor: pointer;" (click)="addToCart(product)">
-          Add to Cart
-        </button>
-      </div>
-      <ng-template #penny>
-        <button class="card-footer-item btn btn-secondary" [disabled]="!loggedIn" style="cursor: pointer;" (click)="addToCart(product)">
-          Add to Interests
-        </button>
-      </ng-template>
+    <div *ngIf="pretty; else penny">
+      <button class="card-footer-item btn btn-primary" [disabled]="!loggedIn" style="cursor: pointer;"
+        (click)="addToCart(product)">
+        Add to Cart
+      </button>
+    </div>
+    <ng-template #penny>
+      <button class="card-footer-item btn btn-secondary" [disabled]="!loggedIn" style="cursor: pointer;"
+        (click)="addToCart(product)">
+        Add to Interests
+      </button>
+    </ng-template>
 
     <hr>
 
     <div class="card-content">
       <div class="content">
+        <div *ngIf="pretty; else pennyDescription">
+          {{ product ? product.description : 'loading' }}
+        </div>
+        <ng-template #pennyDescription>
 
-        <h2>To add: product image slider and zoom</h2>
-
-        {{ product ? product.description : 'loading' }}
+          <p>
+            <ngb-progressbar type="warning" [value]="percentage" height=".5rem">.</ngb-progressbar>
+          </p>
+          <div class="row">
+            <div class="align-self-start">
+              <p class="text-success ml-3 mr-2">Sold: {{product.generatedInterest}}</p>
+            </div>
+            <div class="align-self-end">
+              <p [ngClass]="needClass">{{needthresholdtext}} </p>
+            </div>
+          </div>
+          {{ product ? product.description : 'loading' }}
+        </ng-template>
       </div>
     </div>
   </div>
