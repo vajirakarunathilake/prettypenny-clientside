@@ -164,7 +164,7 @@ export class ProductService {
   calculateCartTotal() {
     this.cartTotal = 0;
     this.cartAddedItems.forEach(item => {
-      this.cartTotal += item.product.price * item.quantity;
+      this.cartTotal += item.product.salePrice * item.quantity;
     });
   }
 

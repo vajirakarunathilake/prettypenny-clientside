@@ -2,6 +2,12 @@ a.panel-block.is-active {
   background-color: whitesmoke;
 }
 
+.card-body {
+  .panel-block {
+    border: 1px solid #dbdbdb;
+  }
+}
+
 @media (min-width: 769px) and (max-width: 1023px) {
   .card--filters { width: 174.25px; }
 }

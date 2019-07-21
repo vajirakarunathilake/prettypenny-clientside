@@ -20,6 +20,11 @@ export class ProductComponent implements OnInit {
   quantity = 1;
   loggedIn = false;
   pretty = false;
+  percentage = 0;
+  needthresholdtext: string;
+  over: number;
+  need: number;
+  needClass: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +35,7 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     this.initProductSingleView();
     this.loggedIn = this.helper.localStorageItem('email') != null;
+
   }
 
   // ngDoCheck() {
@@ -42,6 +48,17 @@ export class ProductComponent implements OnInit {
     this.prodService.findById(+this.id).subscribe(
       product => {
         this.product = product;
+        this.pretty = this.product.status === 'Pretty';
+        this.percentage = (this.product.generatedInterest / this.product.interestThreshold) * 100;
+        if (this.percentage > 100) {
+          this.needClass = 'text-primary';
+          this.over = this.product.generatedInterest - this.product.interestThreshold;
+          this.needthresholdtext = 'Over ' + this.over + ' Sold';
+        } else {
+          this.needClass = 'text-danger';
+          this.need = this.product.interestThreshold - this.product.generatedInterest;
+          this.needthresholdtext = 'Need: ' + this.need;
+        }
       },
       err => console.error(err),
       () => this.isLoading = false

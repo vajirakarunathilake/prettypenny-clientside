@@ -6,9 +6,9 @@
         <a class="card-header-title" [routerLink]="['/products', product.productId]">
           {{ product.productName | truncate:30 }}
         </a></div>
-   
+
       <div class="col-md-4">
-        <p class="text-secondary strikethrough ">{{ product.price | currency }}</p>
+        <p class="text-secondary strikethrough">{{ product.price | currency }}</p>
         <strong class="text-danger">{{ product.salePrice | currency }}</strong>
       </div>
     </div>

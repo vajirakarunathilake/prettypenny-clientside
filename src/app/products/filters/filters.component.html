@@ -63,7 +63,7 @@
             By Brand Name
           </div>
           <div class="card-body">
-            <a class="panel-block mb-3" *ngFor="let filter of filterNames" [class.is-active]="filterBy===filter"
+            <a class="panel-block mb-1" *ngFor="let filter of filterNames" [class.is-active]="filterBy===filter"
               (click)="setFilter(filter)">
               {{filter}}
             </a>
@@ -75,7 +75,7 @@
             By Category
           </div>
           <div class="card-body">
-            <a class="panel-block mb-3" *ngFor="let filter of filterTypes" [class.is-active]="filterBy===filter"
+            <a class="panel-block mb-1" *ngFor="let filter of filterTypes" [class.is-active]="filterBy===filter"
               (click)="setFilter(filter)">
               {{filter}}
             </a>
@@ -87,7 +87,7 @@
             By Subcategory
           </div>
           <div class="card-body">
-            <a class="panel-block mb-3" *ngFor="let filter of filterSubTypes" [class.is-active]="filterBy===filter"
+            <a class="panel-block mb-1" *ngFor="let filter of filterSubTypes" [class.is-active]="filterBy===filter"
               (click)="setFilter(filter)">
               {{filter}}
             </a>
