@@ -33,58 +33,76 @@
     <div class="content has-text-centered">
       <nav class="panel">
         <div class="panel-block">
-          <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label [ngClass]="selectedPretty ? 'active' : ''" class="btn btn-secondary">
-              <input type="radio" name="product-change" id="pretty" autocomplete="off"
-                (click)="switchProducts('Pretty')"> Pretty
-            </label>
-            <label [ngClass]="selectedPenny ? 'active' : ''" class="btn btn-secondary">
-              <input type="radio" name="product-change" id="option2" autocomplete="off"
-                (click)="switchProducts('Within Threshold')"> Penny
-            </label>
+          <div class="form-row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 btn-group btn-group-toggle" data-toggle="buttons">
+              <label [ngClass]="selectedPretty ? 'active' : ''" class="btn btn-secondary">
+                <input type="radio" name="product-change" id="pretty" autocomplete="off"
+                  (click)="switchProducts('Pretty')"> Pretty
+              </label>
+              <label [ngClass]="selectedPenny ? 'active' : ''" class="btn btn-warning text-white">
+                <input type="radio" name="product-change" id="option2" autocomplete="off"
+                  (click)="switchProducts('Within Threshold')"> Penny
+              </label>
+            </div>
+            <div class="col-md-4"></div>
           </div>
+
         </div>
         <div class="panel-block">
           <p class="control has-icons-left">
-            <input class="input is-small" type="text" placeholder="search" (keyup)="searchFilter()" #searchInput />
+            <input class="input" type="text" placeholder="search" (keyup)="searchFilter()" #searchInput />
             <span class="icon is-small is-left">
               <i class="fas fa-search"></i>
             </span>
           </p>
         </div>
 
-        <a class="panel-block" [ngClass]="{'is-active': filterBy==='all'}" (click)="setFilter('all')">
-          All
-        </a>
-        <span>By Brand Name</span>
-        <a class="panel-block" *ngFor="let filter of filterNames" [class.is-active]="filterBy===filter"
-          (click)="setFilter(filter)">
-          {{filter}}
-        </a>
-
-        <span>By Category</span>
-        <a class="panel-block" *ngFor="let filter of filterTypes" [class.is-active]="filterBy===filter"
-          (click)="setFilter(filter)">
-          {{filter}}
-        </a>
-
-        <span>By Subcategory</span>
-        <a class="panel-block" *ngFor="let filter of filterSubTypes" [class.is-active]="filterBy===filter"
-          (click)="setFilter(filter)">
-          {{filter}}
-        </a>
-
-        <!-- <a class="panel-block" [class.is-active]="filterBy==='Electronics'" (click)="setFilter('Electronics')">
-          Electronics
-        </a>
-        <a class="panel-block" [class.is-active]="filterBy==='Wearable Electronics'" (click)="setFilter('Wearable Electronics')">
-          Wearable Electronics
-        </a> -->
-        <div class="panel-block">
-          <button class="button is-outlined is-fullwidth" (click)="resetFilters()">
-            Reset All Filters
-          </button>
+        <div class="card mt-3">
+          <div class="card-header bg-secondary text-white">
+            By Brand Name
+          </div>
+          <div class="card-body">
+            <a class="panel-block mb-3" *ngFor="let filter of filterNames" [class.is-active]="filterBy===filter"
+              (click)="setFilter(filter)">
+              {{filter}}
+            </a>
+          </div>
         </div>
+
+        <div class="card mt-3">
+          <div class="card-header bg-secondary text-white">
+            By Category
+          </div>
+          <div class="card-body">
+            <a class="panel-block mb-3" *ngFor="let filter of filterTypes" [class.is-active]="filterBy===filter"
+              (click)="setFilter(filter)">
+              {{filter}}
+            </a>
+          </div>
+        </div>
+
+        <div class="card mt-3">
+          <div class="card-header bg-secondary text-white">
+            By Subcategory
+          </div>
+          <div class="card-body">
+            <a class="panel-block mb-3" *ngFor="let filter of filterSubTypes" [class.is-active]="filterBy===filter"
+              (click)="setFilter(filter)">
+              {{filter}}
+            </a>
+          </div>
+        </div>
+
+        <div class="card mt-3">
+          <div class="card-header">
+            <button class="btn btn-secondary btn-block" (click)="resetFilters()">
+              Reset All Filters
+            </button>
+          </div>
+
+        </div>
+
       </nav>
     </div>
   </div>
