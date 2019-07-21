@@ -75,6 +75,9 @@
         </div>
       </div>
     </div>
+    <div *ngIf="checkedOut" class="bg-info text-white">
+      Total: {{ cartTotal | currency }}. Thank you for shopping with Pretty Penny!
+    </div>
   </ng-container>
 
   <div class="column" *ngIf="!cartItems.length">

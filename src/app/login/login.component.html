@@ -52,7 +52,7 @@
                 <option *ngFor="let entry of entries" [value]="entry">{{entry}}</option>
               </select>
             </div>
-            <button type="button" (click)="submitRegistration()" class="btn btn-success" id="sbmtBtn">Submit</button>
+            <button type="button" (click)="submitRegistration(registers)" class="btn btn-success" id="sbmtBtn">Submit</button>
           </form>
         </div>
       </div>
@@ -77,7 +77,7 @@
               <input type="password" id="passwordL" class="form-control" [(ngModel)]="passwordL" name="passwordL"
                 placeholder="Password">
             </div>
-            <button type="button" (click)="loginUser()" class="btn btn-primary" id="logBtn">Login</button>
+            <button type="button" (click)="loginUser(logins)" class="btn btn-primary" id="logBtn">Login</button>
           </form>
 
         </div>

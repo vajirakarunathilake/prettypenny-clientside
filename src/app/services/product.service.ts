@@ -164,7 +164,7 @@ export class ProductService {
   calculateCartTotal() {
     this.cartTotal = 0;
     this.cartAddedItems.forEach(item => {
-      this.cartTotal += item.product.price * item.quantity;
+      this.cartTotal += item.product.salePrice * item.quantity;
     });
   }
 
@@ -195,7 +195,7 @@ export class ProductService {
 
   emptyCart() {
     // fixes a bug where multiple items are added to a cart if we cleared a cart when item had qty > 1
-    for (const cp of this.cartAddedItems) { cp.product.generatedInterest = 1; }
+    for (const cp of this.cartAddedItems) { cp.quantity = 1; }
 
     this.cartAddedItems = [];
     this.cartAdditionEmitter.emit(this.cartAddedItems);
@@ -205,7 +205,9 @@ export class ProductService {
     this.toastyNotifications.addToast(true);
   }
 
-
+  checkout() {
+    this.toastyNotifications.checkout(this.cartTotal);
+  }
 
   getLayout() {
     return this.layoutMode;

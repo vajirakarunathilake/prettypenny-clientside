@@ -8,11 +8,13 @@
     <div class="card">
       <header class="card-header">
         <p class="card-header-title">
-          {{ product ? product?.productName : 'loading' }}
+          {{ product ? product.productName : 'loading' }}
         </p>
-        <span class="card-header-icon">
-          <small>{{ product ? (product.price | currency) : 'loading' }}</small>
-        </span>
+        <div>
+          <strong class="text-danger price">{{ product ? (product.salePrice | currency) : '' }}</strong>
+          <p class="text-secondary was"><strong><span class="save bg-danger text-white">Save
+                {{ product ? (save | currency) : '' }} </span></strong>Was {{ product? (product.price | currency) : '' }}</p>
+        </div>
       </header>
       <div class="card-image">
         <figure class="image is-4by3">
@@ -29,28 +31,44 @@
     </a>
 
     <hr>
-
+    <span class="text-success" *ngIf="pretty">Amount left: {{ product ? product.interestThreshold : '' }}</span>
     <app-number-input [(val)]="quantity" (valAdd)="onValAdd()" (valSub)="onValSub()" [minDisabled]="quantity === 1">
     </app-number-input>
-      <div *ngIf="pretty; else penny">
-        <button class="card-footer-item btn btn-primary" [disabled]="!loggedIn" style="cursor: pointer;" (click)="addToCart(product)">
-          Add to Cart
-        </button>
-      </div>
-      <ng-template #penny>
-        <button class="card-footer-item btn btn-secondary" [disabled]="!loggedIn" style="cursor: pointer;" (click)="addToCart(product)">
-          Add to Interests
-        </button>
-      </ng-template>
+    <div *ngIf="pretty; else penny">
+      <button class="card-footer-item btn btn-primary" style="cursor: pointer;"
+        (click)="addToCart(product)">
+        Add to Cart
+      </button>
+    </div>
+    <ng-template #penny>
+      <button class="card-footer-item btn btn-secondary" style="cursor: pointer;"
+        (click)="addToCart(product)">
+        Add to Interests
+      </button>
+    </ng-template>
 
     <hr>
 
     <div class="card-content">
       <div class="content">
+        <div *ngIf="pretty; else pennyDescription">
+          {{ product ? product.description : 'loading' }}
+        </div>
+        <ng-template #pennyDescription>
 
-        <h2>To add: product image slider and zoom</h2>
-
-        {{ product ? product.description : 'loading' }}
+          <p>
+            <ngb-progressbar type="warning" [value]="percentage" height=".5rem">.</ngb-progressbar>
+          </p>
+          <div class="row">
+            <div class="align-self-start">
+              <p class="text-success ml-3 mr-2">Sold: {{ product ? product.generatedInterest : ''}}</p>
+            </div>
+            <div class="align-self-end">
+              <p [ngClass]="needClass">{{needthresholdtext}} </p>
+            </div>
+          </div>
+          {{ product ? product.description : 'loading' }}
+        </ng-template>
       </div>
     </div>
   </div>

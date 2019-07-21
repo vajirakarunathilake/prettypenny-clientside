@@ -1,13 +1,22 @@
 <!-- grid layout -->
 <div class="card">
   <header class="card-header">
-    <a class="card-header-title" [routerLink]="['/products', product.productId]">
-      {{ product.productName }}
-    </a>
+    <div class="form-row">
+      <div class="col-md-7">
+        <a class="card-header-title" [routerLink]="['/products', product.productId]">
+          {{ product.productName | truncate:30 }}
+        </a></div>
 
-    <span class="card-header-icon">
-      <strong class="text-danger">{{ product.price | currency }}</strong>
-    </span>
+      <div class="col-md-5">
+        <div>
+          <strong class="text-danger price">{{ product.salePrice | currency }}</strong>
+          <p class="text-secondary was"><strong><span class="save bg-danger text-white">Save
+                {{ product? (save | currency) : '' }} </span></strong><br>Was {{ product.price | currency }}</p>
+        </div>
+      </div>
+    </div>
+
+
   </header>
   <div class="card-image">
     <figure class="image is-4by3">
@@ -18,7 +27,7 @@
 
     <div *ngIf="pretty; else pennycontent">
       <div class="content has-text-centered">
-        {{ product.description | truncate:60 }}
+        {{ product.description | truncate:130 }}
       </div>
     </div>
     <ng-template #pennycontent>
@@ -45,14 +54,12 @@
     </app-number-input>
 
     <div *ngIf="pretty; else penny" class="float-right">
-      <button class="btn btn-primary btn-sm ml-4 mt-1" style="cursor: pointer;"
-        (click)="onAddToCart(product)">
+      <button class="btn btn-primary btn-sm ml-4 mt-1" style="cursor: pointer;" (click)="onAddToCart(product)">
         Add to Cart
       </button>
     </div>
     <ng-template #penny>
-      <button class="btn btn-warning btn-sm text-white ml-3" style="cursor: pointer;"
-        (click)="onAddToCart(product)">
+      <button class="btn btn-warning btn-sm text-white ml-3" style="cursor: pointer;" (click)="onAddToCart(product)">
         Add to Interests
       </button>
     </ng-template>

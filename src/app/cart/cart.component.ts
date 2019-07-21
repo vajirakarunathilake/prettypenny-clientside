@@ -19,6 +19,7 @@ export class CartComponent implements OnInit, OnDestroy {
   cartTotal: number;
   cartAdditionSubscription: Subscription;
   cartTotalSubscription: Subscription;
+  checkedOut = false;
 
   constructor(
     private interestService: InterestService,
@@ -60,17 +61,22 @@ export class CartComponent implements OnInit, OnDestroy {
     this.prodService.emptyCart();
   }
 
+  checkout() {
+    this.prodService.checkout();
+  }
+
   onCheckout() {
 
     this.cartItems.forEach(item => {
       const interest = item;
       interest.product.dateListed = null;
+
       if (interest.product.status === 'Pretty') {
         const purchase = new Purchase();
         purchase.user = new User();
         purchase.user.userId = +this.helper.localStorageItem('userId');
         purchase.product = interest.product;
-        purchase.cost = interest.product.price * interest.quantity;
+        purchase.cost = interest.product.salePrice * interest.quantity;
         this.purchaseService.insert(purchase).subscribe();
         this.interestService.insert(interest).subscribe();
       } else {
@@ -78,8 +84,7 @@ export class CartComponent implements OnInit, OnDestroy {
       }
 
     });
-
-    alert(`Total: ${this.cartTotal}. Your card information has been processed.\n\nThank you for shopping with Pretty Penny!`);
+    this.checkout();
     this.emptyCart();
   }
 

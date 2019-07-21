@@ -1,15 +1,18 @@
 figure img {
   max-width: 500px;
-  height: auto;
   margin: 0 auto;
   top: 50%;
   transform: translateY(-50%)
 }
 
 
+.was {
+  font-size: calc(1em - 15%);
+  .save {
+    padding: .2em .2em .2em .2em;
+  }
+}
 
-.similar-items-title {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 25px;
+.price {
+  font-size: 1.5rem;
 }

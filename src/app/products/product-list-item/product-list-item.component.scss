@@ -1,12 +1,20 @@
 /* list layout */
 
 .card--list__img {
-  width: 150px;
+  width: 150px !important;
+  img {
+    max-height: 200px !important;
+  }
 }
 
 .card--list__ctas {
   width: 130px;
 }
+
+.card--list__name {
+  width: 550px;
+}
+
 
 .card--list__ctas div {
   display: flex;
@@ -16,4 +24,15 @@
 .card--list__price,
 .card--list__ctas {
   padding-top: 35px;
+}
+
+.was {
+  font-size: calc(1em - 15%);
+  .save {
+    padding: .2em .2em .2em .2em;
+  }
+}
+
+.price {
+  font-size: 1.5rem;
 }
