@@ -1,26 +1,35 @@
 <div id="primary">
-  <h2>
+  <h2 class="display-4">
     My Purchases
   </h2>
   <br>
 
-  <table class="table">
+  <table *ngIf="myPurchases?.length; else none" class="table">
     <thead>
       <tr>
         <th></th>
-        <th>Date</th>
-        <th>Cost</th>
-        <th>Name</th>
+        <th>Date Purchased</th>
+        <th>Amount Charged On Card</th>
+        <th>Quantity</th>
+        <th>Product Sale Price</th>
+        <th>Product Name</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let mine of myPurchases">
         <th></th>
-        <th>{{mine.datePurchased.year}} {{mine.datePurchased.month}} {{mine.datePurchased.dayOfMonth}}</th>
-        <th>${{mine.cost}}</th>
-        <th>{{mine.product.productName}}</th>
+        <th>{{ mine.datePurchased.year}} {{ mine.datePurchased.month }} {{mine.datePurchased.dayOfMonth }}</th>
+        <th>{{ mine.cost | currency }}</th>
+        <th>{{ (mine.cost / mine.product.salePrice) }}</th>
+        <th>{{ mine.product.salePrice }}</th>
+        <th>{{ mine.product.productName }}</th>
       </tr>
     </tbody>
   </table>
+  <ng-template #none>
+    <h2 class="text-danger">No recent purchases found!</h2>
+    <p><a routerLink="products">Visit our products page &raquo;</a></p>
+  </ng-template>
+
 
 </div>
