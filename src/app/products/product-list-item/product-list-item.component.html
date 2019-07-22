@@ -40,7 +40,7 @@
     </a>
     <app-number-input [(val)]="quantity" (valAdd)="onValAdd()" (valSub)="onValSub()" [minDisabled]="quantity === 1">
     </app-number-input>
-    <button [ngClass]="pretty ? 'btn-primary' : 'btn-secondary'" class="btn" (click)="onAddToCart(product)">
+    <button [ngClass]="pretty ? 'btn-primary' : 'btn-warning text-white'" class="btn" (click)="onAddToCart(product)">
       <span class="icon is-small">
         <i class="fas fa-cart-plus"></i>
       </span>
