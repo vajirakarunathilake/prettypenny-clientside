@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../products/product';
-import { Purchase } from '../products/purchase';
 import { Helpers } from '../helpers';
+import { Purchase } from '../products/purchase';
 import { PurchaseService } from '../services/purchase.service';
-import { User } from '../user';
 
 @Component({
   selector: 'app-purchasehistory',
