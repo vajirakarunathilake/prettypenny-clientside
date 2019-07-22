@@ -13,7 +13,8 @@
         <div>
           <strong class="text-danger price">{{ product ? (product.salePrice | currency) : '' }}</strong>
           <p class="text-secondary was"><strong><span class="save bg-danger text-white">Save
-                {{ product ? (save | currency) : '' }} </span></strong>Was {{ product? (product.price | currency) : '' }}</p>
+                {{ product ? (save | currency) : '' }} </span></strong>Was
+            {{ product? (product.price | currency) : '' }}</p>
         </div>
       </header>
       <div class="card-image">
@@ -29,24 +30,38 @@
         <i class="fas fa-arrow-left"></i>
       </span>&nbsp; Back to Products
     </a>
-
+    <a class="float-right button is-light text-primary pt-1"><i class="fas fa-dollar-sign"></i>&nbsp;Price Match
+      Guarantee</a>
     <hr>
-    <span class="text-success" *ngIf="pretty">Amount left: {{ product ? product.interestThreshold : '' }}</span>
-    <app-number-input [(val)]="quantity" (valAdd)="onValAdd()" (valSub)="onValSub()" [minDisabled]="quantity === 1">
-    </app-number-input>
-    <div *ngIf="pretty; else penny">
-      <button class="card-footer-item btn btn-primary" style="cursor: pointer;"
-        (click)="addToCart(product)">
-        Add to Cart
-      </button>
-    </div>
-    <ng-template #penny>
-      <button class="card-footer-item btn btn-secondary" style="cursor: pointer;"
-        (click)="addToCart(product)">
-        Add to Interests
-      </button>
-    </ng-template>
+    <div class="row">
 
+      <div class="col-12 text-left">
+        <span class="text-success" *ngIf="pretty">Amount left: {{ product ? product.interestThreshold : '' }}</span>
+      </div>
+      <div class="col-6 mb-2 align-self-end">
+        <app-number-input [(val)]="quantity" (valAdd)="onValAdd()" (valSub)="onValSub()" [minDisabled]="quantity === 1">
+        </app-number-input>
+      </div>
+      <div class="col-6">
+        <p class="text-primary"><a routerLink="/contact"><i class="fas fa-question-circle"></i>&nbsp;Ask about our free
+            two day shipping!</a></p>
+      </div>
+      <div class="col-6">
+        <div *ngIf="pretty; else penny">
+          <button class="card-footer-item btn btn-primary" style="cursor: pointer;" (click)="addToCart(product)">
+            Add to Cart
+          </button>
+        </div>
+        <ng-template #penny>
+          <button class="card-footer-item btn btn-secondary" style="cursor: pointer;" (click)="addToCart(product)">
+            Add to Interests
+          </button>
+        </ng-template>
+
+      </div>
+
+
+    </div>
     <hr>
 
     <div class="card-content">
@@ -69,6 +84,13 @@
           </div>
           {{ product ? product.description : 'loading' }}
         </ng-template>
+        <p class="mt-2">
+          <a class="button is-light">{{product?.taxonomy?.name}}</a> <a
+            class="button is-light">{{product?.taxonomy?.type}}</a> <a
+            class="button is-light">{{product?.taxonomy?.subType}}</a>
+        </p>
+        <p class="text-primary">Starting May 31, 2049 we will also accept <i class="fab fa-bitcoin"></i>(bitcoin)
+          transactions!</p>
       </div>
     </div>
   </div>
